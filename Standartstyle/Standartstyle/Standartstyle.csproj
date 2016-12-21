@@ -88,6 +88,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -151,7 +153,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBModel\Goods.cs">
+      <DependentUpon>Standartstyle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel\GoodsCategory.cs">
+      <DependentUpon>Standartstyle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel\Image.cs">
+      <DependentUpon>Standartstyle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel\Standartstyle.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standartstyle.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel\Standartstyle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standartstyle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel\Standartstyle.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standartstyle.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -173,7 +200,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\DBModel\Standartstyle.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Standartstyle.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DBModel\Standartstyle.edmx.diagram">
+      <DependentUpon>Standartstyle.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Models\DBModel\Standartstyle.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Standartstyle.edmx</DependentUpon>
+      <LastGenOutput>Standartstyle.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DBModel\Standartstyle.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Standartstyle.edmx</DependentUpon>
+      <LastGenOutput>Standartstyle.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -208,13 +252,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
