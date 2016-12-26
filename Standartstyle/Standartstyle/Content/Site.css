@@ -1,6 +1,24 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿body, div {
+    padding: 0px;
+    margin: 0px;
+    display: block;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    *:before, *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+@font-face {
+    font-family: arciform;
+    src: url(../fonts/arciform.otf);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +39,110 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.header {
+    height: auto;
+    float: left;
+    width: 100%;
+    background-image: url(img/header-bg.jpg);
+    background-position: center;
+}
+
+    .header:before, .header:after, .content:before, .content:after {
+        display: table;
+        line-height: 0;
+        content: "";
+    }
+
+.content {
+    margin: 0px auto;
+    width: 100%;
+    max-width: 1280px;
+}
+
+
+.logo {
+    float: left;
+    height: 100px;
+    padding: 20px 15px;
+    width: 50%;
+    text-align: center;
+}
+
+    .logo a {
+        text-shadow: 1px 1px black;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-family: arciform;
+        font-size: 40px;
+        color: #ffffff;
+        font-weight: 800;
+    }
+
+        .logo a:hover {
+            cursor: pointer;
+            text-shadow: 2px 2px black;
+            text-decoration: none;
+        }
+
+.box-contact {
+    width: 25%;
+    color: #fff;
+    font-family: Arial, Verdana;
+    float: left;
+    display: table-row;
+}
+
+    .box-contact i[class*="logo-image"] {
+        width: 40px;
+        height: 40px;
+        float: left;
+        background-position: center;
+        display: block;
+    }
+
+    .box-contact .contact-row {
+        height: 50px;
+        padding: 5px 0;
+    }
+
+.contact-row .contact-data {
+    cursor: default;
+    margin-left: 50px;
+    height: 40px;
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+    padding: 7px 0px;
+}
+
+.contact-data a {
+    color: #fff;
+}
+
+    .contact-data a:hover {
+        text-decoration: none;
+        text-shadow: 2px 2px black;
+    }
+
+.mail-logo-image {
+    background: url(img/mail.png);
+    background-size: 100%;
+}
+
+.skype-logo-image {
+    background: url(img/skype.png);
+    background-size: 100%;
+}
+
+.mts-logo-image {
+    background: url(img/mts.svg);
+    background-size: 100%;
+}
+
+.velcom-logo-image {
+    background: url(img/velcom.svg);
+    background-size: 100%;
 }

@@ -3,37 +3,60 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!--Header-->
+    <div class="header">
+        <div class="content">
+            <div class="logo"><a>Стандарт Стиль</a></div>
+            <div class="box-contact">
+                <div class="contact-row">
+                    <i class="velcom-logo-image"></i>
+                    <div class="contact-data">
+                        <span>29 111-11-11</span>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <i class="mts-logo-image"></i>
+                    <div class="contact-data">
+                        <span>29 111-11-11</span>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <div class="box-contact">
+                <div class="contact-row">
+                    <i class="mail-logo-image"></i>
+                    <div class="contact-data">
+                        <span><a href="mailto:arty.drozdovskiy@gmail.com">arty.drozdovskiy@gmail.com</a></span>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <i class="skype-logo-image"></i>
+                    <div class="contact-data">
+                        <span><a href="skype:drozdino?chat">drozdino</a></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <!--End of Header-->
+    <!--Main menu-->
+    <div class="menu">
     </div>
+    <!--End of Main menu-->
+    <!--Content-->
+    <div class="content">
+        @RenderBody()
+    </div>
+    <!--End of Content-->
+    <!--Footer-->
+    <div class="footer">
+
+    </div>
+    <!--End of Footer-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

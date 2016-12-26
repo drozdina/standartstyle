@@ -81,17 +81,5 @@ namespace Standartstyle.Repositories
                 dbSet.Remove(entityToDelete);
             }
         }
-
-        public int GetSequenceValue(string tableNamePrefix)
-        {
-            var secuenceValue = context.Database.SqlQuery<int>("SELECT " + tableNamePrefix + "_SEQUENCE.NEXTVAL FROM DUAL").Single();
-            return secuenceValue;
-        }
-
-        public virtual void Update(T entityToUpdate)
-        {
-            dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
-        }
     }
 }
