@@ -57,16 +57,15 @@ textarea {
 
 .content {
     margin: 0px auto;
-    width: 100%;
     max-width: 1280px;
 }
 
 
 .logo {
     float: left;
-    height: 100px;
+    width: 100%;
     padding: 20px 15px;
-    width: 50%;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -89,11 +88,9 @@ textarea {
         }
 
 .box-contact {
-    width: 25%;
+    padding: 10px 0;
     color: #fff;
     font-family: Arial, Verdana;
-    float: left;
-    display: table-row;
 }
 
     .box-contact i[class*="logo-image"] {
@@ -104,18 +101,16 @@ textarea {
         display: block;
     }
 
-    .box-contact .contact-row {
-        height: 50px;
-        padding: 5px 0;
-    }
-
-.contact-row .contact-data {
+.contact-data {
     cursor: default;
-    margin-left: 50px;
-    height: 40px;
     font-size: 20px;
     text-shadow: 1px 1px black;
-    padding: 7px 0px;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.contact-info {
+    padding-left: 10px;
 }
 
 .contact-data a {
