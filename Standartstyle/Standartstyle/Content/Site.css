@@ -41,13 +41,16 @@ textarea {
     max-width: 280px;
 }
 
+
+/*--------------------Header style--------------------*/
 .header {
     height: auto;
-    float: left;
     width: 100%;
     background-image: url(img/header-bg.jpg);
     background-position: center;
 }
+
+
 
     .header:before, .header:after, .content:before, .content:after {
         display: table;
@@ -88,7 +91,7 @@ textarea {
         }
 
 .box-contact {
-    padding: 10px 0;
+    padding: 5px 0;
     color: #fff;
     font-family: Arial, Verdana;
 }
@@ -107,6 +110,13 @@ textarea {
     text-shadow: 1px 1px black;
     vertical-align: middle;
     line-height: 40px;
+}
+
+.box-contact div.container-fluid:first-child {
+    padding-bottom: 5px;
+}
+.box-contact div.container-fluid:last-child {
+    padding-top: 5px;
 }
 
 .contact-info {
@@ -140,4 +150,16 @@ textarea {
 .velcom-logo-image {
     background: url(img/velcom.svg);
     background-size: 100%;
+}
+
+
+/*--------------------Menu style--------------------*/
+.menu {
+    width: 100%;
+    height: auto;
+}
+.nav-style{
+    background-color: #777;
+    border-color: #777;
+    border-radius: 0px;
 }
