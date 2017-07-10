@@ -7,26 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Standartstyle.Models.DBModel
+namespace Standartstyle.App_Code.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Image
+    public partial class CBD_COLOR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Image()
+        public CBD_COLOR()
         {
-            this.Goods = new HashSet<Goods>();
+            this.GOOD_COLOR = new HashSet<GOOD_COLOR>();
         }
     
-        public int ImageCode { get; set; }
-        public string ImageName { get; set; }
-        public string ImageLocation { get; set; }
-        public Nullable<System.DateTime> UploadDate { get; set; }
-        public Nullable<bool> IsMain { get; set; }
+        public int COLORCODE { get; set; }
+        public Nullable<int> COLLECTIONCODE { get; set; }
+        public Nullable<int> IMAGECODE { get; set; }
+        public string NAME { get; set; }
     
+        public virtual CBD_COLLECTION CBD_COLLECTION { get; set; }
+        public virtual IMAGE IMAGE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Goods> Goods { get; set; }
+        public virtual ICollection<GOOD_COLOR> GOOD_COLOR { get; set; }
     }
 }

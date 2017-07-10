@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Standartstyle.Models.DBModel
+namespace Standartstyle.App_Code.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsCategory
+    public partial class GOODS_CATEGORY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GoodsCategory()
+        public GOODS_CATEGORY()
         {
-            this.Goods = new HashSet<Goods>();
+            this.GOODS = new HashSet<GOODS>();
         }
     
-        public int CategoryCode { get; set; }
-        public string CategoryName { get; set; }
+        public int CATEGORYCODE { get; set; }
+        public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Goods> Goods { get; set; }
+        public virtual ICollection<GOODS> GOODS { get; set; }
     }
 }

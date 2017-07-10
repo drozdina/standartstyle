@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Standartstyle</RootNamespace>
     <AssemblyName>Standartstyle</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +96,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -102,13 +104,8 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -150,51 +147,88 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Util\StyleCache.cs" />
-    <Content Include="App_Code\Util\Logger.cs" />
-    <Content Include="App_Code\Util\Interfaces.cs" />
-    <Content Include="App_Code\Util\Constants.cs" />
-    <Content Include="App_Code\DAL\Generic\Repository.cs" />
+    <Content Include="App_Code\DAL\Generic\GenericRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\UsersRepository.cs" />
+    <Content Include="App_Code\Entities\CBD_COLLECTION.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\CBD_COLOR.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\CBD_MANUFACTURER.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\GOODS.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\GOODS_CATEGORY.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\GOOD_COLOR.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\IMAGE.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\REPLY.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\StandartstyleModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.Context.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\StandartstyleModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\StandartstyleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="App_Code\Entities\USERS.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodsRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodsCategoryRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodColorRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\ImageRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\ReplyRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDCollectionRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDColorRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDManufacturerRepository.cs" />
+    <Content Include="App_Code\DAL\Generic\GeneralRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBModel\Goods.cs">
-      <DependentUpon>Standartstyle.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel\GoodsCategory.cs">
-      <DependentUpon>Standartstyle.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel\Image.cs">
-      <DependentUpon>Standartstyle.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel\Standartstyle.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Standartstyle.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel\Standartstyle.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Standartstyle.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel\Standartstyle.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Standartstyle.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Entities\StandartstyleModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+      <LastGenOutput>StandartstyleModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_Code\Entities\StandartstyleModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+      <LastGenOutput>StandartstyleModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -220,25 +254,15 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\DBModel\Standartstyle.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Standartstyle.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBModel\Standartstyle.edmx.diagram">
-      <DependentUpon>Standartstyle.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\arciform.otf" />
+    <EntityDeploy Include="App_Code\Entities\StandartstyleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StandartstyleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="App_Code\Entities\StandartstyleModel.edmx.diagram">
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Models\DBModel\Standartstyle.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Standartstyle.edmx</DependentUpon>
-      <LastGenOutput>Standartstyle.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DBModel\Standartstyle.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Standartstyle.edmx</DependentUpon>
-      <LastGenOutput>Standartstyle.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -272,8 +296,11 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\Entities\" />
+    <Folder Include="App_Code\Util\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Goods\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -283,12 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DBLib\DBLib.csproj">
-      <Project>{1A35DA0E-A9BF-4FF4-824D-6C261FDB5673}</Project>
-      <Name>DBLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

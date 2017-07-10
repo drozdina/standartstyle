@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Standartstyle.Models.DBModel
+namespace Standartstyle.App_Code.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Goods
+    public partial class REPLY
     {
-        public int GoodsCode { get; set; }
-        public Nullable<int> CategoryCode { get; set; }
-        public Nullable<int> ImageCode { get; set; }
-        public string GoodsName { get; set; }
-        public string GoodsDescription { get; set; }
+        public int REPLYCODE { get; set; }
+        public Nullable<int> GOODCODE { get; set; }
+        public string AUTHOR { get; set; }
+        public Nullable<System.DateTime> REPLY_DATE { get; set; }
+        public string REPLY_TEXT { get; set; }
+        public string AUTHOR_LOCATION { get; set; }
+        public Nullable<int> STATE { get; set; }
     
-        public virtual GoodsCategory GoodsCategory { get; set; }
-        public virtual Image Image { get; set; }
+        public virtual GOODS GOODS { get; set; }
     }
 }
