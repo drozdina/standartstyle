@@ -290,3 +290,11 @@ alter table REPLY
    add constraint FK_REPLY_REFERENCE_GOODS foreign key (GOODCODE)
       references GOODS (GOODCODE)
 go
+
+insert into GOODS_CATEGORY (NAME) values ('Компьютерные столы');
+insert into GOODS_CATEGORY (NAME) values ('Комоды');
+insert into GOODS_CATEGORY (NAME) values ('Тумбы TV');
+insert into GOODS_CATEGORY (NAME) values ('Шкафы');
+insert into GOODS_CATEGORY (NAME) values ('Кровати');
+insert into GOODS_CATEGORY (NAME) values ('Горки');
+insert into GOODS_CATEGORY (NAME) values ('Прихожие');

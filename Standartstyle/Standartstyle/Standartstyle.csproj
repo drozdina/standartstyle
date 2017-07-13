@@ -154,77 +154,79 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\DAL\Generic\GenericRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\UsersRepository.cs" />
-    <Content Include="App_Code\Entities\CBD_COLLECTION.cs">
+    <Compile Include="AppCode\DAL\Model\CBD_COLLECTION.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\CBD_COLOR.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\CBD_COLOR.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\CBD_MANUFACTURER.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\CBD_MANUFACTURER.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\GOODS.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\GOODS.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\GOODS_CATEGORY.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\GOODS_CATEGORY.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\GOOD_COLOR.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\GOOD_COLOR.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\IMAGE.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\IMAGE.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\REPLY.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\REPLY.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\StandartstyleModel.Context.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandartstyleModel.Context.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\StandartstyleModel.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\StandartstyleModel.Designer.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandartstyleModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="App_Code\Entities\USERS.cs">
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\USERS.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
-    </Content>
-    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodsRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodsCategoryRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\GoodColorRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\ImageRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\ReplyRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDCollectionRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDColorRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\EntityRepos\CBDManufacturerRepository.cs" />
-    <Content Include="App_Code\DAL\Generic\GeneralRepository.cs" />
+    </Compile>
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDCollectionRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDColorRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDManufacturerRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodColorRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodsCategoryRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodsRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\ImageRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\ReplyRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\UsersRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\GeneralRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\GenericRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoodsCategoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Entities\StandartstyleModel.Context.tt">
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StandartstyleModel.edmx</DependentUpon>
       <LastGenOutput>StandartstyleModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Code\Entities\StandartstyleModel.tt">
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StandartstyleModel.edmx</DependentUpon>
       <LastGenOutput>StandartstyleModel.cs</LastGenOutput>
@@ -255,11 +257,11 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="fonts\arciform.otf" />
-    <EntityDeploy Include="App_Code\Entities\StandartstyleModel.edmx">
+    <EntityDeploy Include="AppCode\DAL\Model\StandartstyleModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StandartstyleModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="App_Code\Entities\StandartstyleModel.edmx.diagram">
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.edmx.diagram">
       <DependentUpon>StandartstyleModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -280,7 +282,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -294,12 +298,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\Util\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Goods\" />
   </ItemGroup>
   <ItemGroup>
