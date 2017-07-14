@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+}
+
+<h2>New Category</h2>
+
+@using (Ajax.BeginForm("method", new AjaxOptions
+{
+    UpdateTargetId = "",
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "",
+    OnFailure = ""
+}))
+{
+
+}

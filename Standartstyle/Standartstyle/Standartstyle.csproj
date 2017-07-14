@@ -301,10 +301,13 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\Form.cshtml" />
+    <Content Include="Views\Goods\Index.cshtml" />
+    <Content Include="Views\Goods\List.cshtml" />
+    <Content Include="Views\Goods\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Goods\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

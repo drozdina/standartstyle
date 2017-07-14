@@ -31,5 +31,10 @@ namespace Standartstyle.Controllers
             }
             return View(forView);
         }
+
+        public ActionResult Form(int? code)
+        {
+            return View();
+        }
     }
 }
