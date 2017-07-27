@@ -19,15 +19,20 @@ namespace Standartstyle.AppCode.DAL.Model
         {
             this.GOODS = new HashSet<GOODS>();
             this.IMAGE = new HashSet<IMAGE>();
+            this.REPLY = new HashSet<REPLY>();
         }
     
         public int USERCODE { get; set; }
-        public string UERNAME { get; set; }
+        public Nullable<int> ROLECODE { get; set; }
+        public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GOODS> GOODS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMAGE> IMAGE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPLY> REPLY { get; set; }
+        public virtual ROLES ROLES { get; set; }
     }
 }

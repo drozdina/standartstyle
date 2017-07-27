@@ -25,14 +25,17 @@ namespace Standartstyle.AppCode.DAL.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ATTRIBUTES> ATTRIBUTES { get; set; }
         public virtual DbSet<CBD_COLLECTION> CBD_COLLECTION { get; set; }
         public virtual DbSet<CBD_COLOR> CBD_COLOR { get; set; }
         public virtual DbSet<CBD_MANUFACTURER> CBD_MANUFACTURER { get; set; }
+        public virtual DbSet<GOOD_ATTRIBUTES> GOOD_ATTRIBUTES { get; set; }
         public virtual DbSet<GOOD_COLOR> GOOD_COLOR { get; set; }
         public virtual DbSet<GOODS> GOODS { get; set; }
         public virtual DbSet<GOODS_CATEGORY> GOODS_CATEGORY { get; set; }
         public virtual DbSet<IMAGE> IMAGE { get; set; }
         public virtual DbSet<REPLY> REPLY { get; set; }
+        public virtual DbSet<ROLES> ROLES { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
     }
 }

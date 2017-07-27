@@ -1,5 +1,12 @@
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('ATTRIBUTES') and o.name = 'FK_ATTRIBUT_REFERENCE_GOODS_CA')
+alter table ATTRIBUTES
+   drop constraint FK_ATTRIBUT_REFERENCE_GOODS_CA
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('CBD_COLLECTION') and o.name = 'FK_CBD_COLL_REFERENCE_CBD_MANU')
 alter table CBD_COLLECTION
    drop constraint FK_CBD_COLL_REFERENCE_CBD_MANU
@@ -42,6 +49,20 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('GOOD_ATTRIBUTES') and o.name = 'FK_GOOD_ATT_REFERENCE_GOODS')
+alter table GOOD_ATTRIBUTES
+   drop constraint FK_GOOD_ATT_REFERENCE_GOODS
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('GOOD_ATTRIBUTES') and o.name = 'FK_GOOD_ATT_REFERENCE_ATTRIBUT')
+alter table GOOD_ATTRIBUTES
+   drop constraint FK_GOOD_ATT_REFERENCE_ATTRIBUT
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('GOOD_COLOR') and o.name = 'FK_GOOD_COL_REFERENCE_GOODS')
 alter table GOOD_COLOR
    drop constraint FK_GOOD_COL_REFERENCE_GOODS
@@ -63,9 +84,30 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('REPLY') and o.name = 'FK_REPLY_REFERENCE_USERS')
+alter table REPLY
+   drop constraint FK_REPLY_REFERENCE_USERS
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('REPLY') and o.name = 'FK_REPLY_REFERENCE_GOODS')
 alter table REPLY
    drop constraint FK_REPLY_REFERENCE_GOODS
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('USERS') and o.name = 'FK_USERS_REFERENCE_ROLES')
+alter table USERS
+   drop constraint FK_USERS_REFERENCE_ROLES
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('ATTRIBUTES')
+            and   type = 'U')
+   drop table ATTRIBUTES
 go
 
 if exists (select 1
@@ -105,6 +147,13 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('GOOD_ATTRIBUTES')
+            and   type = 'U')
+   drop table GOOD_ATTRIBUTES
+go
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('GOOD_COLOR')
             and   type = 'U')
    drop table GOOD_COLOR
@@ -126,9 +175,27 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('ROLES')
+            and   type = 'U')
+   drop table ROLES
+go
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('USERS')
             and   type = 'U')
    drop table USERS
+go
+
+/*==============================================================*/
+/* Table: ATTRIBUTES                                            */
+/*==============================================================*/
+create table ATTRIBUTES (
+   ATTRIBUTECODE        integer              identity,
+   CATEGORYCODE         integer              null,
+   ATTRIBUTENAME        varchar(max)         null,
+   constraint PK_ATTRIBUTES primary key (ATTRIBUTECODE)
+)
 go
 
 /*==============================================================*/
@@ -176,6 +243,7 @@ create table GOODS (
    NAME                 varchar(50)          null,
    DESCRIPTION          text                 null,
    STATE                integer              null,
+   SIZE                 varchar(50)          null,
    constraint PK_GOODS primary key (GOODCODE)
 )
 go
@@ -187,6 +255,17 @@ create table GOODS_CATEGORY (
    CATEGORYCODE         integer              identity,
    NAME                 varchar(50)          null,
    constraint PK_GOODS_CATEGORY primary key (CATEGORYCODE)
+)
+go
+
+/*==============================================================*/
+/* Table: GOOD_ATTRIBUTES                                       */
+/*==============================================================*/
+create table GOOD_ATTRIBUTES (
+   GATCODE              integer              identity,
+   GOODCODE             integer              null,
+   ATTRIBUTECODE        integer              null,
+   constraint PK_GOOD_ATTRIBUTES primary key (GATCODE)
 )
 go
 
@@ -221,6 +300,7 @@ go
 create table REPLY (
    REPLYCODE            integer              not null,
    GOODCODE             integer              null,
+   USERCODE             integer              null,
    AUTHOR               varchar(255)         null,
    REPLY_DATE           datetime             null,
    REPLY_TEXT           text                 null,
@@ -231,14 +311,30 @@ create table REPLY (
 go
 
 /*==============================================================*/
+/* Table: ROLES                                                 */
+/*==============================================================*/
+create table ROLES (
+   ROLECODE             integer              not null,
+   ROLENAME             varchar(50)          null,
+   constraint PK_ROLES primary key (ROLECODE)
+)
+go
+
+/*==============================================================*/
 /* Table: USERS                                                 */
 /*==============================================================*/
 create table USERS (
    USERCODE             integer              not null,
+   ROLECODE             integer              null,
    UERNAME              varchar(50)          null,
    PASSWORD             varchar(50)          null,
    constraint PK_USERS primary key (USERCODE)
 )
+go
+
+alter table ATTRIBUTES
+   add constraint FK_ATTRIBUT_REFERENCE_GOODS_CA foreign key (CATEGORYCODE)
+      references GOODS_CATEGORY (CATEGORYCODE)
 go
 
 alter table CBD_COLLECTION
@@ -271,6 +367,16 @@ alter table GOODS
       references USERS (USERCODE)
 go
 
+alter table GOOD_ATTRIBUTES
+   add constraint FK_GOOD_ATT_REFERENCE_GOODS foreign key (GOODCODE)
+      references GOODS (GOODCODE)
+go
+
+alter table GOOD_ATTRIBUTES
+   add constraint FK_GOOD_ATT_REFERENCE_ATTRIBUT foreign key (ATTRIBUTECODE)
+      references ATTRIBUTES (ATTRIBUTECODE)
+go
+
 alter table GOOD_COLOR
    add constraint FK_GOOD_COL_REFERENCE_GOODS foreign key (GOODCODE)
       references GOODS (GOODCODE)
@@ -287,9 +393,20 @@ alter table IMAGE
 go
 
 alter table REPLY
+   add constraint FK_REPLY_REFERENCE_USERS foreign key (USERCODE)
+      references USERS (USERCODE)
+go
+
+alter table REPLY
    add constraint FK_REPLY_REFERENCE_GOODS foreign key (GOODCODE)
       references GOODS (GOODCODE)
 go
+
+alter table USERS
+   add constraint FK_USERS_REFERENCE_ROLES foreign key (ROLECODE)
+      references ROLES (ROLECODE)
+go
+
 
 insert into GOODS_CATEGORY (NAME) values ('Компьютерные столы');
 insert into GOODS_CATEGORY (NAME) values ('Комоды');
@@ -298,3 +415,6 @@ insert into GOODS_CATEGORY (NAME) values ('Шкафы');
 insert into GOODS_CATEGORY (NAME) values ('Кровати');
 insert into GOODS_CATEGORY (NAME) values ('Горки');
 insert into GOODS_CATEGORY (NAME) values ('Прихожие');
+
+insert into ROLES (ROLECODE, ROLENAME) values (1, 'Admin');
+insert into ROLES (ROLECODE, ROLENAME) values (2, 'User');

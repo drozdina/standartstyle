@@ -17,6 +17,7 @@ namespace Standartstyle.AppCode.DAL.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GOODS()
         {
+            this.GOOD_ATTRIBUTES = new HashSet<GOOD_ATTRIBUTES>();
             this.GOOD_COLOR = new HashSet<GOOD_COLOR>();
             this.REPLY = new HashSet<REPLY>();
         }
@@ -28,7 +29,10 @@ namespace Standartstyle.AppCode.DAL.Model
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
         public Nullable<int> STATE { get; set; }
+        public string SIZE { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GOOD_ATTRIBUTES> GOOD_ATTRIBUTES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GOOD_COLOR> GOOD_COLOR { get; set; }
         public virtual GOODS_CATEGORY GOODS_CATEGORY { get; set; }

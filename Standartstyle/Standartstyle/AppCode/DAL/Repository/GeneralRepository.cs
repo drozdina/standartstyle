@@ -110,6 +110,39 @@ namespace Standartstyle.AppCode.DAL.Repository
             }
         }
 
+        private AttributesRepository _AttributesRepository;
+        public AttributesRepository AttributesRepository
+        {
+            get
+            {
+                if (this._AttributesRepository == null)
+                    this._AttributesRepository = new AttributesRepository(context);
+                return _AttributesRepository;
+            }
+        }
+
+        private GoodAttributesRepository _GoodAttributesRepository;
+        public GoodAttributesRepository GoodAttributesRepository
+        {
+            get
+            {
+                if (this._GoodAttributesRepository == null)
+                    this._GoodAttributesRepository = new GoodAttributesRepository(context);
+                return _GoodAttributesRepository;
+            }
+        }
+
+        private RolesRepository _RolesRepository;
+        public RolesRepository RolesRepository
+        {
+            get
+            {
+                if (this._RolesRepository == null)
+                    this._RolesRepository = new RolesRepository(context);
+                return _RolesRepository;
+            }
+        }
+
         public void Save()
         {
             context.SaveChanges();

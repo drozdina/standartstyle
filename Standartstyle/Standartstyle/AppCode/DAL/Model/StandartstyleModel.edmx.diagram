@@ -4,26 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3abd76d42c4248f4805c9327ed1822cd" Name="Diagram1">
-        <EntityTypeShape EntityType="StandartstyleModel.CBD_COLLECTION" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.CBD_COLOR" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.CBD_MANUFACTURER" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.GOOD_COLOR" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.GOODS" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.GOODS_CATEGORY" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.IMAGE" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.REPLY" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StandartstyleModel.USERS" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <AssociationConnector Association="StandartstyleModel.FK_CBD_COLL_REFERENCE_CBD_MANU" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_CBD_COLO_REFERENCE_CBD_COLL" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_CBD_COLO_REFERENCE_IMAGE" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_GOOD_COL_REFERENCE_CBD_COLO" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_GOOD_COL_REFERENCE_GOODS" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_GOODS_REFERENCE_GOODS_CA" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_GOODS_REFERENCE_IMAGE" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_GOODS_REFERENCE_USERS" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_REPLY_REFERENCE_GOODS" ManuallyRouted="false" />
-        <AssociationConnector Association="StandartstyleModel.FK_IMAGE_REFERENCE_USERS" ManuallyRouted="false" />
+      <Diagram DiagramId="dbd6a9289c2d4f69bc7ae746aa721fe1" Name="Diagram1">
+        <EntityTypeShape EntityType="standartstyleModel.ATTRIBUTES" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_COLLECTION" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_COLOR" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_MANUFACTURER" Width="1.5" PointX="1.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOOD_ATTRIBUTES" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOOD_COLOR" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOODS" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOODS_CATEGORY" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.IMAGE" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.REPLY" Width="1.5" PointX="8.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.ROLES" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.USERS" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="standartstyleModel.FK_ATTRIBUT_REFERENCE_GOODS_CA" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_ATT_REFERENCE_ATTRIBUT" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLL_REFERENCE_CBD_MANU" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLO_REFERENCE_CBD_COLL" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLO_REFERENCE_IMAGE" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_COL_REFERENCE_CBD_COLO" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_ATT_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_COL_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOODS_REFERENCE_GOODS_CA" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOODS_REFERENCE_IMAGE" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOODS_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_REPLY_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_IMAGE_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_REPLY_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_USERS_REFERENCE_ROLES" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

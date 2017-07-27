@@ -12,18 +12,13 @@ namespace Standartstyle.AppCode.DAL.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPLY
+    public partial class GOOD_ATTRIBUTES
     {
-        public int REPLYCODE { get; set; }
+        public int GATCODE { get; set; }
         public Nullable<int> GOODCODE { get; set; }
-        public Nullable<int> USERCODE { get; set; }
-        public string AUTHOR { get; set; }
-        public Nullable<System.DateTime> REPLY_DATE { get; set; }
-        public string REPLY_TEXT { get; set; }
-        public string AUTHOR_LOCATION { get; set; }
-        public Nullable<int> STATE { get; set; }
+        public Nullable<int> ATTRIBUTECODE { get; set; }
     
+        public virtual ATTRIBUTES ATTRIBUTES { get; set; }
         public virtual GOODS GOODS { get; set; }
-        public virtual USERS USERS { get; set; }
     }
 }

@@ -12,21 +12,18 @@ namespace Standartstyle.AppCode.DAL.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GOODS_CATEGORY
+    public partial class ROLES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GOODS_CATEGORY()
+        public ROLES()
         {
-            this.ATTRIBUTES = new HashSet<ATTRIBUTES>();
-            this.GOODS = new HashSet<GOODS>();
+            this.USERS = new HashSet<USERS>();
         }
     
-        public int CATEGORYCODE { get; set; }
-        public string NAME { get; set; }
+        public int ROLECODE { get; set; }
+        public string ROLENAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ATTRIBUTES> ATTRIBUTES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GOODS> GOODS { get; set; }
+        public virtual ICollection<USERS> USERS { get; set; }
     }
 }

@@ -154,6 +154,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\BL\AdminUtils.cs" />
+    <Compile Include="AppCode\BL\Extensions.cs" />
+    <Compile Include="AppCode\BL\Utils.cs" />
+    <Compile Include="AppCode\DAL\Model\ATTRIBUTES.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppCode\DAL\Model\CBD_COLLECTION.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
@@ -169,6 +175,9 @@
     <Compile Include="AppCode\DAL\Model\GOODS_CATEGORY.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\DAL\Model\GOOD_ATTRIBUTES.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppCode\DAL\Model\GOOD_COLOR.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
@@ -176,6 +185,9 @@
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\REPLY.cs">
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\ROLES.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\StandartstyleModel.Context.cs">
@@ -196,20 +208,26 @@
     <Compile Include="AppCode\DAL\Model\USERS.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\AttributesRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDCollectionRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDColorRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDManufacturerRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodAttributesRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodColorRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodsCategoryRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\GoodsRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\ImageRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\ReplyRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\EntityRepositories\RolesRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\UsersRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GeneralRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GenericRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Account\CustomAuthentication.cs" />
+    <Compile Include="Controllers\Account\IAuthentication.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
@@ -218,6 +236,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\GoodsCategoryModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +250,7 @@
       <DependentUpon>StandartstyleModel.edmx</DependentUpon>
       <LastGenOutput>StandartstyleModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -305,6 +325,10 @@
     <Content Include="Views\Goods\Index.cshtml" />
     <Content Include="Views\Goods\List.cshtml" />
     <Content Include="Views\Goods\Form.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\_Menu.cshtml" />
+    <Content Include="Views\Admin\Catalog.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
