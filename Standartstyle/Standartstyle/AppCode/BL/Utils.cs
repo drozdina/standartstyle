@@ -11,5 +11,10 @@ namespace Standartstyle.AppCode.BL
         {
             return pass.HashSHA1();
         }
+
+        public static string GetDefaultImage()
+        {
+            return "";
+        }
     }
 }

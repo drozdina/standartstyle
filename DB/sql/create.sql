@@ -202,7 +202,7 @@ go
 /* Table: CBD_COLLECTION                                        */
 /*==============================================================*/
 create table CBD_COLLECTION (
-   COLLECTIONCODE       integer              not null,
+   COLLECTIONCODE       integer              identity,
    MANCODE              integer              null,
    NAME                 varchar(255)         null,
    constraint PK_CBD_COLLECTION primary key (COLLECTIONCODE)
@@ -213,7 +213,7 @@ go
 /* Table: CBD_COLOR                                             */
 /*==============================================================*/
 create table CBD_COLOR (
-   COLORCODE            integer              not null,
+   COLORCODE            integer              identity,
    COLLECTIONCODE       integer              null,
    IMAGECODE            integer              null,
    NAME                 varchar(255)         null,
@@ -225,7 +225,7 @@ go
 /* Table: CBD_MANUFACTURER                                      */
 /*==============================================================*/
 create table CBD_MANUFACTURER (
-   MANCODE              integer              not null,
+   MANCODE              integer              identity,
    NAME                 varchar(255)         null,
    COUNTRY              varchar(255)         null,
    constraint PK_CBD_MANUFACTURER primary key (MANCODE)
@@ -273,7 +273,7 @@ go
 /* Table: GOOD_COLOR                                            */
 /*==============================================================*/
 create table GOOD_COLOR (
-   GCCODE               integer              not null,
+   GCCODE               integer              identity,
    COLORCODE            integer              null,
    GOODCODE             integer              null,
    constraint PK_GOOD_COLOR primary key (GCCODE)
@@ -284,13 +284,13 @@ go
 /* Table: IMAGE                                                 */
 /*==============================================================*/
 create table IMAGE (
-   IMAGECOED            integer              identity,
+   IMAGECODE            integer              identity,
    USERCODE             integer              null,
    NAME                 varchar(50)          null,
    LOCATION             varchar(max)         null,
    UPLOAD_DATE          datetime             null,
    IS_MAIN              bit                  null,
-   constraint PK_IMAGE primary key (IMAGECOED)
+   constraint PK_IMAGE primary key (IMAGECODE)
 )
 go
 
@@ -298,7 +298,7 @@ go
 /* Table: REPLY                                                 */
 /*==============================================================*/
 create table REPLY (
-   REPLYCODE            integer              not null,
+   REPLYCODE            integer              identity,
    GOODCODE             integer              null,
    USERCODE             integer              null,
    AUTHOR               varchar(255)         null,
@@ -324,9 +324,9 @@ go
 /* Table: USERS                                                 */
 /*==============================================================*/
 create table USERS (
-   USERCODE             integer              not null,
+   USERCODE             integer              identity,
    ROLECODE             integer              null,
-   UERNAME              varchar(50)          null,
+   USERNAME             varchar(50)          null,
    PASSWORD             varchar(50)          null,
    constraint PK_USERS primary key (USERCODE)
 )
@@ -349,7 +349,7 @@ go
 
 alter table CBD_COLOR
    add constraint FK_CBD_COLO_REFERENCE_IMAGE foreign key (IMAGECODE)
-      references IMAGE (IMAGECOED)
+      references IMAGE (IMAGECODE)
 go
 
 alter table GOODS
@@ -359,7 +359,7 @@ go
 
 alter table GOODS
    add constraint FK_GOODS_REFERENCE_IMAGE foreign key (IMAGECODE)
-      references IMAGE (IMAGECOED)
+      references IMAGE (IMAGECODE)
 go
 
 alter table GOODS
@@ -407,7 +407,6 @@ alter table USERS
       references ROLES (ROLECODE)
 go
 
-
 insert into GOODS_CATEGORY (NAME) values ('Компьютерные столы');
 insert into GOODS_CATEGORY (NAME) values ('Комоды');
 insert into GOODS_CATEGORY (NAME) values ('Тумбы TV');
@@ -418,3 +417,5 @@ insert into GOODS_CATEGORY (NAME) values ('Прихожие');
 
 insert into ROLES (ROLECODE, ROLENAME) values (1, 'Admin');
 insert into ROLES (ROLECODE, ROLENAME) values (2, 'User');
+
+INSERT INTO USERS (ROLECODE, USERNAME, PASSWORD) VALUES (1, 'admin', 'fIdUH9Pz71AW4S1BGQDIemBGqOg=');

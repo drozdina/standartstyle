@@ -226,8 +226,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Account\CustomAuthentication.cs" />
-    <Compile Include="Controllers\Account\IAuthentication.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
@@ -235,6 +233,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\GoodsCategoryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,16 +318,15 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\_List.cshtml" />
     <Content Include="Views\Category\Form.cshtml" />
     <Content Include="Views\Goods\Index.cshtml" />
-    <Content Include="Views\Goods\List.cshtml" />
+    <Content Include="Views\Goods\_List.cshtml" />
     <Content Include="Views\Goods\Form.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\_Menu.cshtml" />
     <Content Include="Views\Admin\Catalog.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

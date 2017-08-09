@@ -29,7 +29,7 @@ namespace Standartstyle.Controllers
                     Name = category.NAME
                 });
             }
-            return View(forView);
+            return PartialView("_List" ,forView);
         }
 
         public ActionResult Form(int? code)
