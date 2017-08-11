@@ -35,13 +35,6 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('GOODS') and o.name = 'FK_GOODS_REFERENCE_IMAGE')
-alter table GOODS
-   drop constraint FK_GOODS_REFERENCE_IMAGE
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('GOODS') and o.name = 'FK_GOODS_REFERENCE_USERS')
 alter table GOODS
    drop constraint FK_GOODS_REFERENCE_USERS
@@ -73,6 +66,13 @@ if exists (select 1
    where r.fkeyid = object_id('GOOD_COLOR') and o.name = 'FK_GOOD_COL_REFERENCE_CBD_COLO')
 alter table GOOD_COLOR
    drop constraint FK_GOOD_COL_REFERENCE_CBD_COLO
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('IMAGE') and o.name = 'FK_IMAGE_REFERENCE_GOODS')
+alter table IMAGE
+   drop constraint FK_IMAGE_REFERENCE_GOODS
 go
 
 if exists (select 1
@@ -238,7 +238,6 @@ go
 create table GOODS (
    GOODCODE             integer              identity,
    CATEGORYCODE         integer              null,
-   IMAGECODE            integer              null,
    USERCODE             integer              null,
    NAME                 varchar(50)          null,
    DESCRIPTION          text                 null,
@@ -286,6 +285,7 @@ go
 create table IMAGE (
    IMAGECODE            integer              identity,
    USERCODE             integer              null,
+   GOODCODE             integer              null,
    NAME                 varchar(50)          null,
    LOCATION             varchar(max)         null,
    UPLOAD_DATE          datetime             null,
@@ -358,11 +358,6 @@ alter table GOODS
 go
 
 alter table GOODS
-   add constraint FK_GOODS_REFERENCE_IMAGE foreign key (IMAGECODE)
-      references IMAGE (IMAGECODE)
-go
-
-alter table GOODS
    add constraint FK_GOODS_REFERENCE_USERS foreign key (USERCODE)
       references USERS (USERCODE)
 go
@@ -385,6 +380,11 @@ go
 alter table GOOD_COLOR
    add constraint FK_GOOD_COL_REFERENCE_CBD_COLO foreign key (COLORCODE)
       references CBD_COLOR (COLORCODE)
+go
+
+alter table IMAGE
+   add constraint FK_IMAGE_REFERENCE_GOODS foreign key (GOODCODE)
+      references GOODS (GOODCODE)
 go
 
 alter table IMAGE

@@ -18,11 +18,11 @@ namespace Standartstyle.AppCode.DAL.Model
         public IMAGE()
         {
             this.CBD_COLOR = new HashSet<CBD_COLOR>();
-            this.GOODS = new HashSet<GOODS>();
         }
     
-        public int IMAGECOED { get; set; }
+        public int IMAGECODE { get; set; }
         public Nullable<int> USERCODE { get; set; }
+        public Nullable<int> GOODCODE { get; set; }
         public string NAME { get; set; }
         public string LOCATION { get; set; }
         public Nullable<System.DateTime> UPLOAD_DATE { get; set; }
@@ -30,8 +30,7 @@ namespace Standartstyle.AppCode.DAL.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CBD_COLOR> CBD_COLOR { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GOODS> GOODS { get; set; }
+        public virtual GOODS GOODS { get; set; }
         public virtual USERS USERS { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\Workflow\Visual Studio Workspace\standartstyle-1\Standartstyle\Standartstyle\AppCode\DAL\Model\StandartstyleModel.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\!VisualWorkspace\Private\standartstyle\Standartstyle\Standartstyle\AppCode\DAL\Model\StandartstyleModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

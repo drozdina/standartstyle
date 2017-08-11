@@ -26,7 +26,6 @@ namespace Standartstyle.Controllers
         {
             if (ModelState.IsValid)
             {
-                // поиск пользователя в бд
                 USERS user = null;
                 user = repo.UsersRepository.Login(model.Name, Utils.HashedPassword(model.Password));
                 if (user != null)

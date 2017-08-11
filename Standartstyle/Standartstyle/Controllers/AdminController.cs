@@ -26,13 +26,24 @@ namespace Standartstyle.Controllers
                 var goods = new List<GoodModel>();
                 try
                 {
+                    var goodsFromDB = repo.GoodsRepository.All.Where(elem => elem.CATEGORYCODE == category.CATEGORYCODE).ToList();
+                    foreach (var goodFromDB in goodsFromDB)
+                    {
+                        var images = new List<ImageModel>();
+                        var imagesFromDB = repo.ImageRepository.All.Where(elem => elem.GOODCODE == goodFromDB.GOODCODE).ToList();
+                        foreach (var imageFromDB in imagesFromDB)
+                        {
 
+                        }
+
+                        var good = new GoodModel()
+                        {
+                            GoodCode = goodFromDB.GOODCODE,
+                            Name = goodFromDB.NAME
+                        };
+                    }
                 }
                 catch (Exception ex)
-                {
-
-                }
-                finally
                 {
 
                 }

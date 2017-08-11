@@ -19,12 +19,12 @@ namespace Standartstyle.AppCode.DAL.Model
         {
             this.GOOD_ATTRIBUTES = new HashSet<GOOD_ATTRIBUTES>();
             this.GOOD_COLOR = new HashSet<GOOD_COLOR>();
+            this.IMAGE = new HashSet<IMAGE>();
             this.REPLY = new HashSet<REPLY>();
         }
     
         public int GOODCODE { get; set; }
         public Nullable<int> CATEGORYCODE { get; set; }
-        public Nullable<int> IMAGECODE { get; set; }
         public Nullable<int> USERCODE { get; set; }
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
@@ -36,8 +36,9 @@ namespace Standartstyle.AppCode.DAL.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GOOD_COLOR> GOOD_COLOR { get; set; }
         public virtual GOODS_CATEGORY GOODS_CATEGORY { get; set; }
-        public virtual IMAGE IMAGE { get; set; }
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMAGE> IMAGE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPLY> REPLY { get; set; }
     }

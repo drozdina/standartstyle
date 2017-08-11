@@ -233,6 +233,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttributeModel.cs" />
+    <Compile Include="Models\CatalogModel.cs" />
     <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\GoodsCategoryModel.cs" />
     <Compile Include="Models\UserModel.cs" />

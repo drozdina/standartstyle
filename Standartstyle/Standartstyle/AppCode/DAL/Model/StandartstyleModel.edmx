@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="standartstyleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="StandartstyleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ATTRIBUTES">
           <Key>
             <PropertyRef Name="ATTRIBUTECODE" />
@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="COLLECTIONCODE" />
           </Key>
-          <Property Name="COLLECTIONCODE" Type="int" Nullable="false" />
+          <Property Name="COLLECTIONCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MANCODE" Type="int" />
           <Property Name="NAME" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="COLORCODE" />
           </Key>
-          <Property Name="COLORCODE" Type="int" Nullable="false" />
+          <Property Name="COLORCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COLLECTIONCODE" Type="int" />
           <Property Name="IMAGECODE" Type="int" />
           <Property Name="NAME" Type="varchar" MaxLength="255" />
@@ -34,7 +34,7 @@
           <Key>
             <PropertyRef Name="MANCODE" />
           </Key>
-          <Property Name="MANCODE" Type="int" Nullable="false" />
+          <Property Name="MANCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NAME" Type="varchar" MaxLength="255" />
           <Property Name="COUNTRY" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -50,7 +50,7 @@
           <Key>
             <PropertyRef Name="GCCODE" />
           </Key>
-          <Property Name="GCCODE" Type="int" Nullable="false" />
+          <Property Name="GCCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COLORCODE" Type="int" />
           <Property Name="GOODCODE" Type="int" />
         </EntityType>
@@ -60,7 +60,6 @@
           </Key>
           <Property Name="GOODCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CATEGORYCODE" Type="int" />
-          <Property Name="IMAGECODE" Type="int" />
           <Property Name="USERCODE" Type="int" />
           <Property Name="NAME" Type="varchar" MaxLength="50" />
           <Property Name="DESCRIPTION" Type="text" />
@@ -76,10 +75,11 @@
         </EntityType>
         <EntityType Name="IMAGE">
           <Key>
-            <PropertyRef Name="IMAGECOED" />
+            <PropertyRef Name="IMAGECODE" />
           </Key>
-          <Property Name="IMAGECOED" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMAGECODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USERCODE" Type="int" />
+          <Property Name="GOODCODE" Type="int" />
           <Property Name="NAME" Type="varchar" MaxLength="50" />
           <Property Name="LOCATION" Type="varchar(max)" />
           <Property Name="UPLOAD_DATE" Type="datetime" />
@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="REPLYCODE" />
           </Key>
-          <Property Name="REPLYCODE" Type="int" Nullable="false" />
+          <Property Name="REPLYCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GOODCODE" Type="int" />
           <Property Name="USERCODE" Type="int" />
           <Property Name="AUTHOR" Type="varchar" MaxLength="255" />
@@ -109,7 +109,7 @@
           <Key>
             <PropertyRef Name="USERCODE" />
           </Key>
-          <Property Name="USERCODE" Type="int" Nullable="false" />
+          <Property Name="USERCODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ROLECODE" Type="int" />
           <Property Name="USERNAME" Type="varchar" MaxLength="50" />
           <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
@@ -155,7 +155,7 @@
           <End Role="CBD_COLOR" Type="Self.CBD_COLOR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMAGE">
-              <PropertyRef Name="IMAGECOED" />
+              <PropertyRef Name="IMAGECODE" />
             </Principal>
             <Dependent Role="CBD_COLOR">
               <PropertyRef Name="IMAGECODE" />
@@ -222,18 +222,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GOODS_REFERENCE_IMAGE">
-          <End Role="IMAGE" Type="Self.IMAGE" Multiplicity="0..1" />
-          <End Role="GOODS" Type="Self.GOODS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMAGE">
-              <PropertyRef Name="IMAGECOED" />
-            </Principal>
-            <Dependent Role="GOODS">
-              <PropertyRef Name="IMAGECODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GOODS_REFERENCE_USERS">
           <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
           <End Role="GOODS" Type="Self.GOODS" Multiplicity="*" />
@@ -243,6 +231,18 @@
             </Principal>
             <Dependent Role="GOODS">
               <PropertyRef Name="USERCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_REFERENCE_GOODS">
+          <End Role="GOODS" Type="Self.GOODS" Multiplicity="0..1" />
+          <End Role="IMAGE" Type="Self.IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GOODS">
+              <PropertyRef Name="GOODCODE" />
+            </Principal>
+            <Dependent Role="IMAGE">
+              <PropertyRef Name="GOODCODE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,7 +294,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="standartstyleModelStoreContainer">
+        <EntityContainer Name="StandartstyleModelStoreContainer">
           <EntitySet Name="ATTRIBUTES" EntityType="Self.ATTRIBUTES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBD_COLLECTION" EntityType="Self.CBD_COLLECTION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CBD_COLOR" EntityType="Self.CBD_COLOR" Schema="dbo" store:Type="Tables" />
@@ -343,13 +343,13 @@
             <End Role="GOODS_CATEGORY" EntitySet="GOODS_CATEGORY" />
             <End Role="GOODS" EntitySet="GOODS" />
           </AssociationSet>
-          <AssociationSet Name="FK_GOODS_REFERENCE_IMAGE" Association="Self.FK_GOODS_REFERENCE_IMAGE">
-            <End Role="IMAGE" EntitySet="IMAGE" />
-            <End Role="GOODS" EntitySet="GOODS" />
-          </AssociationSet>
           <AssociationSet Name="FK_GOODS_REFERENCE_USERS" Association="Self.FK_GOODS_REFERENCE_USERS">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="GOODS" EntitySet="GOODS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_REFERENCE_GOODS" Association="Self.FK_IMAGE_REFERENCE_GOODS">
+            <End Role="GOODS" EntitySet="GOODS" />
+            <End Role="IMAGE" EntitySet="IMAGE" />
           </AssociationSet>
           <AssociationSet Name="FK_IMAGE_REFERENCE_USERS" Association="Self.FK_IMAGE_REFERENCE_USERS">
             <End Role="USERS" EntitySet="USERS" />
@@ -372,7 +372,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="standartstyleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="StandartstyleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ATTRIBUTES">
           <Key>
             <PropertyRef Name="ATTRIBUTECODE" />
@@ -387,7 +387,7 @@
           <Key>
             <PropertyRef Name="COLLECTIONCODE" />
           </Key>
-          <Property Name="COLLECTIONCODE" Type="Int32" Nullable="false" />
+          <Property Name="COLLECTIONCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MANCODE" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CBD_MANUFACTURER" Relationship="Self.FK_CBD_COLL_REFERENCE_CBD_MANU" FromRole="CBD_COLLECTION" ToRole="CBD_MANUFACTURER" />
@@ -397,7 +397,7 @@
           <Key>
             <PropertyRef Name="COLORCODE" />
           </Key>
-          <Property Name="COLORCODE" Type="Int32" Nullable="false" />
+          <Property Name="COLORCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COLLECTIONCODE" Type="Int32" />
           <Property Name="IMAGECODE" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -409,7 +409,7 @@
           <Key>
             <PropertyRef Name="MANCODE" />
           </Key>
-          <Property Name="MANCODE" Type="Int32" Nullable="false" />
+          <Property Name="MANCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="COUNTRY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CBD_COLLECTION" Relationship="Self.FK_CBD_COLL_REFERENCE_CBD_MANU" FromRole="CBD_MANUFACTURER" ToRole="CBD_COLLECTION" />
@@ -428,7 +428,7 @@
           <Key>
             <PropertyRef Name="GCCODE" />
           </Key>
-          <Property Name="GCCODE" Type="Int32" Nullable="false" />
+          <Property Name="GCCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COLORCODE" Type="Int32" />
           <Property Name="GOODCODE" Type="Int32" />
           <NavigationProperty Name="CBD_COLOR" Relationship="Self.FK_GOOD_COL_REFERENCE_CBD_COLO" FromRole="GOOD_COLOR" ToRole="CBD_COLOR" />
@@ -440,7 +440,6 @@
           </Key>
           <Property Name="GOODCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CATEGORYCODE" Type="Int32" />
-          <Property Name="IMAGECODE" Type="Int32" />
           <Property Name="USERCODE" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -449,8 +448,8 @@
           <NavigationProperty Name="GOOD_ATTRIBUTES" Relationship="Self.FK_GOOD_ATT_REFERENCE_GOODS" FromRole="GOODS" ToRole="GOOD_ATTRIBUTES" />
           <NavigationProperty Name="GOOD_COLOR" Relationship="Self.FK_GOOD_COL_REFERENCE_GOODS" FromRole="GOODS" ToRole="GOOD_COLOR" />
           <NavigationProperty Name="GOODS_CATEGORY" Relationship="Self.FK_GOODS_REFERENCE_GOODS_CA" FromRole="GOODS" ToRole="GOODS_CATEGORY" />
-          <NavigationProperty Name="IMAGE" Relationship="Self.FK_GOODS_REFERENCE_IMAGE" FromRole="GOODS" ToRole="IMAGE" />
           <NavigationProperty Name="USERS" Relationship="Self.FK_GOODS_REFERENCE_USERS" FromRole="GOODS" ToRole="USERS" />
+          <NavigationProperty Name="IMAGE" Relationship="Self.FK_IMAGE_REFERENCE_GOODS" FromRole="GOODS" ToRole="IMAGE" />
           <NavigationProperty Name="REPLY" Relationship="Self.FK_REPLY_REFERENCE_GOODS" FromRole="GOODS" ToRole="REPLY" />
         </EntityType>
         <EntityType Name="GOODS_CATEGORY">
@@ -464,23 +463,24 @@
         </EntityType>
         <EntityType Name="IMAGE">
           <Key>
-            <PropertyRef Name="IMAGECOED" />
+            <PropertyRef Name="IMAGECODE" />
           </Key>
-          <Property Name="IMAGECOED" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMAGECODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USERCODE" Type="Int32" />
+          <Property Name="GOODCODE" Type="Int32" />
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LOCATION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UPLOAD_DATE" Type="DateTime" Precision="3" />
           <Property Name="IS_MAIN" Type="Boolean" />
           <NavigationProperty Name="CBD_COLOR" Relationship="Self.FK_CBD_COLO_REFERENCE_IMAGE" FromRole="IMAGE" ToRole="CBD_COLOR" />
-          <NavigationProperty Name="GOODS" Relationship="Self.FK_GOODS_REFERENCE_IMAGE" FromRole="IMAGE" ToRole="GOODS" />
+          <NavigationProperty Name="GOODS" Relationship="Self.FK_IMAGE_REFERENCE_GOODS" FromRole="IMAGE" ToRole="GOODS" />
           <NavigationProperty Name="USERS" Relationship="Self.FK_IMAGE_REFERENCE_USERS" FromRole="IMAGE" ToRole="USERS" />
         </EntityType>
         <EntityType Name="REPLY">
           <Key>
             <PropertyRef Name="REPLYCODE" />
           </Key>
-          <Property Name="REPLYCODE" Type="Int32" Nullable="false" />
+          <Property Name="REPLYCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GOODCODE" Type="Int32" />
           <Property Name="USERCODE" Type="Int32" />
           <Property Name="AUTHOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -503,7 +503,7 @@
           <Key>
             <PropertyRef Name="USERCODE" />
           </Key>
-          <Property Name="USERCODE" Type="Int32" Nullable="false" />
+          <Property Name="USERCODE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ROLECODE" Type="Int32" />
           <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -565,7 +565,7 @@
           <End Role="CBD_COLOR" Type="Self.CBD_COLOR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="IMAGE">
-              <PropertyRef Name="IMAGECOED" />
+              <PropertyRef Name="IMAGECODE" />
             </Principal>
             <Dependent Role="CBD_COLOR">
               <PropertyRef Name="IMAGECODE" />
@@ -620,18 +620,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GOODS_REFERENCE_IMAGE">
-          <End Role="IMAGE" Type="Self.IMAGE" Multiplicity="0..1" />
-          <End Role="GOODS" Type="Self.GOODS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMAGE">
-              <PropertyRef Name="IMAGECOED" />
-            </Principal>
-            <Dependent Role="GOODS">
-              <PropertyRef Name="IMAGECODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GOODS_REFERENCE_USERS">
           <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
           <End Role="GOODS" Type="Self.GOODS" Multiplicity="*" />
@@ -641,6 +629,18 @@
             </Principal>
             <Dependent Role="GOODS">
               <PropertyRef Name="USERCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_REFERENCE_GOODS">
+          <End Role="GOODS" Type="Self.GOODS" Multiplicity="0..1" />
+          <End Role="IMAGE" Type="Self.IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GOODS">
+              <PropertyRef Name="GOODCODE" />
+            </Principal>
+            <Dependent Role="IMAGE">
+              <PropertyRef Name="GOODCODE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -692,7 +692,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="StandartstyleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTRIBUTES" EntityType="Self.ATTRIBUTES" />
           <EntitySet Name="CBD_COLLECTION" EntityType="Self.CBD_COLLECTION" />
           <EntitySet Name="CBD_COLOR" EntityType="Self.CBD_COLOR" />
@@ -741,13 +741,13 @@
             <End Role="GOODS_CATEGORY" EntitySet="GOODS_CATEGORY" />
             <End Role="GOODS" EntitySet="GOODS" />
           </AssociationSet>
-          <AssociationSet Name="FK_GOODS_REFERENCE_IMAGE" Association="Self.FK_GOODS_REFERENCE_IMAGE">
-            <End Role="IMAGE" EntitySet="IMAGE" />
-            <End Role="GOODS" EntitySet="GOODS" />
-          </AssociationSet>
           <AssociationSet Name="FK_GOODS_REFERENCE_USERS" Association="Self.FK_GOODS_REFERENCE_USERS">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="GOODS" EntitySet="GOODS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_REFERENCE_GOODS" Association="Self.FK_IMAGE_REFERENCE_GOODS">
+            <End Role="GOODS" EntitySet="GOODS" />
+            <End Role="IMAGE" EntitySet="IMAGE" />
           </AssociationSet>
           <AssociationSet Name="FK_REPLY_REFERENCE_GOODS" Association="Self.FK_REPLY_REFERENCE_GOODS">
             <End Role="GOODS" EntitySet="GOODS" />
@@ -771,9 +771,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="standartstyleModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="StandartstyleModelStoreContainer" CdmEntityContainer="StandartstyleEntities">
           <EntitySetMapping Name="ATTRIBUTES">
-            <EntityTypeMapping TypeName="standartstyleModel.ATTRIBUTES">
+            <EntityTypeMapping TypeName="StandartstyleModel.ATTRIBUTES">
               <MappingFragment StoreEntitySet="ATTRIBUTES">
                 <ScalarProperty Name="ATTRIBUTECODE" ColumnName="ATTRIBUTECODE" />
                 <ScalarProperty Name="CATEGORYCODE" ColumnName="CATEGORYCODE" />
@@ -782,7 +782,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CBD_COLLECTION">
-            <EntityTypeMapping TypeName="standartstyleModel.CBD_COLLECTION">
+            <EntityTypeMapping TypeName="StandartstyleModel.CBD_COLLECTION">
               <MappingFragment StoreEntitySet="CBD_COLLECTION">
                 <ScalarProperty Name="COLLECTIONCODE" ColumnName="COLLECTIONCODE" />
                 <ScalarProperty Name="MANCODE" ColumnName="MANCODE" />
@@ -791,7 +791,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CBD_COLOR">
-            <EntityTypeMapping TypeName="standartstyleModel.CBD_COLOR">
+            <EntityTypeMapping TypeName="StandartstyleModel.CBD_COLOR">
               <MappingFragment StoreEntitySet="CBD_COLOR">
                 <ScalarProperty Name="COLORCODE" ColumnName="COLORCODE" />
                 <ScalarProperty Name="COLLECTIONCODE" ColumnName="COLLECTIONCODE" />
@@ -801,7 +801,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CBD_MANUFACTURER">
-            <EntityTypeMapping TypeName="standartstyleModel.CBD_MANUFACTURER">
+            <EntityTypeMapping TypeName="StandartstyleModel.CBD_MANUFACTURER">
               <MappingFragment StoreEntitySet="CBD_MANUFACTURER">
                 <ScalarProperty Name="MANCODE" ColumnName="MANCODE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -810,7 +810,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GOOD_ATTRIBUTES">
-            <EntityTypeMapping TypeName="standartstyleModel.GOOD_ATTRIBUTES">
+            <EntityTypeMapping TypeName="StandartstyleModel.GOOD_ATTRIBUTES">
               <MappingFragment StoreEntitySet="GOOD_ATTRIBUTES">
                 <ScalarProperty Name="GATCODE" ColumnName="GATCODE" />
                 <ScalarProperty Name="GOODCODE" ColumnName="GOODCODE" />
@@ -819,7 +819,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GOOD_COLOR">
-            <EntityTypeMapping TypeName="standartstyleModel.GOOD_COLOR">
+            <EntityTypeMapping TypeName="StandartstyleModel.GOOD_COLOR">
               <MappingFragment StoreEntitySet="GOOD_COLOR">
                 <ScalarProperty Name="GCCODE" ColumnName="GCCODE" />
                 <ScalarProperty Name="COLORCODE" ColumnName="COLORCODE" />
@@ -828,11 +828,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GOODS">
-            <EntityTypeMapping TypeName="standartstyleModel.GOODS">
+            <EntityTypeMapping TypeName="StandartstyleModel.GOODS">
               <MappingFragment StoreEntitySet="GOODS">
                 <ScalarProperty Name="GOODCODE" ColumnName="GOODCODE" />
                 <ScalarProperty Name="CATEGORYCODE" ColumnName="CATEGORYCODE" />
-                <ScalarProperty Name="IMAGECODE" ColumnName="IMAGECODE" />
                 <ScalarProperty Name="USERCODE" ColumnName="USERCODE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
@@ -842,7 +841,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GOODS_CATEGORY">
-            <EntityTypeMapping TypeName="standartstyleModel.GOODS_CATEGORY">
+            <EntityTypeMapping TypeName="StandartstyleModel.GOODS_CATEGORY">
               <MappingFragment StoreEntitySet="GOODS_CATEGORY">
                 <ScalarProperty Name="CATEGORYCODE" ColumnName="CATEGORYCODE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -850,10 +849,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IMAGE">
-            <EntityTypeMapping TypeName="standartstyleModel.IMAGE">
+            <EntityTypeMapping TypeName="StandartstyleModel.IMAGE">
               <MappingFragment StoreEntitySet="IMAGE">
-                <ScalarProperty Name="IMAGECOED" ColumnName="IMAGECOED" />
+                <ScalarProperty Name="IMAGECODE" ColumnName="IMAGECODE" />
                 <ScalarProperty Name="USERCODE" ColumnName="USERCODE" />
+                <ScalarProperty Name="GOODCODE" ColumnName="GOODCODE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
                 <ScalarProperty Name="UPLOAD_DATE" ColumnName="UPLOAD_DATE" />
@@ -862,7 +862,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REPLY">
-            <EntityTypeMapping TypeName="standartstyleModel.REPLY">
+            <EntityTypeMapping TypeName="StandartstyleModel.REPLY">
               <MappingFragment StoreEntitySet="REPLY">
                 <ScalarProperty Name="REPLYCODE" ColumnName="REPLYCODE" />
                 <ScalarProperty Name="GOODCODE" ColumnName="GOODCODE" />
@@ -876,7 +876,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ROLES">
-            <EntityTypeMapping TypeName="standartstyleModel.ROLES">
+            <EntityTypeMapping TypeName="StandartstyleModel.ROLES">
               <MappingFragment StoreEntitySet="ROLES">
                 <ScalarProperty Name="ROLECODE" ColumnName="ROLECODE" />
                 <ScalarProperty Name="ROLENAME" ColumnName="ROLENAME" />
@@ -884,7 +884,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USERS">
-            <EntityTypeMapping TypeName="standartstyleModel.USERS">
+            <EntityTypeMapping TypeName="StandartstyleModel.USERS">
               <MappingFragment StoreEntitySet="USERS">
                 <ScalarProperty Name="USERCODE" ColumnName="USERCODE" />
                 <ScalarProperty Name="ROLECODE" ColumnName="ROLECODE" />
