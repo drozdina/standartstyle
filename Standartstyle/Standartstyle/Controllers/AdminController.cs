@@ -29,18 +29,13 @@ namespace Standartstyle.Controllers
                     var goodsFromDB = repo.GoodsRepository.All.Where(elem => elem.CATEGORYCODE == category.CATEGORYCODE).ToList();
                     foreach (var goodFromDB in goodsFromDB)
                     {
-                        var images = new List<ImageModel>();
-                        var imagesFromDB = repo.ImageRepository.All.Where(elem => elem.GOODCODE == goodFromDB.GOODCODE).ToList();
-                        foreach (var imageFromDB in imagesFromDB)
-                        {
-
-                        }
-
                         var good = new GoodModel()
                         {
                             GoodCode = goodFromDB.GOODCODE,
                             Name = goodFromDB.NAME
                         };
+                        SetImagesForGood(good);
+                        goods.Add(good);
                     }
                 }
                 catch (Exception ex)
@@ -48,8 +43,42 @@ namespace Standartstyle.Controllers
 
                 }
 
+                var goodCategory = new GoodsCategoryModel()
+                {
+                    Code = category.CATEGORYCODE,
+                    Name = category.NAME
+                };
+                catalog.GoodsMap.Add(goodCategory, goods);
             }
-            return View();
+            catalog.GoodsMap.Add(catalog.CurrentCategory, null);
+
+            return View(catalog);
+        }
+
+        private void SetImagesForGood(GoodModel good)
+        {
+            var images = new List<ImageModel>();
+            var imagesFromDB = repo.ImageRepository.All.Where(elem => elem.GOODCODE == good.GoodCode).ToList();
+            var mainImageIndex = 0;
+            foreach (var imageFromDB in imagesFromDB)
+            {
+                var image = new ImageModel()
+                {
+                    ImageCode = imageFromDB.IMAGECODE,
+                    Name = imageFromDB.NAME,
+                    Path = imageFromDB.LOCATION
+                };
+
+                images.Add(image);
+
+                if (imageFromDB.IS_MAIN.HasValue && imageFromDB.IS_MAIN.Value)
+                {
+                    mainImageIndex = images.IndexOf(image);
+                }
+            }
+
+            good.Images = images;
+            good.MainImageIndex = mainImageIndex;
         }
     }
 }

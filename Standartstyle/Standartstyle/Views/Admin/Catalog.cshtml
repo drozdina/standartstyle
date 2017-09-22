@@ -1,3 +1,8 @@
-﻿@{
+﻿@model Standartstyle.Models.CatalogModel
+
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+@Html.Partial("Catalog/_CategoriesPartial", Model.GoodsMap.Keys)
+

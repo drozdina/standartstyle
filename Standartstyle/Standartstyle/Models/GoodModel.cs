@@ -10,6 +10,11 @@ namespace Standartstyle.Models
         public int GoodCode { get; set; }
         public string Name { get; set; }
         public int MainImageIndex { get; set; }
-        public IEnumerable<string> Images { get; set; }
+        public IEnumerable<ImageModel> Images { get; set; }
+
+        public GoodModel()
+        {
+            Images = new List<ImageModel>();
+        }
     }
 }
