@@ -407,7 +407,7 @@ alter table USERS
       references ROLES (ROLECODE)
 go
 
-insert into GOODS_CATEGORY (NAME) values ('Компьютерные столы');
+insert into GOODS_CATEGORY (NAME) values ('Столы');
 insert into GOODS_CATEGORY (NAME) values ('Комоды');
 insert into GOODS_CATEGORY (NAME) values ('Тумбы TV');
 insert into GOODS_CATEGORY (NAME) values ('Шкафы');
@@ -419,3 +419,9 @@ insert into ROLES (ROLECODE, ROLENAME) values (1, 'Admin');
 insert into ROLES (ROLECODE, ROLENAME) values (2, 'User');
 
 INSERT INTO USERS (ROLECODE, USERNAME, PASSWORD) VALUES (1, 'admin', 'fIdUH9Pz71AW4S1BGQDIemBGqOg=');
+
+insert into ATTRIBUTES (CATEGORYCODE, ATTRIBUTENAME) VALUES (1, 'Компьютерный');
+insert into ATTRIBUTES (CATEGORYCODE, ATTRIBUTENAME) VALUES (1, 'С надставкой');
+insert into ATTRIBUTES (CATEGORYCODE, ATTRIBUTENAME) VALUES (1, 'С полками');
+insert into ATTRIBUTES (CATEGORYCODE, ATTRIBUTENAME) VALUES (1, 'Письменный');
+insert into ATTRIBUTES (CATEGORYCODE, ATTRIBUTENAME) VALUES (1, 'Стол-стеллаж');
