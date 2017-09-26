@@ -20,7 +20,13 @@ namespace Standartstyle.Controllers
         public ActionResult Catalog()
         {
             var categories = repo.GoodsCategoryRepository.All;
+            var allCategoriesElement = new GoodsCategoryModel
+            {
+                Code = -1,
+                Name = "Весь каталог"
+            };
             var catalog = new CatalogModel();
+            catalog.GoodsMap.Add(allCategoriesElement, null);
             foreach (var category in categories)
             {
                 var goods = new List<GoodModel>();
@@ -50,7 +56,6 @@ namespace Standartstyle.Controllers
                 };
                 catalog.GoodsMap.Add(goodCategory, goods);
             }
-            catalog.GoodsMap.Add(catalog.CurrentCategory, null);
 
             return View(catalog);
         }

@@ -7,5 +7,6 @@ namespace Standartstyle.AppCode.BL
 {
     public class AdminUtils
     {
+
     }
 }
