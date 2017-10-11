@@ -1,29 +1,33 @@
-﻿@model IEnumerable<Standartstyle.Models.GoodsCategoryModel>
+﻿@model Standartstyle.Models.CatalogModel
 
 <div id="categories">
-    <div class="col-md-3">
-        <span class="panel-title">Категории</span>
-    </div>
-    <div class="col-md-9">
-        @foreach (var category in Model)
-        {
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="category">
-                    <a>
-                        <span>@category.Name</span>
+    <div id="sidebar-wrapper">
+        <nav id="spy">
+            <ul class="sidebar-nav nav">
+                <li class="sidebar-brand">
+                    <a><span class="">Категории</span></a>
+                </li>
+                @foreach (var category in Model.GoodsMap.Keys)
+                {
+
+                    <li class="category @if(category.Equals(Model.ActiveCategory)){<text>active</text>}">
+                        <a>
+                            @category.Name
+                            @if (category.Code > 0)
+                            {
+                                <span class="glyphicon glyphicon-trash pull-right" onclick="deleteCategory(@category.Code)"></span>
+                                <span class="glyphicon glyphicon-edit pull-right" onclick="editCategory(@category.Code)"></span>
+                            }
+                        </a>
+
+                    </li>
+                }
+                <li>
+                    <a href="#">
+                        Добавить новую<span class="glyphicon glyphicon-plus"></span>
                     </a>
-                    <div class='vcenter category-btn-group pull-right'>
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default btn-xs">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-xs">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>

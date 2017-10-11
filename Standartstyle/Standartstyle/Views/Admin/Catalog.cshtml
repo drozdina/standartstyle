@@ -4,5 +4,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@Html.Partial("Catalog/_CategoriesPartial", Model.GoodsMap.Keys)
-
+<div id="wrapper">
+    @Html.Partial("Catalog/_CategoriesPartial", Model)
+</div>

@@ -73,39 +73,111 @@ body.account {
     margin: 50px auto 0px auto;
 }
 
-.category {
-    height: 30px;
-    cursor: default;
-    margin: 2px;
-}
-
-    .category a {
-        color: #000000;
-        line-height: 30px;
-    }
-
-        .category a span:hover, .category a span:focus {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .category a span {
-            display: inline-block;
-            vertical-align: middle;
-            line-height: normal;
-        }
-
 .vcenter {
     display: inline-block;
     vertical-align: middle;
     float: none;
 }
 
-.category-btn-group{
+.category-btn-group {
     line-height: 30px;
 }
 
-span.panel-title {
-    font-size: 25px;
-    text-align: center;
+#wrapper {
+    padding-left: 250px;
+    transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+    margin-left: -250px;
+    left: 250px;
+    width: 250px;
+    background: #ccc;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: all 0.4s ease 0s;
+}
+
+#wrapper.active {
+    padding-left: 0;
+}
+
+    #wrapper.active #sidebar-wrapper {
+        left: 0;
+    }
+
+#page-content-wrapper {
+    width: 100%;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .sidebar-nav li {
+        line-height: 30px;
+        text-indent: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+        .sidebar-nav li a {
+            color: #000;
+            display: block;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: rgba(255,255,255,0.2);
+                text-decoration: none;
+            }
+
+            .sidebar-nav li.category > a span.glyphicon {
+                display: none;
+            }
+
+            .sidebar-nav li.category > a:hover span.glyphicon {
+                display: block;
+                margin-top: 7px;
+                color: #000;
+            }
+
+            .sidebar-nav li.category > a:hover span.glyphicon:hover{
+                color:#fff;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+    .sidebar-nav > .sidebar-brand {
+        height: 80px;
+        line-height: 60px;
+        font-size: 18px;
+    }
+
+        .sidebar-nav > .sidebar-brand a {
+            color: #000;
+        }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #000;
+                background: none;
+                cursor: default;
+            }
+
+.admin-btn {
+    float: right;
 }

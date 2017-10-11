@@ -25,7 +25,9 @@ namespace Standartstyle.Controllers
                 Code = -1,
                 Name = "Весь каталог"
             };
+
             var catalog = new CatalogModel();
+
             catalog.GoodsMap.Add(allCategoriesElement, null);
             foreach (var category in categories)
             {
@@ -55,7 +57,10 @@ namespace Standartstyle.Controllers
                     Name = category.NAME
                 };
                 catalog.GoodsMap.Add(goodCategory, goods);
+
             }
+
+            catalog.ActiveCategory = allCategoriesElement;
 
             return View(catalog);
         }
