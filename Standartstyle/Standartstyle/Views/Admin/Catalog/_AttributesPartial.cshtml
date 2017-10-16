@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Standartstyle.Models.AttributeModel>
+
+<div id="categories">
+    <div class="col-md-3">
+        <span class="panel-title">Атрибуты</span>
+    </div>
+    <div class="col-md-9">
+        @foreach (var attribute in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <div class="category">
+                    <a>
+                        <span>@attribute.AttributeName</span>
+                    </a>
+                    <div class='vcenter category-btn-group pull-right'>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

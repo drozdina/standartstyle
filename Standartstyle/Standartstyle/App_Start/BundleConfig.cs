@@ -23,6 +23,13 @@ namespace Standartstyle
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                "~/Scripts/fileinput.js",
+                "~/Scripts/locales/ru.js",
+                "~/Scripts/plugins/piexif.js",
+                "~/Scripts/plugins/purify.js",
+                "~/Scripts/plugins/sortable.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -30,6 +37,11 @@ namespace Standartstyle
             bundles.Add(new StyleBundle("~/Content/admin").Include(
                      "~/Content/bootstrap.css",
                      "~/Content/Admin.css"));
+
+            bundles.Add(new StyleBundle("~/Content/fileuploader").Include(
+                "~/Content/bootstrap-fileinput/css/fileinput-rtl.css",
+                "~/Content/bootstrap-fileinput/css/fileinput.css"
+                ));
         }
     }
 }

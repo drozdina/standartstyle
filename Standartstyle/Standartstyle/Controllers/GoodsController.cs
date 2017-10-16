@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Standartstyle.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,18 @@ namespace Standartstyle.Controllers
     {
         // GET: Goods
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Form()
+        {
+            GoodModel model = new GoodModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SaveGood()
         {
             return View();
         }
