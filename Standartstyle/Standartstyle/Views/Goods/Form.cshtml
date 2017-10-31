@@ -20,32 +20,94 @@
 
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
-            <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(m => m.Size, new { @class = "col-form-label" })
-                        @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+            <div class="vert-offset-top-1"></div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Основные данные</label>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(m => m.Width, new { @class = "col-form-label" })
+                                    @Html.TextBoxFor(m => m.Width, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(m => m.Height, new { @class = "col-form-label" })
+                                    @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(m => m.Depth, new { @class = "col-form-label" })
+                                    @Html.TextBoxFor(m => m.Depth, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(m => m.Description, new { @class = "col-form-label" })
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        @Html.LabelFor(m => m.Description, new { @class = "col-form-label" })
-                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Загрузка файлов</label>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div class="file-loading">
+                                        <input id="fileform" class="file" type="file" multiple data-min-file-count="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <div class="file-loading">
-                            <input id="fileform" class="file" type="file" multiple data-min-file-count="1">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Изготовлено из ДСП</label>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Атрибуты</label>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-success disabled" disabled="disabled">
+                        <div class="btnBack">Сохранить</div>
+                    </button>
+                    <button class="btn btn-default">
+                        <div class="btnBack">Отмена</div>
+                    </button>
                 </div>
             </div>
 

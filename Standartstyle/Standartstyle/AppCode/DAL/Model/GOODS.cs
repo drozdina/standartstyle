@@ -29,7 +29,9 @@ namespace Standartstyle.AppCode.DAL.Model
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
         public Nullable<int> STATE { get; set; }
-        public string SIZE { get; set; }
+        public string WIDTH { get; set; }
+        public string HEIGHT { get; set; }
+        public string DEPTH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GOOD_ATTRIBUTES> GOOD_ATTRIBUTES { get; set; }

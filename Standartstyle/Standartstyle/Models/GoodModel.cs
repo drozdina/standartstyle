@@ -13,13 +13,19 @@ namespace Standartstyle.Models
 
         [Required(ErrorMessage = "Обязательно к заполнению")]
         [Display(Name = "Название")]
-        public string Name { get; set;}
+        public string Name { get; set; }
         [Required(ErrorMessage = "Обязательно к заполнению")]
         [Display(Name = "Описание")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Обязательно к заполнению")]
-        [Display(Name = "Размеры (шир х выс х глб)")]
-        public string Size { get; set; }
+        [Display(Name = "Высота, мм")]
+        public string Height { get; set; }
+        [Required(ErrorMessage = "Обязательно к заполнению")]
+        [Display(Name = "Ширина, мм")]
+        public string Width { get; set; }
+        [Required(ErrorMessage = "Обязательно к заполнению")]
+        [Display(Name = "Глубина, мм")]
+        public string Depth { get; set; }
 
         public int MainImageIndex { get; set; }
         public IEnumerable<ImageModel> Images { get; set; }

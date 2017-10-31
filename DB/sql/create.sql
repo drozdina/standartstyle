@@ -242,7 +242,9 @@ create table GOODS (
    NAME                 varchar(50)          null,
    DESCRIPTION          text                 null,
    STATE                integer              null,
-   SIZE                 varchar(50)          null,
+   WIDTH                varchar(15)          null,
+   HEIGHT               varchar(15)          null,
+   DEPTH                varchar(15)          null,
    constraint PK_GOODS primary key (GOODCODE)
 )
 go
