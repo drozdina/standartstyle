@@ -60,13 +60,37 @@
                 <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Загрузка файлов</label>
+                            <label>Изображения</label>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <div class="file-loading">
-                                        <input id="fileform" class="file" type="file" multiple data-min-file-count="1">
+                                    <div class="col-lg-offset-5 col-md-offset-5">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#file-upload-modal">
+                                            Загрузить фото
+                                        </button>
+                                    </div>
+
+
+                                    <div class="modal fade" id="file-upload-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="file-loading">
+                                                        <input id="fileform" class="file" type="file" multiple>
+                                                    </div>
+                                                    <div id="kartik-file-errors"></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,10 +142,11 @@
 @Scripts.Render("~/bundles/fileupload")
 <script>
     $('#fileform').fileinput({
-        theme: 'explorer-fa',
-        overwriteInitial: false,
         uploadAsync: false,
         language: 'ru',
+        showCaption: false,
+        dropZoneEnabled: false,
+        fileActionSettings: false,
         uploadUrl: '@Url.Action("UploadFiles", "Image")',
         allowedFileExtensions: ['jpg', 'png', 'jpeg']
     });

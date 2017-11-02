@@ -1,4 +1,5 @@
-﻿using Standartstyle.AppCode.DAL.Repository;
+﻿using Standartstyle.App_Start.Filters;
+using Standartstyle.AppCode.DAL.Repository;
 using Standartstyle.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Standartstyle.Controllers
 {
+    [SessionExpireFilter]
     public class AdminController : Controller
     {
         private GeneralRepository repo = new GeneralRepository();

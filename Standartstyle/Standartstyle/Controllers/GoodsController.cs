@@ -1,4 +1,5 @@
-﻿using Standartstyle.Models;
+﻿using Standartstyle.AppCode.Util.Session;
+using Standartstyle.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Standartstyle.Controllers
 
         public ActionResult Form()
         {
+            UserSession.Create("admin", "admin");
             GoodModel model = new GoodModel();
             return View(model);
         }

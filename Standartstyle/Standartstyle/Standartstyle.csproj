@@ -172,6 +172,8 @@
   <ItemGroup>
     <Compile Include="AppCode\BL\AdminUtils.cs" />
     <Compile Include="AppCode\BL\Extensions.cs" />
+    <Compile Include="AppCode\BL\Goods\GoodsLogic.cs" />
+    <Compile Include="AppCode\BL\Images\ImagesLogic.cs" />
     <Compile Include="AppCode\BL\Utils.cs" />
     <Compile Include="AppCode\DAL\Model\ATTRIBUTES.cs">
       <DependentUpon>StandartstyleModel.tt</DependentUpon>
@@ -238,8 +240,10 @@
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\UsersRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GeneralRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GenericRepository.cs" />
+    <Compile Include="AppCode\Util\Session\UserSession.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Filters\SessionExpireFilterAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
