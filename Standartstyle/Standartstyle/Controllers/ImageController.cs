@@ -23,16 +23,21 @@ namespace Standartstyle.Controllers
                     {
                         HttpPostedFileBase file = files[i];
                         string fname;
+                        string realFilename = String.Empty;
 
                         // Checking for Internet Explorer  
                         if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
                         {
                             string[] testfiles = file.FileName.Split(new char[] { '\\' });
                             fname = testfiles[testfiles.Length - 1];
+                            var fileLexemes = fname.Split('.');
+                            var extension = fileLexemes[fileLexemes.Length - 1];
+                            for (var idx = 0; idx < fileLexemes.Length - 1; idx++)
+                                realFilename += fileLexemes[idx];
                         }
                         else
                         {
-                            fname = file.FileName;
+                            fname = file.FileName + DateTime.Now;
                         }
                         var location = Server.MapPath(Configuration.UploadDirectory);
                         if (!Directory.Exists(location))

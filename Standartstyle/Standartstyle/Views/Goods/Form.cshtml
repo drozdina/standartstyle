@@ -14,7 +14,6 @@
             InsertionMode = InsertionMode.Replace,
             OnSuccess = "successCallback",
             OnFailure = "failureCallback",
-            OnBegin = "hideHeader"
         }, new { id = "ContractForm" }))
         {
 
@@ -64,6 +63,16 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
+                                <div class="form-group col-md-12" id="existingImages" hidden>
+                                    <label>Загруженные фото</label>
+                                </div>
+                            </div>
+                            <div class="row" id="newImages">
+                                <div class="form-group col-md-12">
+                                    <label>Новые фото</label>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-12">
                                     <div class="col-lg-offset-5 col-md-offset-5">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#file-upload-modal">
@@ -82,12 +91,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="file-loading">
-                                                        <input id="fileform" class="file" type="file" multiple>
+                                                        <input id="file-uploader" type="file" accept="image/*" multiple>
                                                     </div>
                                                     <div id="kartik-file-errors"></div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,23 +147,43 @@
         }
     </div>
 </div>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/fileupload")
-<script>
-    $('#fileform').fileinput({
-        uploadAsync: false,
-        language: 'ru',
-        showCaption: false,
-        dropZoneEnabled: false,
-        fileActionSettings: false,
-        uploadUrl: '@Url.Action("UploadFiles", "Image")',
-        allowedFileExtensions: ['jpg', 'png', 'jpeg']
-    });
+@section scripts{
+    @Scripts.Render("~/bundles/fileupload")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $fileInputObject = $('#file-uploader'),
+                initPlugin = function () {
 
-    $('#fileform').on('filebatchuploadsuccess', function (event, data, previewId, index) {
-        var form = data.form, files = data.files, extra = data.extra,
-            response = data.response, reader = data.reader;
-        console.log('File batch upload success');
-    });
+                    $fileInputObject.fileinput({
+                        uploadAsync: false,
+                        language: 'ru',
+                        showCaption: false,
+                        dropZoneEnabled: false,
+                        fileActionSettings: false,
+                        uploadUrl: '@Url.Action("UploadFiles", "Image")',
+                        allowedFileExtensions: ['jpg', 'png', 'jpeg'],
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Выбрать изображения",
+                        browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Удалить",
+                        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Загрузить",
+                        uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+                    });
+                };
 
-</script>
+            initPlugin();
+
+            $fileInputObject.on('filebatchuploadsuccess', function (event, data, previewId, index) {
+                var form = data.form, files = data.files, extra = data.extra,
+                    response = data.response, reader = data.reader;
+                if ($fileInputObject.data('fileinput')) {
+                }
+            });
+        });
+    </script>
+}
+
