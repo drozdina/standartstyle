@@ -70,6 +70,7 @@
                             <div class="row" id="newImages">
                                 <div class="form-group col-md-12">
                                     <label>Новые фото</label>
+                                    <div class="row" id="newImagesGalery"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -160,6 +161,7 @@
                         showCaption: false,
                         dropZoneEnabled: false,
                         fileActionSettings: false,
+                        autoReplace: true,
                         uploadUrl: '@Url.Action("UploadFiles", "Image")',
                         allowedFileExtensions: ['jpg', 'png', 'jpeg'],
                         previewFileType: "image",
@@ -181,6 +183,10 @@
                 var form = data.form, files = data.files, extra = data.extra,
                     response = data.response, reader = data.reader;
                 if ($fileInputObject.data('fileinput')) {
+
+                    $.post('@Url.Action("List", "Image")', { images: response.files }, function (result) {
+                        $("#newImagesGalery").append(result);
+                    });
                 }
             });
         });

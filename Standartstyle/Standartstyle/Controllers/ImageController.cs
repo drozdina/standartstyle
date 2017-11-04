@@ -1,8 +1,11 @@
 ﻿using Standartstyle.AppCode.BL;
+using Standartstyle.AppCode.BL.Images;
+using Standartstyle.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,42 +15,51 @@ namespace Standartstyle.Controllers
     {
         public ActionResult UploadFiles()
         {
-            // Checking no of files injected in Request object  
             if (Request.Files.Count > 0)
             {
                 try
                 {
-                    //  Get all files from Request object  
+                    List<ImageModel> images = new List<ImageModel>();
                     HttpFileCollectionBase files = Request.Files;
                     for (int i = 0; i < files.Count; i++)
                     {
                         HttpPostedFileBase file = files[i];
                         string fname;
-                        string realFilename = String.Empty;
+                        string filenameForSave = String.Empty;
 
-                        // Checking for Internet Explorer  
                         if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
                         {
                             string[] testfiles = file.FileName.Split(new char[] { '\\' });
                             fname = testfiles[testfiles.Length - 1];
-                            var fileLexemes = fname.Split('.');
-                            var extension = fileLexemes[fileLexemes.Length - 1];
-                            for (var idx = 0; idx < fileLexemes.Length - 1; idx++)
-                                realFilename += fileLexemes[idx];
+                            filenameForSave = ImagesLogic.generateFilename(fname);
                         }
                         else
                         {
-                            fname = file.FileName + DateTime.Now;
+                            filenameForSave = ImagesLogic.generateFilename(file.FileName);
                         }
                         var location = Server.MapPath(Configuration.UploadDirectory);
                         if (!Directory.Exists(location))
                         {
                             Directory.CreateDirectory(location);
                         }
-                        fname = Path.Combine(location, fname);
-                        file.SaveAs(fname);
+
+                        ImageModel newImage = new ImageModel
+                        {
+                            ImageCode = -1,
+                            Name = filenameForSave,
+                            Path = Configuration.UploadDirectory
+                        };
+                        images.Add(newImage);
+
+                        filenameForSave = Path.Combine(location, filenameForSave);
+                        file.SaveAs(filenameForSave);
                     }
-                    return Json("File Uploaded Successfully!");
+                    return Json(new
+                    {
+                        code = HttpStatusCode.OK,
+                        message = "File Uploaded Successfully!",
+                        files = images
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -58,6 +70,11 @@ namespace Standartstyle.Controllers
             {
                 return Json("No files selected.");
             }
+        }
+
+        public ActionResult List(IEnumerable<ImageModel> images)
+        {
+            return PartialView("_List", images);
         }
     }
 }

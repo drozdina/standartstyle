@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Standartstyle.Models.ImageModel>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="@Url.Content(item.Path+item.Name)" class="img-thumbnail" alt="@item.Name">
+        </div>
+    </div>
+}
