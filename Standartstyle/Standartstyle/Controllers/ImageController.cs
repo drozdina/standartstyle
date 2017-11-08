@@ -25,34 +25,30 @@ namespace Standartstyle.Controllers
                     {
                         HttpPostedFileBase file = files[i];
                         string fname;
-                        string filenameForSave = String.Empty;
+                        ImageModel newImage = null;
 
                         if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
                         {
                             string[] testfiles = file.FileName.Split(new char[] { '\\' });
                             fname = testfiles[testfiles.Length - 1];
-                            filenameForSave = ImagesLogic.generateFilename(fname);
+                            newImage = ImagesLogic.generateFileModel(fname);
                         }
                         else
                         {
-                            filenameForSave = ImagesLogic.generateFilename(file.FileName);
+                            newImage = ImagesLogic.generateFileModel(file.FileName);
                         }
-                        var location = Server.MapPath(Configuration.UploadDirectory);
-                        if (!Directory.Exists(location))
+                        if (newImage != null)
                         {
-                            Directory.CreateDirectory(location);
+                            var location = Server.MapPath(newImage.Path);
+                            if (!Directory.Exists(location))
+                            {
+                                Directory.CreateDirectory(location);
+                            }
+                            images.Add(newImage);
+                            string filenameForSave = String.Empty;
+                            filenameForSave = Path.Combine(location, newImage.GetFullFilename());
+                            file.SaveAs(filenameForSave);
                         }
-
-                        ImageModel newImage = new ImageModel
-                        {
-                            ImageCode = -1,
-                            Name = filenameForSave,
-                            Path = Configuration.UploadDirectory
-                        };
-                        images.Add(newImage);
-
-                        filenameForSave = Path.Combine(location, filenameForSave);
-                        file.SaveAs(filenameForSave);
                     }
                     return Json(new
                     {

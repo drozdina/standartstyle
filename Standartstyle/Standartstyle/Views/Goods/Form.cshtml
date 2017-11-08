@@ -150,11 +150,11 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/fileupload")
+    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var $fileInputObject = $('#file-uploader'),
                 initPlugin = function () {
-
                     $fileInputObject.fileinput({
                         uploadAsync: false,
                         language: 'ru',
@@ -186,9 +186,28 @@
 
                     $.post('@Url.Action("List", "Image")', { images: response.files }, function (result) {
                         $("#newImagesGalery").append(result);
+                        var images = $("#newImagesGalery").find("img");
+                        $(images).each(function (idx, elem) {
+                            var imgUrl = $(elem).attr("src");
+                            var loadingImage = loadImage(imgUrl, function (img) {
+                                var imageParent = $("#newImagesGalery").find("#" + $(elem).attr("name"));
+                                $(imageParent).html("");
+                                $(imageParent).append(img);
+                            }, {
+                                maxWidth: 600,
+                                maxHeight: 300,
+                                minWidth: 100,
+                                minHeight: 50,
+                                canvas: true,
+                                orientation: true
+                            });
+                        });
+
                     });
                 }
             });
+
+
         });
     </script>
 }
