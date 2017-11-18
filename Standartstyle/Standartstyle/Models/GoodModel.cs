@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Standartstyle.Models
 {
@@ -30,8 +31,11 @@ namespace Standartstyle.Models
         public int MainImageIndex { get; set; }
         public IEnumerable<ImageModel> Images { get; set; }
 
+        [Required(ErrorMessage = "Обязательно к заполнению")]
+        [Range(1, int.MaxValue, ErrorMessage = "Необходимо выбрать категорию товара")]
+        [Display(Name ="Категория товара")]
         public int SelectedCategoryCode { get; set; }
-        public IEnumerable<GoodsCategoryModel> Categories { get; set; }
+        public IEnumerable<SelectListItem> Categories { get; set; }
 
         public IEnumerable<int> SelectedAttributeCodes { get; set; }
         public IEnumerable<AttributeModel> Attributes { get; set; }
@@ -45,7 +49,7 @@ namespace Standartstyle.Models
         public GoodModel()
         {
             this.Images = new List<ImageModel>();
-            this.Categories = new List<GoodsCategoryModel>();
+            this.Categories = new List<SelectListItem>();
             this.Attributes = new List<AttributeModel>();
             this.Manufacturers = new List<CBDManufacturerModel>();
             this.Collections = new List<CBDCollectionModel>();

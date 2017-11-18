@@ -1,4 +1,5 @@
-﻿using Standartstyle.AppCode.Util.Session;
+﻿using Standartstyle.AppCode.BL.Categories;
+using Standartstyle.AppCode.Util.Session;
 using Standartstyle.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ namespace Standartstyle.Controllers
 {
     public class GoodsController : Controller
     {
+        #region Variables
+        private CategoriesLogic categoriesLogic = new CategoriesLogic();
+        #endregion
+
+        #region Actions
         // GET: Goods
         public ActionResult Index()
         {
@@ -20,6 +26,7 @@ namespace Standartstyle.Controllers
         {
             UserSession.Create("admin", "admin");
             GoodModel model = new GoodModel();
+            model.Categories = categoriesLogic.createExistingCategoriesDropdownList();
             return View(model);
         }
 
@@ -33,5 +40,6 @@ namespace Standartstyle.Controllers
         {
             return View();
         }
+        #endregion
     }
 }

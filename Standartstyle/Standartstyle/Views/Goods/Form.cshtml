@@ -28,9 +28,13 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control mustHave" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(m => m.SelectedCategoryCode, new { @class = "col-form-label" })
+                                    @Html.DropDownListFor(m => m.SelectedCategoryCode, Model.Categories, new { @class = "form-control mustHave" })
                                 </div>
                             </div>
                             <div class="row">

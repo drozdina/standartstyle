@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCode\BL\AdminUtils.cs" />
+    <Compile Include="AppCode\BL\Categories\CategoriesLogic.cs" />
     <Compile Include="AppCode\BL\Extensions.cs" />
     <Compile Include="AppCode\BL\Goods\GoodsLogic.cs" />
     <Compile Include="AppCode\BL\Images\ImagesLogic.cs" />
