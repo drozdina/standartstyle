@@ -116,7 +116,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Изготовлено из ДСП</label>
+                            <label>Метки, теги</label>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -124,11 +124,10 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Атрибуты</label>
+                            <label>Изготовлено из ДСП</label>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -154,11 +153,11 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/fileupload")
-    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    @Scripts.Render("~/Scripts/load-image.all.min.js")
     <script type="text/javascript">
         var fileFormFlag = true,
         fieldFormFlag = true;
-        
+
         function checkMusthaveFields() {
             var result = true;
             var musthaveFields = $(document).find(".mustHave");
@@ -235,10 +234,8 @@
                                 $(imageParent).html("");
                                 $(imageParent).append(img);
                             }, {
-                                maxWidth: 600,
-                                maxHeight: 300,
-                                minWidth: 100,
-                                minHeight: 50,
+                                maxWidth: 200,
+                                maxHeight: 200,
                                 canvas: true,
                                 orientation: true
                             });

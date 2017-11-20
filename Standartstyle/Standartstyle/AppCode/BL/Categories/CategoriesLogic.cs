@@ -16,7 +16,8 @@ namespace Standartstyle.AppCode.BL.Categories
             categories.Add(new SelectListItem
             {
                 Value = "0",
-                Text = "Категория"
+                Text = "Категория",
+                Disabled = true
             });
 
             using (GeneralRepository repo = new GeneralRepository())
