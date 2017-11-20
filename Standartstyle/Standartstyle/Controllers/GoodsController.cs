@@ -31,7 +31,7 @@ namespace Standartstyle.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveGood()
+        public ActionResult SaveGood(GoodModel model)
         {
             return View();
         }

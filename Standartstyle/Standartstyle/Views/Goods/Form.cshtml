@@ -75,6 +75,7 @@
                                 <div class="form-group col-md-12">
                                     <label>Новые фото</label>
                                     <div class="row" id="newImagesGalery"></div>
+                                    @Html.HiddenFor(m => m.newImagesNames, new { id = "newImagesNames" })
                                 </div>
                             </div>
                             <div class="row">
@@ -156,7 +157,8 @@
     @Scripts.Render("~/Scripts/load-image.all.min.js")
     <script type="text/javascript">
         var fileFormFlag = true,
-        fieldFormFlag = true;
+            fieldFormFlag = true,
+            fileNames = [];
 
         function checkMusthaveFields() {
             var result = true;
@@ -224,7 +226,8 @@
                     response = data.response, reader = data.reader;
                 if ($fileInputObject.data('fileinput')) {
 
-                    $.post('@Url.Action("List", "Image")', { images: response.files }, function (result) {
+                    var images = response.files;
+                    $.post('@Url.Action("List", "Image")', { images: images }, function (result) {
                         $("#newImagesGalery").append(result);
                         var images = $("#newImagesGalery").find("img");
                         $(images).each(function (idx, elem) {
@@ -240,8 +243,15 @@
                                 orientation: true
                             });
                         });
-
                     });
+
+                    $(images).each(function (idx, image) {
+                        var fileName = image.Name + "." + image.Extension;
+                        if (fileNames.indexOf(fileName) < 0) {
+                            fileNames[fileNames.length] = fileName;
+                        }
+                    });
+                    $("#newImagesNames").val(fileNames);
                 }
             });
         });

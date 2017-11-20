@@ -11,7 +11,6 @@ namespace Standartstyle.Models
     {
         public int GoodCode { get; set; }
 
-
         [Required(ErrorMessage = "Обязательно к заполнению")]
         [Display(Name = "Название")]
         public string Name { get; set; }
@@ -36,6 +35,8 @@ namespace Standartstyle.Models
         [Display(Name ="Категория товара")]
         public int SelectedCategoryCode { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        public IEnumerable<string> newImagesNames { get; set; }
 
         public IEnumerable<int> SelectedAttributeCodes { get; set; }
         public IEnumerable<AttributeModel> Attributes { get; set; }

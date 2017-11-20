@@ -9,11 +9,13 @@ namespace Standartstyle.AppCode.BL.Images
     public class ImagesLogic
     {
         private static string _DASH = "-";
+        private static string _UNDERSCORE = "_";
+        private static string _SPACE = " ";
 
         public static ImageModel generateFileModel(string filename)
         {
+            filename = filename.Replace(_SPACE, _UNDERSCORE);
             string filenameForSave = DateTime.Now.ToFileTimeUtc().ToString() + _DASH;
-
             var fileLexemes = filename.Split('.');
             int extIdx = fileLexemes.Length - 1;
             var extension = fileLexemes[extIdx];

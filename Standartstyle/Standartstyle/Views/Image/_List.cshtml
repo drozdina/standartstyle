@@ -3,8 +3,10 @@
 @foreach (var item in Model)
 {
     <div class="col-md-4">
-        <div class="thumbnail" style="width: 210px; height: 210px;" id="@item.Name">
-            <img src="@Url.Content(item.Path+item.GetFullFilename())" name="@item.Name" alt="@item.Name">
+        <div class="thumbnail" style="width: 210px; height: 210px;" >
+            <p id="@item.Name">
+                <img src="@Url.Content(item.Path+item.GetFullFilename())" name="@item.Name" alt="@item.Name">
+            </p>
         </div>
     </div>
 }

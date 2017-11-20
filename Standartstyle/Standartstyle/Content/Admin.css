@@ -180,3 +180,16 @@ body.account {
 .admin-btn {
     float: right;
 }
+
+.thumbnail canvas{
+    margin: 0px auto;
+    vertical-align: middle;
+}
+
+.thumbnail p {
+    margin: 0px;
+    line-height: 200px;
+    height: 200px;
+    overflow: hidden;
+    text-align: center;
+}
