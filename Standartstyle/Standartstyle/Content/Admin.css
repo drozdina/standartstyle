@@ -193,3 +193,7 @@ body.account {
     overflow: hidden;
     text-align: center;
 }
+
+.vresize {
+  resize: vertical; 
+}
