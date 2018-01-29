@@ -75,7 +75,10 @@
                                 <div class="form-group col-md-12">
                                     <label>Новые фото</label>
                                     <div class="row" id="newImagesGalery"></div>
-                                    @Html.HiddenFor(m => m.newImagesNames, new { id = "newImagesNames" })
+                                    @for (int i = 0; i < Model.NewImagesNames.Count; i++)
+                                    {
+                                        @Html.Hidden("NewImagesNames[" + i + "]", Model.NewImagesNames[i])
+                                    }
                                 </div>
                             </div>
                             <div class="row">
@@ -184,9 +187,6 @@
                         browseClass: "btn btn-success",
                         browseLabel: "Выбрать изображения",
                         browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
-                        removeClass: "btn btn-danger",
-                        removeLabel: "Удалить",
-                        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
                         uploadClass: "btn btn-info",
                         uploadLabel: "Загрузить",
                         uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",

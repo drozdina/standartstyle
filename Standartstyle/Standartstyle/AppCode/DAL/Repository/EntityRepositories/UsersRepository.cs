@@ -13,13 +13,13 @@ namespace Standartstyle.AppCode.DAL.Repository.EntityRepositories
 
         public USERS Login(string login, string password)
         {
-            return this.All.FirstOrDefault(elem => elem.USERNAME.Equals(login) && elem.PASSWORD.Equals(password));
+            return this.Get().FirstOrDefault(elem => elem.USERNAME.Equals(login) && elem.PASSWORD.Equals(password));
         }
 
         public UserModel CheckUser(string login)
         {
             UserModel existingUser = null;
-            var user = this.All.FirstOrDefault(elem => elem.USERNAME.Equals(login));
+            var user = this.Get().FirstOrDefault(elem => elem.USERNAME.Equals(login));
             if (user != null)
             {
                 existingUser = new UserModel

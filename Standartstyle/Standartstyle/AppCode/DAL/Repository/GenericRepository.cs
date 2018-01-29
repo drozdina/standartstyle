@@ -8,91 +8,62 @@ using System.Web;
 
 namespace Standartstyle.AppCode.DAL.Repository
 {
-    public class GenericRepository<T> where T : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal Entities context;
-        internal DbSet<T> dbSet;
-
-        public List<T> All
-        {
-            get
-            {
-                return Get().ToList();
-            }
-        }
+        internal Entities _context;
+        internal DbSet<TEntity> _dbSet;
 
         public GenericRepository(Entities context)
         {
-            this.context = context;
-            this.dbSet = context.Set<T>();
+            this._context = context;
+            this._dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<T> Get(
-            Expression<Func<T, bool>> filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            string includeProperties = "")
+        public IEnumerable<TEntity> Get()
         {
-            IQueryable<T> query = dbSet;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
-            }
+            return _dbSet.AsNoTracking().ToList();
+        }
+        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        {
+            return _dbSet.AsNoTracking().Where(predicate).ToList();
+        }
+        public TEntity FindById(int id)
+        {
+            return _dbSet.Find(id);
+        }
+        public void Create(TEntity item)
+        {
+            _dbSet.Add(item);
+            _context.SaveChanges();
+        }
+        public void Update(TEntity item)
+        {
+            _context.Entry(item).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+        public void Remove(TEntity item)
+        {
+            _dbSet.Remove(item);
+            _context.SaveChanges();
         }
 
-        public virtual T GetByID(object id)
+        public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            return dbSet.Find(id);
+            return Include(includeProperties).ToList();
         }
 
-        public virtual void Insert(T entity)
+        public IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            dbSet.Add(entity);
+            var query = Include(includeProperties);
+            return query.Where(predicate).ToList();
         }
 
-        public virtual void Update(T entityToUpdate, bool useAttach = true)
+        private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
-        }
-
-        public virtual void Delete(T entityToDelete)
-        {
-            if (entityToDelete != null)
-            {
-                if (context.Entry(entityToDelete).State == EntityState.Detached)
-                {
-                    dbSet.Attach(entityToDelete);
-                }
-                dbSet.Remove(entityToDelete);
-            }
-        }
-
-        public int GetSequenceValue(string tableNamePrefix)
-        {
-            var secuenceValue = context.Database.SqlQuery<int>("SELECT " + tableNamePrefix + "_SEQUENCE.NEXTVAL FROM DUAL").Single();
-            return secuenceValue;
-        }
-
-        public virtual void Update(T entityToUpdate)
-        {
-            dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
+            IQueryable<TEntity> query = _dbSet.AsNoTracking();
+            return includeProperties
+                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
     }
 }

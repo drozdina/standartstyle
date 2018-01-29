@@ -32,11 +32,11 @@ namespace Standartstyle.Models
 
         [Required(ErrorMessage = "Обязательно к заполнению")]
         [Range(1, int.MaxValue, ErrorMessage = "Необходимо выбрать категорию товара")]
-        [Display(Name ="Категория товара")]
+        [Display(Name = "Категория товара")]
         public int SelectedCategoryCode { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
 
-        public IEnumerable<string> newImagesNames { get; set; }
+        public IList<string> NewImagesNames { get; set; }
 
         public IEnumerable<int> SelectedAttributeCodes { get; set; }
         public IEnumerable<AttributeModel> Attributes { get; set; }
@@ -55,6 +55,10 @@ namespace Standartstyle.Models
             this.Manufacturers = new List<CBDManufacturerModel>();
             this.Collections = new List<CBDCollectionModel>();
             this.CBDColors = new List<CBDColorModel>();
+
+            this.NewImagesNames = new List<string>();
+            this.NewImagesNames.Add("one");
+            this.NewImagesNames.Add("two");
 
             this.SelectedAttributeCodes = new List<int>();
             this.SelectedColorCodes = new List<int>();

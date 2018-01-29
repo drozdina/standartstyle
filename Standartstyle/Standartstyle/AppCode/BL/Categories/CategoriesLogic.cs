@@ -22,7 +22,7 @@ namespace Standartstyle.AppCode.BL.Categories
 
             using (GeneralRepository repo = new GeneralRepository())
             {
-                var categoriesFromDB = repo.GoodsCategoryRepository.All.OrderBy(elem => elem.NAME);
+                var categoriesFromDB = repo.GoodsCategoryRepository.Get().OrderBy(elem => elem.NAME);
                 if (categoriesFromDB != null && categoriesFromDB.Count() > 0)
                 {
                     foreach (var category in categoriesFromDB)

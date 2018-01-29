@@ -19,7 +19,7 @@ namespace Standartstyle.Controllers
 
         public ActionResult List()
         {
-            var categories = repo.GoodsCategoryRepository.All.ToList();
+            var categories = repo.GoodsCategoryRepository.Get().ToList();
             var forView = new List<GoodsCategoryModel>();
             foreach (var category in categories)
             {

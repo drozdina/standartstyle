@@ -21,7 +21,7 @@ namespace Standartstyle.Controllers
 
         public ActionResult Catalog()
         {
-            var categories = repo.GoodsCategoryRepository.All;
+            var categories = repo.GoodsCategoryRepository.Get();
             var allCategoriesElement = new GoodsCategoryModel
             {
                 Code = -1,
@@ -36,7 +36,7 @@ namespace Standartstyle.Controllers
                 var goods = new List<GoodModel>();
                 try
                 {
-                    var goodsFromDB = repo.GoodsRepository.All.Where(elem => elem.CATEGORYCODE == category.CATEGORYCODE).ToList();
+                    var goodsFromDB = repo.GoodsRepository.Get().Where(elem => elem.CATEGORYCODE == category.CATEGORYCODE).ToList();
                     foreach (var goodFromDB in goodsFromDB)
                     {
                         var good = new GoodModel()
@@ -70,7 +70,7 @@ namespace Standartstyle.Controllers
         private void SetImagesForGood(GoodModel good)
         {
             var images = new List<ImageModel>();
-            var imagesFromDB = repo.ImageRepository.All.Where(elem => elem.GOODCODE == good.GoodCode).ToList();
+            var imagesFromDB = repo.ImageRepository.Get().Where(elem => elem.GOODCODE == good.GoodCode).ToList();
             var mainImageIndex = 0;
             foreach (var imageFromDB in imagesFromDB)
             {

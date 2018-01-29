@@ -241,6 +241,7 @@
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\UsersRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GeneralRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\GenericRepository.cs" />
+    <Compile Include="AppCode\DAL\Repository\IGenericRepository.cs" />
     <Compile Include="AppCode\Util\Session\UserSession.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
