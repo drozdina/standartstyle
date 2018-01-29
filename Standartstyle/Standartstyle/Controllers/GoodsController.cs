@@ -1,4 +1,5 @@
 ﻿using Standartstyle.AppCode.BL.Categories;
+using Standartstyle.AppCode.BL.Goods;
 using Standartstyle.AppCode.Util.Session;
 using Standartstyle.Models;
 using System;
@@ -13,6 +14,7 @@ namespace Standartstyle.Controllers
     {
         #region Variables
         private CategoriesLogic categoriesLogic = new CategoriesLogic();
+        private GoodsLogic goodsLogic = new GoodsLogic();
         #endregion
 
         #region Actions
@@ -31,9 +33,17 @@ namespace Standartstyle.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveGood(GoodModel model)
+        public JsonResult SaveGood(GoodModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+                return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { status = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List()

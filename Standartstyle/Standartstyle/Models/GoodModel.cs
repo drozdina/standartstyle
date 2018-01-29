@@ -57,8 +57,6 @@ namespace Standartstyle.Models
             this.CBDColors = new List<CBDColorModel>();
 
             this.NewImagesNames = new List<string>();
-            this.NewImagesNames.Add("one");
-            this.NewImagesNames.Add("two");
 
             this.SelectedAttributeCodes = new List<int>();
             this.SelectedColorCodes = new List<int>();

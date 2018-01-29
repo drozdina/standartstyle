@@ -74,11 +74,14 @@
                             <div class="row" id="newImages">
                                 <div class="form-group col-md-12">
                                     <label>Новые фото</label>
-                                    <div class="row" id="newImagesGalery"></div>
-                                    @for (int i = 0; i < Model.NewImagesNames.Count; i++)
-                                    {
-                                        @Html.Hidden("NewImagesNames[" + i + "]", Model.NewImagesNames[i])
-                                    }
+                                    <div class="row" id="newImagesGalery">
+                                    </div>
+                                    <div id="NewImagesNamesList">
+                                        @for (int i = 0; i < Model.NewImagesNames.Count; i++)
+                                        {
+                                            @Html.Hidden("NewImagesNames[" + i + "]", Model.NewImagesNames[i])
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -235,7 +238,11 @@
                             fileNames[fileNames.length] = fileName;
                         }
                     });
-                    $("#newImagesNames").val(fileNames);
+                    $("#NewImagesNamesList").html("");
+                    $(fileNames).each(function (idx, name) {
+                        var template = "<input id='NewImagesNames_" + idx + "_' name='NewImagesNames[" + idx + "]' type='hidden' value='" + name + "'>";
+                        $("#NewImagesNamesList").append(template);
+                    });
                 }
             });
         });
