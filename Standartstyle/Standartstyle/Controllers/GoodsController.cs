@@ -1,5 +1,6 @@
 ﻿using Standartstyle.AppCode.BL.Categories;
 using Standartstyle.AppCode.BL.Goods;
+using Standartstyle.AppCode.BL.Images;
 using Standartstyle.AppCode.Util.Session;
 using Standartstyle.Models;
 using System;
@@ -15,6 +16,7 @@ namespace Standartstyle.Controllers
         #region Variables
         private CategoriesLogic categoriesLogic = new CategoriesLogic();
         private GoodsLogic goodsLogic = new GoodsLogic();
+        private ImagesLogic imagesLogic = new ImagesLogic();
         #endregion
 
         #region Actions
@@ -35,15 +37,27 @@ namespace Standartstyle.Controllers
         [HttpPost]
         public JsonResult SaveGood(GoodModel model)
         {
+            var result = new List<object>();
             if (ModelState.IsValid)
             {
+                model = goodsLogic.CreateNewGood(model);
+                if (model.GoodCode > 0)
+                {
+                    Boolean isCreated = imagesLogic.createNewImage();
 
+                }
+                else
+                {
+                    result.Add(new { status = false });
+                    result.Add(new { message = "Не удалось сохранить новый товар!" });
+                }
             }
             else
             {
-                return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+                result.Add(new { status = false });
+                result.Add(new { message = "Не заполнены все обязательные поля!" });
             }
-            return Json(new { status = true }, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List()

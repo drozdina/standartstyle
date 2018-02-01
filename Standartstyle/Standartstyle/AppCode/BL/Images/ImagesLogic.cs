@@ -8,10 +8,13 @@ namespace Standartstyle.AppCode.BL.Images
 {
     public class ImagesLogic
     {
+        #region Variables
         private static string _DASH = "-";
         private static string _UNDERSCORE = "_";
         private static string _SPACE = " ";
+        #endregion
 
+        #region Static methods
         public static ImageModel generateFileModel(string filename)
         {
             filename = filename.Replace(_SPACE, _UNDERSCORE);
@@ -31,5 +34,15 @@ namespace Standartstyle.AppCode.BL.Images
             };
             return model;
         }
+        #endregion
+
+        #region CRUD logic
+        public Boolean createNewImage()
+        {
+            Boolean result = false;
+            return result;
+        }
+        #endregion
+
     }
 }
