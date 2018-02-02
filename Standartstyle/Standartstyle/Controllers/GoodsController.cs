@@ -43,7 +43,7 @@ namespace Standartstyle.Controllers
                 model = goodsLogic.CreateNewGood(model);
                 if (model.GoodCode > 0)
                 {
-                    Boolean isCreated = imagesLogic.createNewImage();
+                    Boolean isCreated = imagesLogic.CreateNewImage(model);
 
                 }
                 else
