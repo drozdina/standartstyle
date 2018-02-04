@@ -76,11 +76,7 @@
                                     <label>Новые фото</label>
                                     <div class="row" id="newImagesGalery">
                                     </div>
-                                    <div id="NewImagesNamesList">
-                                        @for (int i = 0; i < Model.NewImagesNames.Count; i++)
-                                        {
-                                            @Html.Hidden("NewImagesNames[" + i + "]", Model.NewImagesNames[i])
-                                        }
+                                    <div id="NewImagesList">
                                     </div>
                                 </div>
                             </div>
@@ -234,15 +230,23 @@
 
                     $(images).each(function (idx, image) {
                         var fileName = image.Name + "." + image.Extension;
-                        if (fileNames.indexOf(fileName) < 0) {
-                            fileNames[fileNames.length] = fileName;
+                        if (!fileNames.hasOwnProperty(fileName)) {
+                            fileNames[fileName] = image;
                         }
                     });
-                    $("#NewImagesNamesList").html("");
-                    $(fileNames).each(function (idx, name) {
-                        var template = "<input id='NewImagesNames_" + idx + "_' name='NewImagesNames[" + idx + "]' type='hidden' value='" + name + "'>";
-                        $("#NewImagesNamesList").append(template);
-                    });
+
+                    var idx = 0;
+                    $("#NewImagesList").html("");
+                    for (var key in fileNames) {
+                        var image = fileNames[key];
+                        var template =
+                            "<input id='NewImages_" + idx + "__Extension' name='NewImages[" + idx + "].Extension' type='hidden' value='" + image.Extension + "'>" +
+                            "<input id='NewImages_" + idx + "__ImageCode' name='NewImages[" + idx + "].ImageCode' type='hidden' value='" + image.ImageCode + "'>" +
+                            "<input id='NewImages_" + idx + "__Name' name='NewImages[" + idx + "].Name' type='hidden' value='" + image.Name + "'>" +
+                            "<input id='NewImages_" + idx + "__Path' name='NewImages[" + idx + "].Path' type='hidden' value='" + image.Path + "'>";
+                        $("#NewImagesList").append(template);
+                        idx++;
+                    }
                 }
             });
         });

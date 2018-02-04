@@ -28,7 +28,7 @@ namespace Standartstyle.Models
         public string Depth { get; set; }
 
         public int MainImageIndex { get; set; }
-        public IEnumerable<ImageModel> Images { get; set; }
+        public IList<ImageModel> Images { get; set; }
 
         [Required(ErrorMessage = "Обязательно к заполнению")]
         [Range(1, int.MaxValue, ErrorMessage = "Необходимо выбрать категорию товара")]
@@ -36,7 +36,7 @@ namespace Standartstyle.Models
         public int SelectedCategoryCode { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
 
-        public IList<string> NewImagesNames { get; set; }
+        public IList<ImageModel> NewImages { get; set; }
 
         public IEnumerable<int> SelectedAttributeCodes { get; set; }
         public IEnumerable<AttributeModel> Attributes { get; set; }
@@ -56,7 +56,7 @@ namespace Standartstyle.Models
             this.Collections = new List<CBDCollectionModel>();
             this.CBDColors = new List<CBDColorModel>();
 
-            this.NewImagesNames = new List<string>();
+            this.NewImages = new List<ImageModel>();
 
             this.SelectedAttributeCodes = new List<int>();
             this.SelectedColorCodes = new List<int>();

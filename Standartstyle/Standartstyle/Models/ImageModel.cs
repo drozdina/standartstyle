@@ -7,7 +7,7 @@ namespace Standartstyle.Models
 {
     public class ImageModel
     {
-        private static string _DOT = ".";
+        public static string _DOT = ".";
 
         public int ImageCode { get; set; }
         public string Path { get; set; }

@@ -29,7 +29,7 @@ namespace Standartstyle.Controllers
 
                         if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
                         {
-                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                            string[] testfiles = file.FileName.Split(Path.DirectorySeparatorChar);
                             fname = testfiles[testfiles.Length - 1];
                             newImage = ImagesLogic.generateFileModel(fname);
                         }
