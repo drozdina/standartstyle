@@ -13,6 +13,7 @@ namespace Standartstyle.Models
         public string Path { get; set; }
         public string Name { get; set; }
         public string Extension { get; set; }
+        public bool MainImageFlag { get; set; }
 
         public string GetFullFilename()
         {

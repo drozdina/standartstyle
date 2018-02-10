@@ -167,6 +167,14 @@
             }
         }
 
+        function setUpMainImage(caller) {
+            var imageName = $(caller).attr("id");
+            var checkPointElement = $.find("input[value='" + imageName + "']");
+            var idx = $(checkPointElement).attr("elem-index");
+            $(".class-for-main").val(false);
+            $("#NewImages_" + idx + "__MainImageFlag").val(true);
+        }
+
 
         $(document).ready(function () {
             checkMusthaveFields();
@@ -219,6 +227,9 @@
                                 var imageParent = $("#newImagesGalery").find("#" + $(elem).attr("name"));
                                 $(imageParent).html("");
                                 $(imageParent).append(img);
+                                $(imageParent).click(function () {
+                                    setUpMainImage(this);
+                                });
                             }, {
                                 maxWidth: 200,
                                 maxHeight: 200,
@@ -242,8 +253,9 @@
                         var template =
                             "<input id='NewImages_" + idx + "__Extension' name='NewImages[" + idx + "].Extension' type='hidden' value='" + image.Extension + "'>" +
                             "<input id='NewImages_" + idx + "__ImageCode' name='NewImages[" + idx + "].ImageCode' type='hidden' value='" + image.ImageCode + "'>" +
-                            "<input id='NewImages_" + idx + "__Name' name='NewImages[" + idx + "].Name' type='hidden' value='" + image.Name + "'>" +
-                            "<input id='NewImages_" + idx + "__Path' name='NewImages[" + idx + "].Path' type='hidden' value='" + image.Path + "'>";
+                            "<input id='NewImages_" + idx + "__Name' name='NewImages[" + idx + "].Name' type='hidden' value='" + image.Name + "' elem-index='" + idx + "'>" +
+                            "<input id='NewImages_" + idx + "__Path' name='NewImages[" + idx + "].Path' type='hidden' value='" + image.Path + "'>" +
+                            "<input id='NewImages_" + idx + "__MainImageFlag' name='NewImages[" + idx + "].MainImageFlag' type='hidden' class='class-for-main' value='" + image.MainImageFlag + "'>";
                         $("#NewImagesList").append(template);
                         idx++;
                     }
