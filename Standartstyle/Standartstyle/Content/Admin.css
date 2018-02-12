@@ -142,24 +142,24 @@ body.account {
                 text-decoration: none;
             }
 
-            .sidebar-nav li.category > a span.glyphicon {
-                display: none;
+        .sidebar-nav li.category > a span.glyphicon {
+            display: none;
+        }
+
+        .sidebar-nav li.category > a:hover span.glyphicon {
+            display: block;
+            margin-top: 7px;
+            color: #000;
+        }
+
+            .sidebar-nav li.category > a:hover span.glyphicon:hover {
+                color: #fff;
             }
 
-            .sidebar-nav li.category > a:hover span.glyphicon {
-                display: block;
-                margin-top: 7px;
-                color: #000;
-            }
-
-            .sidebar-nav li.category > a:hover span.glyphicon:hover{
-                color:#fff;
-            }
-
-            .sidebar-nav li a:active,
-            .sidebar-nav li a:focus {
-                text-decoration: none;
-            }
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus {
+            text-decoration: none;
+        }
 
     .sidebar-nav > .sidebar-brand {
         height: 80px;
@@ -181,7 +181,17 @@ body.account {
     float: right;
 }
 
-.thumbnail canvas{
+.thumbnail.main {
+    border-color: #4cae4c;
+    border-width: 2px;
+}
+
+.thumbnail .main-image {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.thumbnail canvas {
     margin: 0px auto;
     vertical-align: middle;
 }
@@ -195,5 +205,5 @@ body.account {
 }
 
 .vresize {
-  resize: vertical; 
+    resize: vertical;
 }
