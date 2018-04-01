@@ -21,7 +21,7 @@
             @Html.ValidationSummary(true)
             <div class="vert-offset-top-1"></div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <label>Основные данные</label>
@@ -60,15 +60,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Изображения</label>
+                            <label>Изображения (&nbsp;<span class="glyphicon glyphicon-star" style="color: #eea236"></span>&nbsp;&ndash;&nbsp;изображение для главной)</label>
+
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="form-group col-md-12" id="existingImages" hidden>
+                            <div class="row" id="existingImages" hidden>
+                                <div class="form-group col-md-12">
                                     <label>Загруженные фото</label>
+                                    <div class="row" id="existingImagesGalery">
+                                    </div>
+                                    <div id="ExistingImagesList">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" id="newImages">
@@ -94,7 +99,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <label>Метки, теги</label>
@@ -105,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <label>Изготовлено из ДСП</label>
@@ -128,7 +133,6 @@
                     </button>
                 </div>
             </div>
-
         }
     </div>
 </div>
@@ -173,8 +177,103 @@
             var idx = $(checkPointElement).attr("elem-index");
             $(".class-for-main").val(false);
             $("#NewImages_" + idx + "__MainImageFlag").val(true);
+            refreshMainImageUI(caller);
         }
 
+        function refreshMainImageUI(caller) {
+            var elemForRemove = $("#existingImagesGalery .img-wrapper.main .main-image");
+            $(elemForRemove).remove();
+            $("#existingImagesGalery .img-wrapper").removeClass("main");
+
+            elemForRemove = $("#newImagesGalery .img-wrapper.main .main-image");
+            $(elemForRemove).remove();
+            $("#newImagesGalery .img-wrapper").removeClass("main");
+
+            $(caller).addClass("main");
+            var template = "<div class='main-image'><span class='glyphicon glyphicon-star'</span></div>";
+            $(caller).append(template);
+        }
+
+        function checkMainImageValueAndSetItsValue() {
+            var mainElemnet = $("input.class-for-main[value='true']").first();
+            if (mainElemnet.length < 1) {
+                var firstImage = null;
+                if ($("#ExistingImagesList").children().length > 0) {
+                    firstImage = $("#ExistingImagesList input.class-for-main:first");
+                    $(firstImage).val(true);
+                }
+                else if ($("#NewImagesList").children().length > 0) {
+                    firstImage = $("#NewImagesList input.class-for-main:first");
+                    $(firstImage).val(true);
+                }
+
+                var imageUIElementId = $(firstImage).attr("index-name");
+                var imageUIElement = $("#" + imageUIElementId);
+                setUpMainImage($(imageUIElement));
+            }
+        }
+
+        function refreshModelImageData() {
+            var idx = recalculateNewImageIndexes();
+
+            for (var key in fileNames) {
+                var image = fileNames[key];
+                if (image != null && $("div[elem-name='" + image.Name + "']").length < 1) {
+                    var template =
+                        "<div class='new-image-data' elem-name='" + image.Name + "'>" +
+                        "<input id='NewImages_" + idx + "__Extension' name='NewImages[" + idx + "].Extension' type='hidden' class='class-for-extension' value='" + image.Extension + "' elem-index='" + idx + "'>" +
+                        "<input id='NewImages_" + idx + "__ImageCode' name='NewImages[" + idx + "].ImageCode' type='hidden' class='class-for-code' value='" + image.ImageCode + "' elem-index='" + idx + "'>" +
+                        "<input id='NewImages_" + idx + "__Name' name='NewImages[" + idx + "].Name' type='hidden' class='class-for-name' value='" + image.Name + "' elem-index='" + idx + "'>" +
+                        "<input id='NewImages_" + idx + "__Path' name='NewImages[" + idx + "].Path' type='hidden' class='class-for-path' value='" + image.Path + "' elem-index='" + idx + "'>" +
+                        "<input id='NewImages_" + idx + "__MainImageFlag' name='NewImages[" + idx + "].MainImageFlag' type='hidden' class='class-for-main' index-name='" + image.Name + "' value='" + image.MainImageFlag + "' elem-index='" + idx + "'>" +
+                        "</div>";
+                    $("#NewImagesList").append(template);
+                    idx++;
+                }
+            }
+        }
+
+        function recalculateNewImageIndexes() {
+            var newImages = $("div.new-image-data");
+            var idx = 0,
+                idRegEx = /[a-z]+\_\d+\_/i,
+                nameRegEx = /[a-z]+\[\d+\]/i;
+
+            if (newImages.length > 0) {
+                $(newImages).each(function (index, newImage) {
+                    var inputs = $(newImage).find("input");
+                    $(inputs).each(function (inputIndex, input) {
+                        var id = $(input).attr("id");
+                        var name = $(input).attr("name");
+                        
+                        var idReplacement = "NewImages_" + idx + "_";
+                        var nameReplacement = "NewImages[" + idx + "]";
+
+                        var idSubstring = id.match(idRegEx);
+                        var nameSubstring = name.match(nameRegEx);
+
+                        var updatedId = id.replace(idSubstring[0], idReplacement);
+                        var updatedName = name.replace(nameSubstring[0], nameReplacement);
+
+                        $(input).attr("id", updatedId);
+                        $(input).attr("name", updatedName);
+                        $(input).attr("elem-index", idx);
+                    });
+                    idx++;
+                });
+            }
+            return idx;
+        }
+
+        function deleteImage(id) {
+            delete fileNames[id];
+            var dataBlock = $("div[elem-name='" + id + "']");
+            var uiElementBlock = $("#image-" + id);
+            $(uiElementBlock).remove();
+            $(dataBlock).remove();
+            recalculateNewImageIndexes();
+            checkMainImageValueAndSetItsValue();
+        }
 
         $(document).ready(function () {
             checkMusthaveFields();
@@ -217,48 +316,27 @@
                     response = data.response, reader = data.reader;
                 if ($fileInputObject.data('fileinput')) {
 
-                    var images = response.files;
-                    $.post('@Url.Action("List", "Image")', { images: images }, function (result) {
+                    var imageFiles = response.files;
+                    $.post('@Url.Action("List", "Image")', { images: imageFiles }, function (result) {
                         $("#newImagesGalery").append(result);
                         var images = $("#newImagesGalery").find("img");
                         $(images).each(function (idx, elem) {
-                            var imgUrl = $(elem).attr("src");
-                            var loadingImage = loadImage(imgUrl, function (img) {
-                                var imageParent = $("#newImagesGalery").find("#" + $(elem).attr("name"));
-                                $(imageParent).html("");
-                                $(imageParent).append(img);
-                                $(imageParent).click(function () {
-                                    setUpMainImage(this);
-                                });
-                            }, {
-                                maxWidth: 200,
-                                maxHeight: 200,
-                                canvas: true,
-                                orientation: true
+                            var imageParent = $("#newImagesGalery").find("#" + $(elem).attr("name"));
+                            $(imageParent).click(function () {
+                                setUpMainImage(this);
                             });
                         });
-                    });
 
-                    $(images).each(function (idx, image) {
-                        var fileName = image.Name + "." + image.Extension;
-                        if (!fileNames.hasOwnProperty(fileName)) {
-                            fileNames[fileName] = image;
-                        }
-                    });
+                        $(imageFiles).each(function (idx, image) {
+                            var fileName = image.Name;
+                            if (!fileNames.hasOwnProperty(fileName)) {
+                                fileNames[fileName] = image;
+                            }
+                        });
 
-                    var idx = 0;
-                    $("#NewImagesList").html("");
-                    for (var key in fileNames) {
-                        var image = fileNames[key];
-                        var template =
-                            "<input id='NewImages_" + idx + "__Extension' name='NewImages[" + idx + "].Extension' type='hidden' value='" + image.Extension + "'>" +
-                            "<input id='NewImages_" + idx + "__ImageCode' name='NewImages[" + idx + "].ImageCode' type='hidden' value='" + image.ImageCode + "'>" +
-                            "<input id='NewImages_" + idx + "__Name' name='NewImages[" + idx + "].Name' type='hidden' value='" + image.Name + "' elem-index='" + idx + "'>" +
-                            "<input id='NewImages_" + idx + "__Path' name='NewImages[" + idx + "].Path' type='hidden' value='" + image.Path + "'>" +
-                            "<input id='NewImages_" + idx + "__MainImageFlag' name='NewImages[" + idx + "].MainImageFlag' type='hidden' class='class-for-main' value='" + image.MainImageFlag + "'>";
-                        $("#NewImagesList").append(template);
-                        idx++;
-                    }
+                        refreshModelImageData();
+                        checkMainImageValueAndSetItsValue();
+                    });
                 }
             });
         });

@@ -2,15 +2,21 @@
 
 @foreach (var item in Model)
 {
-    <div class="col-md-4">
-        <div class="thumbnail @if (item.MainImageFlag) {<text> main</text>}" style="width: 210px; height: 210px;" >
-            <p id="@item.Name">
-                <img src="@Url.Content(item.Path+item.GetFullFilename())" name="@item.Name" alt="@item.Name">
-            </p>
+    <div class="col-md-4" id="image-@item.Name">
+        <div class="img-wrapper" id="@item.Name">
+            <div class="thumbnail @if (item.MainImageFlag) {<text> main</text>}">
+                <img src="@Url.Content(item.Path+item.GetFullFilename())" name="@item.Name" alt="@item.Name" class="img-responsive vertical-middle">
+                <span class="img-span"></span>
+                <a class="delete-img" onclick="deleteImage('@item.Name');">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </a>
+            </div>
             @if (item.MainImageFlag)
             {
-                <div class="main-image">Используется как главная</div>
-            }            
+                <div class="main-image">
+                    <span class="glyphicon glyphicon-star"></span>
+                </div>
+            }
         </div>
     </div>
 }
