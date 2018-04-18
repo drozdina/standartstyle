@@ -7,14 +7,14 @@ namespace Standartstyle.Models
 {
     public class CatalogModel
     {
-        public Dictionary<GoodsCategoryModel, IEnumerable<GoodModel>> GoodsMap { get; set; }
-        public Dictionary<GoodsCategoryModel, IEnumerable<AttributeModel>> AttributesMap { get; set; }
+        public IEnumerable<GoodsCategoryModel> Categories { get; set; }
+        public IEnumerable<GoodModel> GoodsForActiveCategory { get; set; }
         public GoodsCategoryModel ActiveCategory { get; set; }
 
         public CatalogModel()
         {
-            GoodsMap = new Dictionary<GoodsCategoryModel, IEnumerable<GoodModel>>();
-            AttributesMap = new Dictionary<GoodsCategoryModel, IEnumerable<AttributeModel>>();
+            Categories = new List<GoodsCategoryModel>();
+            GoodsForActiveCategory = new List<GoodModel>();
             ActiveCategory = new GoodsCategoryModel();
         }
     }

@@ -15,7 +15,8 @@ namespace Standartstyle.AppCode.BL.Goods
         {
             using (GeneralRepository repo = new GeneralRepository())
             {
-                GOODS newElement = new GOODS {
+                GOODS newElement = new GOODS
+                {
                     NAME = newGood.Name,
                     CATEGORYCODE = newGood.SelectedCategoryCode,
                     WIDTH = newGood.Width,
@@ -30,6 +31,20 @@ namespace Standartstyle.AppCode.BL.Goods
                 }
             }
             return newGood;
+        }
+
+        public IEnumerable<GoodModel> selectRangeOfGoods(GeneralRepository repo, int categoryCode, int? page, int? range)
+        {
+            var goods = new List<GoodModel>();
+            if(categoryCode == -1)
+            {
+               var goodsFromDB = repo.GoodsRepository.Get()
+            }
+            else
+            {
+
+            }
+            return goods;
         }
     }
 }

@@ -85,9 +85,9 @@ namespace Standartstyle.AppCode.BL.Images
         #endregion
 
         #region CRUD logic
-        public Boolean CreateNewImage(GoodModel goodModel)
+        public List<string> CreateNewImage(GoodModel goodModel)
         {
-            Boolean result = false;
+            List<string> uncopiedImages = new List<string>();
             var relativeLocation = GenerateRelativePathForGoodImages(goodModel);
             foreach (var image in goodModel.NewImages)
             {
@@ -98,14 +98,20 @@ namespace Standartstyle.AppCode.BL.Images
                         GOODCODE = goodModel.GoodCode,
                         NAME = image.Name,
                         UPLOAD_DATE = DateTime.Now,
-                        LOCATION = relativeLocation
+                        LOCATION = relativeLocation,
+                        IS_MAIN = image.MainImageFlag,
+
                     };
 
                     repo.ImageRepository.Create(newImageModel);
                     var isCopied = MoveGoodImageToFileLocation(newImageModel, image);
+                    if(!isCopied)
+                    {
+                        uncopiedImages.Add(newImageModel.NAME);
+                    }
                 }
             }
-            return result;
+            return uncopiedImages;
         }
         #endregion
 

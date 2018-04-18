@@ -1,4 +1,5 @@
 ﻿using Standartstyle.AppCode.DAL.Repository;
+using Standartstyle.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,33 @@ namespace Standartstyle.AppCode.BL.Categories
             }
             return categories;
         }
-        #endregion
+
+        public IEnumerable<GoodsCategoryModel> createGoodsCategoryModel(GeneralRepository repo)
+        {
+            var categories = new List<GoodsCategoryModel>();
+            var allCategoriesElement = new GoodsCategoryModel
+            {
+                Code = -1,
+                Name = "Весь каталог"
+            };
+
+
+            var categoriesFromDB = repo.GoodsCategoryRepository.Get();
+            foreach (var category in categoriesFromDB)
+            {
+                var goodCategory = new GoodsCategoryModel()
+                {
+                    Code = category.CATEGORYCODE,
+                    Name = category.NAME
+                };
+                categories.Add(goodCategory);
+            }
+
+            categories = categories.OrderBy(cat => cat.Name).ToList();
+            categories.Insert(0, allCategoriesElement);
+
+            return categories;
+        }
+        #endregion        
     }
 }

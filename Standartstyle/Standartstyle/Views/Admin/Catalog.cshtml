@@ -7,3 +7,13 @@
 <div id="wrapper">
     @Html.Partial("Catalog/_CategoriesPartial", Model)
 </div>
+<div id="content">
+    @if (Model.ActiveCategory.Code == -1)
+    {
+        @Html.Partial("Catalog/_GoodsPartial", Model.GoodsMap.Values.ToList())
+    }
+    else
+    {
+        @Html.Partial("Catalog/_CategoriesPartial", Model.GoodsMap[Model.ActiveCategory])
+    }
+</div>

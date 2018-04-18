@@ -43,7 +43,7 @@ namespace Standartstyle.Controllers
                 model = goodsLogic.CreateNewGood(model);
                 if (model.GoodCode > 0)
                 {
-                    Boolean isCreated = imagesLogic.CreateNewImage(model);
+                    List<string> notCopied = imagesLogic.CreateNewImage(model);
 
                 }
                 else
@@ -62,7 +62,7 @@ namespace Standartstyle.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return PartialView("_List");
         }
         #endregion
     }
