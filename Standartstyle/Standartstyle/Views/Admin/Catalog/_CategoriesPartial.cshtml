@@ -1,4 +1,4 @@
-﻿@model Standartstyle.Models.CatalogModel
+﻿@model  Standartstyle.Models.CatalogModel
 
 <div id="categories">
     <div id="sidebar-wrapper">
@@ -7,7 +7,7 @@
                 <li class="sidebar-brand">
                     <a><span class="">Категории</span></a>
                 </li>
-                @foreach (var category in Model.GoodsMap.Keys)
+                @foreach (var category in Model.Categories)
                 {
 
                     <li class="category @if(category.Equals(Model.ActiveCategory)){<text>active</text>}">

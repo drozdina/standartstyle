@@ -8,11 +8,14 @@
 
         @foreach (var good in Model)
         {
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
+            <div class="col-md-4">
+                <div class="img-wrapper">
+                    <div class="thumbnail">
+                        <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilename())" name="@good.Images[0].Name" alt="@good.Images[0].Name" class="img-responsive vertical-middle">
+                        <span class="img-span"></span>                        
+                    </div>                   
+                </div>
+            </div>          
         }
     </div>
 </div>

@@ -27,6 +27,7 @@ namespace Standartstyle.AppCode.DAL.Model
         public string LOCATION { get; set; }
         public Nullable<System.DateTime> UPLOAD_DATE { get; set; }
         public Nullable<bool> IS_MAIN { get; set; }
+        public string EXTENSION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CBD_COLOR> CBD_COLOR { get; set; }

@@ -13,19 +13,28 @@ namespace Standartstyle.Controllers
     [SessionExpireFilter]
     public class AdminController : Controller
     {
-        private GeneralRepository repo = new GeneralRepository();
+        private GeneralRepository repo;
+
+        private AdminUtils adminUtils;
+
+        public AdminController()
+        {
+            repo = new GeneralRepository();
+            adminUtils = new AdminUtils();
+        }
+
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Catalog(int? categoryCode, int? page)
+        public ActionResult Catalog(int? categoryCode, int? page, int? range)
         {
-            var catalog = AdminUtils.prepareCatalogModelForView(repo, categoryCode, page);
+            var catalog = adminUtils.prepareCatalogModelForView(repo, categoryCode, page, range);
             return View(catalog);
         }
 
-       
+
     }
 }

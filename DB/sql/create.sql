@@ -292,6 +292,7 @@ create table IMAGE (
    LOCATION             varchar(max)         null,
    UPLOAD_DATE          datetime             null,
    IS_MAIN              bit                  null,
+   EXTENSION            varchar(10)          null,
    constraint PK_IMAGE primary key (IMAGECODE)
 )
 go

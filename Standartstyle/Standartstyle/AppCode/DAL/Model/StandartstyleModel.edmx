@@ -86,6 +86,7 @@
           <Property Name="LOCATION" Type="varchar(max)" />
           <Property Name="UPLOAD_DATE" Type="datetime" />
           <Property Name="IS_MAIN" Type="bit" />
+          <Property Name="EXTENSION" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="REPLY">
           <Key>
@@ -476,6 +477,7 @@
           <Property Name="LOCATION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UPLOAD_DATE" Type="DateTime" Precision="3" />
           <Property Name="IS_MAIN" Type="Boolean" />
+          <Property Name="EXTENSION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CBD_COLOR" Relationship="Self.FK_CBD_COLO_REFERENCE_IMAGE" FromRole="IMAGE" ToRole="CBD_COLOR" />
           <NavigationProperty Name="GOODS" Relationship="Self.FK_IMAGE_REFERENCE_GOODS" FromRole="IMAGE" ToRole="GOODS" />
           <NavigationProperty Name="USERS" Relationship="Self.FK_IMAGE_REFERENCE_USERS" FromRole="IMAGE" ToRole="USERS" />
@@ -696,7 +698,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="StandartstyleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTRIBUTES" EntityType="Self.ATTRIBUTES" />
           <EntitySet Name="CBD_COLLECTION" EntityType="Self.CBD_COLLECTION" />
           <EntitySet Name="CBD_COLOR" EntityType="Self.CBD_COLOR" />
@@ -775,7 +777,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StandartstyleModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="StandartstyleModelStoreContainer" CdmEntityContainer="StandartstyleEntities">
           <EntitySetMapping Name="ATTRIBUTES">
             <EntityTypeMapping TypeName="StandartstyleModel.ATTRIBUTES">
               <MappingFragment StoreEntitySet="ATTRIBUTES">
@@ -864,6 +866,7 @@
                 <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
                 <ScalarProperty Name="UPLOAD_DATE" ColumnName="UPLOAD_DATE" />
                 <ScalarProperty Name="IS_MAIN" ColumnName="IS_MAIN" />
+                <ScalarProperty Name="EXTENSION" ColumnName="EXTENSION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
