@@ -47,13 +47,25 @@ namespace Standartstyle.AppCode.BL.Goods
             {
                 goodsFromDB = repo.GoodsRepository.Get(good => good.CATEGORYCODE == categoryCode).Skip(skipRange).Take(range).ToList();
             }
-            
+
             foreach (var goodFromDB in goodsFromDB)
             {
+                var categoryFromDB = repo.GoodsCategoryRepository.Get(cat => cat.CATEGORYCODE == goodFromDB.CATEGORYCODE).FirstOrDefault();
+                var category = new GoodsCategoryModel();
+                if (categoryFromDB != null)
+                {
+                    category = new GoodsCategoryModel()
+                    {
+                        Code = categoryFromDB.CATEGORYCODE,
+                        Name = categoryFromDB.NAME
+                    };
+                }
+
                 var good = new GoodModel()
                 {
                     GoodCode = goodFromDB.GOODCODE,
-                    Name = goodFromDB.NAME
+                    Name = goodFromDB.NAME,
+                    SelectedCategory = category
                 };
                 SetImagesForGood(repo, good);
                 goods.Add(good);
@@ -72,7 +84,8 @@ namespace Standartstyle.AppCode.BL.Goods
                 {
                     ImageCode = imageFromDB.IMAGECODE,
                     Name = imageFromDB.NAME,
-                    Path = imageFromDB.LOCATION
+                    Path = imageFromDB.LOCATION,
+                    Extension = imageFromDB.EXTENSION
                 };
 
                 images.Add(image);

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Thumbnail Gallery</h1>
+            <h1 class="page-header">Каталог товаров</h1>
         </div>
 
         @foreach (var good in Model)
@@ -11,11 +11,30 @@
             <div class="col-md-4">
                 <div class="img-wrapper">
                     <div class="thumbnail">
-                        <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilename())" name="@good.Images[0].Name" alt="@good.Images[0].Name" class="img-responsive vertical-middle">
-                        <span class="img-span"></span>                        
-                    </div>                   
+                        <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilenameForStoredFile())"
+                             name="@good.Images[0].Name"
+                             alt="@good.Images[0].Name"
+                             class="img-responsive vertical-middle">
+                    </div>
+                    <div class="container-fluid">
+                        <div class="good-name">
+                            <span class="pull-left">Название: @good.Name</span>
+                            <span class="pull-right">Категория: @good.SelectedCategory.Name</span>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="">
+                            <div class="pull-left">
+                                <button class="btn btn-sm btn-success">Редактировать</button>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-sm btn-default">Скрыть</button>
+                                <button class="btn btn-sm btn-danger">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>          
+            </div>
         }
     </div>
 </div>

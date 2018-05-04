@@ -215,6 +215,15 @@ body.account {
         color: #eea236;
     }
 
+.img-wrapper .good-name {
+    height: 30px;
+    margin-top: -30px;
+    width: 100%;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+
 
 .img-span {
     display: inline-block !important;

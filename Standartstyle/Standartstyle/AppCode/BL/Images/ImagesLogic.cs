@@ -72,7 +72,7 @@ namespace Standartstyle.AppCode.BL.Images
             if (!absoluteDestinationLocation.Equals(String.Empty))
             {
                 var absoluteSourceLocation = CreateLocationForGoodImages(Configuration.UploadDirectory);
-                var sourceLocation = Path.Combine(absoluteSourceLocation, image.GetFullFilename());
+                var sourceLocation = Path.Combine(absoluteSourceLocation, image.GetFullFilenameForTemporaryFile());
                 var destinationLocation = Path.Combine(absoluteDestinationLocation, imageModel.IMAGECODE.ToString() + ImageModel._DOT + image.Extension);
                 if (File.Exists(sourceLocation))
                 {
@@ -100,7 +100,7 @@ namespace Standartstyle.AppCode.BL.Images
                         UPLOAD_DATE = DateTime.Now,
                         LOCATION = relativeLocation,
                         IS_MAIN = image.MainImageFlag,
-
+                        EXTENSION = image.Extension
                     };
 
                     repo.ImageRepository.Create(newImageModel);

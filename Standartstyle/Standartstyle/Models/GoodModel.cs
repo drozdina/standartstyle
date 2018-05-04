@@ -36,6 +36,8 @@ namespace Standartstyle.Models
         public int SelectedCategoryCode { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
 
+        public GoodsCategoryModel SelectedCategory { get; set; }
+
         public IList<ImageModel> NewImages { get; set; }
 
         public IEnumerable<int> SelectedAttributeCodes { get; set; }

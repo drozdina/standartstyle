@@ -46,7 +46,7 @@ namespace Standartstyle.Controllers
                             }
                             images.Add(newImage);
                             string filenameForSave = String.Empty;
-                            filenameForSave = Path.Combine(location, newImage.GetFullFilename());
+                            filenameForSave = Path.Combine(location, newImage.GetFullFilenameForTemporaryFile());
                             file.SaveAs(filenameForSave);
                         }
                     }

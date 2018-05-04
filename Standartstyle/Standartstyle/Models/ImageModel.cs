@@ -15,9 +15,14 @@ namespace Standartstyle.Models
         public string Extension { get; set; }
         public bool MainImageFlag { get; set; }
 
-        public string GetFullFilename()
+        public string GetFullFilenameForTemporaryFile()
         {
             return this.Name + _DOT + this.Extension;
+        }
+
+        public string GetFullFilenameForStoredFile()
+        {
+            return this.ImageCode + _DOT + this.Extension;
         }
     }
 }

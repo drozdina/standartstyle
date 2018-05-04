@@ -13,10 +13,10 @@ namespace Standartstyle.AppCode.DAL.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StandartstyleEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public StandartstyleEntities()
-            : base("name=StandartstyleEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
