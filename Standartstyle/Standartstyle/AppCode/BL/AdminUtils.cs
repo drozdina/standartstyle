@@ -43,7 +43,7 @@ namespace Standartstyle.AppCode.BL
                 range = 20;
             }
 
-            catalog.GoodsForActiveCategory = goodsLogic.selectRangeOfGoods(repo, catalog.ActiveCategory.Code, page.Value, range.Value);
+            catalog.GoodsForActiveCategory = goodsLogic.SelectRangeOfGoods(repo, catalog.ActiveCategory.Code, page.Value, range.Value);
             return catalog;
         }
     }

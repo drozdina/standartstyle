@@ -264,3 +264,7 @@ body.account {
         .delete-img span:hover {
             color: #ac2925;
         }
+
+.buttons {
+    padding: 0 15px 10px 15px;
+}

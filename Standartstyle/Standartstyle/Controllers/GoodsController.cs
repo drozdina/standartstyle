@@ -26,12 +26,27 @@ namespace Standartstyle.Controllers
             return View();
         }
 
-        public ActionResult Form()
+        public ActionResult Form(int? id)
         {
-            UserSession.Create("admin", "admin");
+            //UserSession.Create("admin", "admin");
+            GoodModel model = createNewGoodModel();
+            if (id.HasValue)
+            {
+                fillModelFromDB(id.Value, model);
+            }
+            return View(model);
+        }
+
+        private GoodModel createNewGoodModel()
+        {
             GoodModel model = new GoodModel();
             model.Categories = categoriesLogic.createExistingCategoriesDropdownList();
-            return View(model);
+            return model;
+        }
+
+        private void fillModelFromDB(int id, GoodModel model)
+        {
+            model = goodsLogic.SelectGoodData(id, model);
         }
 
         [HttpPost]

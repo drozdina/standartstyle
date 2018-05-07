@@ -23,13 +23,13 @@
                         </div>
                     </div>
                     <div class="container-fluid">
-                        <div class="">
+                        <div class="row buttons">
                             <div class="pull-left">
-                                <button class="btn btn-sm btn-success">Редактировать</button>
+                                @Html.ActionLink("Редактировать", "Form", "Goods", new { id = good.GoodCode }, new { @class = "btn btn-sm btn-success" })
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-sm btn-default">Скрыть</button>
-                                <button class="btn btn-sm btn-danger">Удалить</button>
+                                <a class="btn btn-sm btn-default">Скрыть</a>
+                                <a class="btn btn-sm btn-danger">Удалить</a>
                             </div>
                         </div>
                     </div>
