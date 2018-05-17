@@ -105,13 +105,38 @@ namespace Standartstyle.AppCode.BL.Images
 
                     repo.ImageRepository.Create(newImageModel);
                     var isCopied = MoveGoodImageToFileLocation(newImageModel, image);
-                    if(!isCopied)
+                    if (!isCopied)
                     {
                         uncopiedImages.Add(newImageModel.NAME);
                     }
                 }
             }
             return uncopiedImages;
+        }
+
+        public GoodModel SelectImagesForModel(GoodModel goodModel)
+        {
+            List<ImageModel> images = new List<ImageModel>();
+            using (GeneralRepository repo = new GeneralRepository())
+            {
+                var imagesFromDB = repo.ImageRepository.Get(image => image.GOODCODE == goodModel.GoodCode).ToList();
+                foreach (var imageFromDB in imagesFromDB)
+                {
+                    var image = new ImageModel()
+                    {
+                        ImageCode = imageFromDB.IMAGECODE,
+                        MainImageFlag = imageFromDB.IS_MAIN.Value,
+                        Name = imageFromDB.NAME,
+                        Extension = imageFromDB.EXTENSION,
+                        Path = imageFromDB.LOCATION
+                    };
+
+                    images.Add(image);
+                }
+
+                ((List<ImageModel>)goodModel.Images).AddRange(images);
+            }
+            return goodModel;
         }
         #endregion
 

@@ -47,6 +47,7 @@ namespace Standartstyle.Controllers
         private void fillModelFromDB(int id, GoodModel model)
         {
             model = goodsLogic.SelectGoodData(id, model);
+            model = imagesLogic.SelectImagesForModel(model);
         }
 
         [HttpPost]

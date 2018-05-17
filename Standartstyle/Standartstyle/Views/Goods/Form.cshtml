@@ -67,14 +67,28 @@
 
                         </div>
                         <div class="panel-body">
-                            <div class="row" id="existingImages" hidden>
-                                <div class="form-group col-md-12">
-                                    <label>Загруженные фото</label>
-                                    <div class="row" id="existingImagesGalery">
+                            <div class="row" id="existingImages" @if (Model.GoodCode <= 0) { <text> hidden</text>}>
+                                @if (Model.GoodCode > 0)
+                                {
+                                    <div class="form-group col-md-12">
+                                        <label>Загруженные фото</label>
+                                        <div class="row" id="existingImagesGalery">
+                                            @Html.Partial("../Image/_ExistingImagesList", Model.Images)
+                                        </div>
+                                        <div id="ExistingImagesList">
+                                            @for (var i = 0; i < Model.Images.Count; i++)
+                                            {
+                                                <div class="existing-image-data" elem-name="@Model.Images[i].Name">
+                                                    @Html.HiddenFor(m => m.Images[i].Extension)
+                                                    @Html.HiddenFor(m => m.Images[i].ImageCode)
+                                                    @Html.HiddenFor(m => m.Images[i].Name)
+                                                    @Html.HiddenFor(m => m.Images[i].Path)
+                                                    @Html.HiddenFor(m => m.Images[i].MainImageFlag)
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
-                                    <div id="ExistingImagesList">
-                                    </div>
-                                </div>
+                                }
                             </div>
                             <div class="row" id="newImages">
                                 <div class="form-group col-md-12">
@@ -245,7 +259,7 @@
                     $(inputs).each(function (inputIndex, input) {
                         var id = $(input).attr("id");
                         var name = $(input).attr("name");
-                        
+
                         var idReplacement = "NewImages_" + idx + "_";
                         var nameReplacement = "NewImages[" + idx + "]";
 
@@ -275,7 +289,13 @@
             checkMainImageValueAndSetItsValue();
         }
 
+
+        function loadExistingImages() {
+
+        }
+
         $(document).ready(function () {
+            loadExistingImages();
             checkMusthaveFields();
 
             var $fileInputObject = $('#file-uploader'),
