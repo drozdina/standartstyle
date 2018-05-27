@@ -430,7 +430,6 @@
     <Content Include="Views\Admin\Catalog\_CategoriesPartial.cshtml" />
     <Content Include="Views\Admin\Catalog\_GoodsPartial.cshtml" />
     <Content Include="Views\Image\_List.cshtml" />
-    <Content Include="Views\Image\_ExistingImagesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

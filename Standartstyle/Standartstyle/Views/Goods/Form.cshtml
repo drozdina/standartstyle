@@ -73,7 +73,7 @@
                                     <div class="form-group col-md-12">
                                         <label>Загруженные фото</label>
                                         <div class="row" id="existingImagesGalery">
-                                            @Html.Partial("../Image/_ExistingImagesList", Model.Images)
+                                            @Html.Partial("../Image/_List", Model.Images)
                                         </div>
                                         <div id="ExistingImagesList">
                                             @for (var i = 0; i < Model.Images.Count; i++)
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" hidden>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -228,7 +228,7 @@
         }
 
         function refreshModelImageData() {
-            var idx = recalculateNewImageIndexes();
+            var idx = recalculateNewImagesIndexes();
 
             for (var key in fileNames) {
                 var image = fileNames[key];
@@ -247,8 +247,16 @@
             }
         }
 
-        function recalculateNewImageIndexes() {
-            var newImages = $("div.new-image-data");
+        function recalculateExistingImagesIndexes() {
+            return recalculateImagesIndexes("div.existing-image-data", "Images");
+        }
+
+        function recalculateNewImagesIndexes() {
+            return recalculateImagesIndexes("div.new-image-data", "NewImages");
+        }
+
+        function recalculateImagesIndexes(imagesElem, attrReplacement) {
+            var newImages = $(imagesElem);
             var idx = 0,
                 idRegEx = /[a-z]+\_\d+\_/i,
                 nameRegEx = /[a-z]+\[\d+\]/i;
@@ -260,8 +268,8 @@
                         var id = $(input).attr("id");
                         var name = $(input).attr("name");
 
-                        var idReplacement = "NewImages_" + idx + "_";
-                        var nameReplacement = "NewImages[" + idx + "]";
+                        var idReplacement = attrReplacement + "_" + idx + "_";
+                        var nameReplacement = attrReplacement + "[" + idx + "]";
 
                         var idSubstring = id.match(idRegEx);
                         var nameSubstring = name.match(nameRegEx);
@@ -279,13 +287,18 @@
             return idx;
         }
 
-        function deleteImage(id) {
+        function deleteImage(id, isNewImage) {
             delete fileNames[id];
             var dataBlock = $("div[elem-name='" + id + "']");
             var uiElementBlock = $("#image-" + id);
             $(uiElementBlock).remove();
             $(dataBlock).remove();
-            recalculateNewImageIndexes();
+            if (isNewImage) {
+                recalculateNewImagesIndexes();
+            }
+            else {
+                recalculateExistingImagesIndexes();
+            }
             checkMainImageValueAndSetItsValue();
         }
 

@@ -28,12 +28,13 @@ namespace Standartstyle.AppCode.BL.Images
             for (var idx = 0; idx < extIdx; idx++)
                 filenameForSave += fileLexemes[idx];
 
-            var model = new ImageModel
+            var model = new ImageModel()
             {
                 ImageCode = -1,
                 Name = filenameForSave,
                 Extension = extension,
-                Path = Configuration.UploadDirectory
+                Path = Configuration.UploadDirectory,
+                IsNewImage = true
             };
             return model;
         }
@@ -128,7 +129,8 @@ namespace Standartstyle.AppCode.BL.Images
                         MainImageFlag = imageFromDB.IS_MAIN.Value,
                         Name = imageFromDB.NAME,
                         Extension = imageFromDB.EXTENSION,
-                        Path = imageFromDB.LOCATION
+                        Path = imageFromDB.LOCATION,
+                        IsNewImage = false
                     };
 
                     images.Add(image);
