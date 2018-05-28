@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c42c8359ac84cb9825c785e09f07c90" Name="Diagram1">
+        <EntityTypeShape EntityType="standartstyleModel.ATTRIBUTES" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_COLLECTION" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_COLOR" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.CBD_MANUFACTURER" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOOD_ATTRIBUTES" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOOD_COLOR" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOODS" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.GOODS_CATEGORY" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.IMAGE" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.REPLY" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.ROLES" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="standartstyleModel.USERS" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="standartstyleModel.FK_ATTRIBUT_REFERENCE_GOODS_CA" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_ATT_REFERENCE_ATTRIBUT" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLL_REFERENCE_CBD_MANU" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLO_REFERENCE_CBD_COLL" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_CBD_COLO_REFERENCE_IMAGE" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_COL_REFERENCE_CBD_COLO" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_ATT_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOOD_COL_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOODS_REFERENCE_GOODS_CA" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_GOODS_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_IMAGE_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_REPLY_REFERENCE_GOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_IMAGE_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_REPLY_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="standartstyleModel.FK_USERS_REFERENCE_ROLES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

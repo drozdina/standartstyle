@@ -42,6 +42,9 @@ namespace Standartstyle
                 "~/Content/bootstrap-fileinput/css/fileinput-rtl.css",
                 "~/Content/bootstrap-fileinput/css/fileinput.css"
                 ));
+
+            bundles.Add(new StyleBundle("~/Content/open-iconic").Include(
+                "~/Content/open-iconic/open-iconic-bootstrap.css"));
         }
     }
 }

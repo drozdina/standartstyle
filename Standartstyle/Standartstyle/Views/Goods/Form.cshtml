@@ -5,149 +5,150 @@
 }
 @Styles.Render("~/Content/fileuploader")
 <div class="container-fluid">
-    <div class="row clearfix"></div>
-    <div class="form-group col-md-12">
-        @using (Ajax.BeginForm("SaveGood", "Goods", new AjaxOptions
-        {
-            UpdateTargetId = "steps",
-            HttpMethod = "Post",
-            InsertionMode = InsertionMode.Replace,
-            OnSuccess = "successCallback",
-            OnFailure = "failureCallback",
-        }, new { id = "ContractForm" }))
-        {
+    <div class="row">
+        <div class="form-group col-md-12">
+            @using (Ajax.BeginForm("SaveGood", "Goods", new AjaxOptions
+            {
+                UpdateTargetId = "steps",
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                OnSuccess = "successCallback",
+                OnFailure = "failureCallback",
+            }, new { id = "ContractForm" }))
+            {
 
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            <div class="vert-offset-top-1"></div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <label>Основные данные</label>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
-                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control mustHave" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(m => m.SelectedCategoryCode, new { @class = "col-form-label" })
-                                    @Html.DropDownListFor(m => m.SelectedCategoryCode, Model.Categories, new { @class = "form-control mustHave" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.Width, new { @class = "col-form-label" })
-                                    @Html.TextBoxFor(m => m.Width, new { @class = "form-control mustHave" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.Height, new { @class = "col-form-label" })
-                                    @Html.TextBoxFor(m => m.Height, new { @class = "form-control mustHave" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.Depth, new { @class = "col-form-label" })
-                                    @Html.TextBoxFor(m => m.Depth, new { @class = "form-control mustHave" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    @Html.LabelFor(m => m.Description, new { @class = "col-form-label" })
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control mustHave vresize" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <label>Изображения (&nbsp;<span class="glyphicon glyphicon-star" style="color: #eea236"></span>&nbsp;&ndash;&nbsp;изображение для главной)</label>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
 
-                        </div>
-                        <div class="panel-body">
-                            <div class="row" id="existingImages" @if (Model.GoodCode <= 0) { <text> hidden</text>}>
-                                @if (Model.GoodCode > 0)
-                                {
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <label>Основные данные</label>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control mustHave" })
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.SelectedCategoryCode, new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(m => m.SelectedCategoryCode, Model.Categories, new { @class = "form-control mustHave" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.Width, new { @class = "col-form-label" })
+                                        @Html.TextBoxFor(m => m.Width, new { @class = "form-control mustHave" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.Height, new { @class = "col-form-label" })
+                                        @Html.TextBoxFor(m => m.Height, new { @class = "form-control mustHave" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.Depth, new { @class = "col-form-label" })
+                                        @Html.TextBoxFor(m => m.Depth, new { @class = "form-control mustHave" })
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label>Загруженные фото</label>
-                                        <div class="row" id="existingImagesGalery">
-                                            @Html.Partial("../Image/_List", Model.Images)
-                                        </div>
-                                        <div id="ExistingImagesList">
-                                            @for (var i = 0; i < Model.Images.Count; i++)
-                                            {
-                                                <div class="existing-image-data" elem-name="@Model.Images[i].Name">
-                                                    @Html.HiddenFor(m => m.Images[i].Extension)
-                                                    @Html.HiddenFor(m => m.Images[i].ImageCode)
-                                                    @Html.HiddenFor(m => m.Images[i].Name)
-                                                    @Html.HiddenFor(m => m.Images[i].Path)
-                                                    @Html.HiddenFor(m => m.Images[i].MainImageFlag)
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                            <div class="row" id="newImages">
-                                <div class="form-group col-md-12">
-                                    <label>Новые фото</label>
-                                    <div class="row" id="newImagesGalery">
-                                    </div>
-                                    <div id="NewImagesList">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="file-loading">
-                                            <input id="file-uploader" type="file" accept="image/*" multiple>
-                                        </div>
+                                        @Html.LabelFor(m => m.Description, new { @class = "col-form-label" })
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control mustHave vresize" })
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row" hidden>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <label>Метки, теги</label>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <label>Изготовлено из ДСП</label>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <label>Изображения (&nbsp;<span class="oi oi-star" style="color: #eea236"></span>&nbsp;&ndash;&nbsp;изображение для главной)</label>
 
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <button type="submit" id="submitFormBtn" class="btn btn-success disabled" disabled="disabled">
-                        <div class="btnBack">Сохранить</div>
-                    </button>
-                    <button class="btn btn-default">
-                        <div class="btnBack">Отмена</div>
-                    </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" id="existingImages" @if (Model.GoodCode <= 0) { <text> hidden</text>}>
+                                    @if (Model.GoodCode > 0)
+                                    {
+                                        <div class="form-group col-md-12">
+                                            <label>Загруженные фото</label>
+                                            <div class="row" id="existingImagesGalery">
+                                                @Html.Partial("../Image/_List", Model.Images)
+                                            </div>
+                                            <div id="ExistingImagesList">
+                                                @for (var i = 0; i < Model.Images.Count; i++)
+                                                {
+                                                    <div class="existing-image-data" elem-name="@Model.Images[i].Name">
+                                                        @Html.HiddenFor(m => m.Images[i].Extension)
+                                                        @Html.HiddenFor(m => m.Images[i].ImageCode)
+                                                        @Html.HiddenFor(m => m.Images[i].Name)
+                                                        @Html.HiddenFor(m => m.Images[i].Path)
+                                                        @Html.HiddenFor(m => m.Images[i].MainImageFlag)
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row" id="newImages">
+                                    <div class="form-group col-md-12">
+                                        <label>Новые фото</label>
+                                        <div class="row" id="newImagesGalery">
+                                        </div>
+                                        <div id="NewImagesList">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="file-loading">
+                                                <input id="file-uploader" type="file" accept="image/*" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        }
+                <div class="row" hidden>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <label>Метки, теги</label>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card panel-default">
+                            <div class="card-header">
+                                <label>Изготовлено из ДСП</label>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" id="submitFormBtn" class="btn btn-success disabled" disabled="disabled">
+                            <div class="btnBack">Сохранить</div>
+                        </button>
+                        <button class="btn btn-default">
+                            <div class="btnBack">Отмена</div>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
 @section scripts{
@@ -204,7 +205,7 @@
             $("#newImagesGalery .img-wrapper").removeClass("main");
 
             $(caller).addClass("main");
-            var template = "<div class='main-image'><span class='glyphicon glyphicon-star'</span></div>";
+            var template = "<div class='main-image'><span class='oi oi-star'</span></div>";
             $(caller).append(template);
         }
 

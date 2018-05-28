@@ -7,23 +7,23 @@
             <div class="thumbnail @if (item.MainImageFlag) {<text> main</text>}">
                 @if (item.IsNewImage)
                 {
-                    <img src="@Url.Content(item.Path + item.GetFullFilenameForTemporaryFile())" name="@item.Name" alt="@item.Name" class="img-responsive vertical-middle">
+                    <img src="@Url.Content(item.Path + item.GetFullFilenameForTemporaryFile())" name="@item.Name" alt="@item.Name" class="img-thumbnail vertical-middle rounded">
                 }
                 else
                 {
-                    <img src="@Url.Content(item.Path + item.GetFullFilenameForStoredFile())" name="@item.Name" alt="@item.Name" class="img-responsive vertical-middle">
+                    <img src="@Url.Content(item.Path + item.GetFullFilenameForStoredFile())" name="@item.Name" alt="@item.Name" class="img-thumbnail vertical-middle rounded">
                 }
                 <span class="img-span"></span>
                 @if (item.IsNewImage)
                 {
                     <a class="delete-img" onclick="deleteImage('@item.Name', true);">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="oi oi-circle-x"></span>
                     </a>
                 }
                 else
                 {
                     <a class="delete-img" onclick="deleteImage('@item.Name', false);">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="oi oi-circle-x"></span>
                     </a>
                 }
 
@@ -31,7 +31,7 @@
             @if (item.MainImageFlag)
                 {
                 <div class="main-image">
-                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="oi oi-star"></span>
                 </div>
             }
         </div>
