@@ -79,11 +79,11 @@
                                                 @for (var i = 0; i < Model.Images.Count; i++)
                                                 {
                                                     <div class="existing-image-data" elem-name="@Model.Images[i].Name">
-                                                        @Html.HiddenFor(m => m.Images[i].Extension)
-                                                        @Html.HiddenFor(m => m.Images[i].ImageCode)
-                                                        @Html.HiddenFor(m => m.Images[i].Name)
-                                                        @Html.HiddenFor(m => m.Images[i].Path)
-                                                        @Html.HiddenFor(m => m.Images[i].MainImageFlag)
+                                                        @Html.HiddenFor(m => m.Images[i].Extension, new { @class = "class-for-extension", elem_index = i })
+                                                        @Html.HiddenFor(m => m.Images[i].ImageCode, new { @class = "class-for-code", elem_index = i })
+                                                        @Html.HiddenFor(m => m.Images[i].Name, new { @class = "class-for-name", elem_index = i })
+                                                        @Html.HiddenFor(m => m.Images[i].Path, new { @class = "class-for-path", elem_index = i })
+                                                        @Html.HiddenFor(m => m.Images[i].MainImageFlag, new { @class = "class-for-main", index_name = Model.Images[i].Name, elem_index = i })
                                                     </div>
                                                 }
                                             </div>
@@ -157,7 +157,8 @@
     <script type="text/javascript">
         var fileFormFlag = true,
             fieldFormFlag = true,
-            fileNames = [];
+            fileNames = [],
+            deleteFiles = [];
 
         function checkMusthaveFields() {
             var result = true;
@@ -188,22 +189,25 @@
 
         function setUpMainImage(caller) {
             var imageName = $(caller).attr("id");
+            var imageCollection = $(caller).attr("image-collection");
             var checkPointElement = $.find("input[value='" + imageName + "']");
             var idx = $(checkPointElement).attr("elem-index");
             $(".class-for-main").val(false);
-            $("#NewImages_" + idx + "__MainImageFlag").val(true);
+            $("#" + imageCollection + "_" + idx + "__MainImageFlag").val(true);
             refreshMainImageUI(caller);
         }
 
         function refreshMainImageUI(caller) {
             var elemForRemove = $("#existingImagesGalery .img-wrapper.main .main-image");
-            $(elemForRemove).remove();
-            $("#existingImagesGalery .img-wrapper").removeClass("main");
-
+            if (elemForRemove.length > 0) {
+                $(elemForRemove).remove();
+                $("#existingImagesGalery .img-wrapper").removeClass("main");
+            }
             elemForRemove = $("#newImagesGalery .img-wrapper.main .main-image");
-            $(elemForRemove).remove();
-            $("#newImagesGalery .img-wrapper").removeClass("main");
-
+            if (elemForRemove.length > 0) {
+                $(elemForRemove).remove();
+                $("#newImagesGalery .img-wrapper").removeClass("main");
+            }
             $(caller).addClass("main");
             var template = "<div class='main-image'><span class='oi oi-star'</span></div>";
             $(caller).append(template);
@@ -289,12 +293,12 @@
         }
 
         function deleteImage(id, isNewImage) {
-            delete fileNames[id];
             var dataBlock = $("div[elem-name='" + id + "']");
             var uiElementBlock = $("#image-" + id);
             $(uiElementBlock).remove();
             $(dataBlock).remove();
-            if (isNewImage) {
+            if (isNewImage == 'true') {
+                delete fileNames[id];
                 recalculateNewImagesIndexes();
             }
             else {
@@ -303,13 +307,7 @@
             checkMainImageValueAndSetItsValue();
         }
 
-
-        function loadExistingImages() {
-
-        }
-
         $(document).ready(function () {
-            loadExistingImages();
             checkMusthaveFields();
 
             var $fileInputObject = $('#file-uploader'),
@@ -345,6 +343,15 @@
                 checkMusthaveFields();
             });
 
+            $("a.delete-img").click(function (event) {
+                var deletedObj = {};
+                deletedObj.id = $(this).attr("data-itemcode");
+                deletedObj.name = $(this).attr("data-itemname");
+                deleteFiles.push(deletedObj);
+                deleteImage($(this).attr("data-itemname"), $(this).attr("data-isnew"));
+                event.stopPropagation();
+            });
+
             $fileInputObject.on('filebatchuploadsuccess', function (event, data, previewId, index) {
                 var form = data.form, files = data.files, extra = data.extra,
                     response = data.response, reader = data.reader;
@@ -353,13 +360,6 @@
                     var imageFiles = response.files;
                     $.post('@Url.Action("List", "Image")', { images: imageFiles }, function (result) {
                         $("#newImagesGalery").append(result);
-                        var images = $("#newImagesGalery").find("img");
-                        $(images).each(function (idx, elem) {
-                            var imageParent = $("#newImagesGalery").find("#" + $(elem).attr("name"));
-                            $(imageParent).click(function () {
-                                setUpMainImage(this);
-                            });
-                        });
 
                         $(imageFiles).each(function (idx, image) {
                             var fileName = image.Name;

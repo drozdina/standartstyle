@@ -182,56 +182,56 @@
     <Compile Include="AppCode\BL\Goods\GoodsLogic.cs" />
     <Compile Include="AppCode\BL\Images\ImagesLogic.cs" />
     <Compile Include="AppCode\BL\Utils.cs" />
-    <Compile Include="AppCode\DAL\Model\Acer.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Acer.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppCode\DAL\Model\Acer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Acer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppCode\DAL\Model\Acer.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Acer.edmx</DependentUpon>
-    </Compile>
     <Compile Include="AppCode\DAL\Model\ATTRIBUTES.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\CBD_COLLECTION.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\CBD_COLOR.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\CBD_MANUFACTURER.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\GOODS.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\GOODS_CATEGORY.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\GOOD_ATTRIBUTES.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\GOOD_COLOR.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\IMAGE.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\REPLY.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\ROLES.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppCode\DAL\Model\StandartstyleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Model\USERS.cs">
-      <DependentUpon>Acer.tt</DependentUpon>
+      <DependentUpon>StandartstyleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\AttributesRepository.cs" />
     <Compile Include="AppCode\DAL\Repository\EntityRepositories\CBDCollectionRepository.cs" />
@@ -274,15 +274,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppCode\DAL\Model\Acer.Context.tt">
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Acer.edmx</DependentUpon>
-      <LastGenOutput>Acer.Context.cs</LastGenOutput>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+      <LastGenOutput>StandartstyleModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="AppCode\DAL\Model\Acer.tt">
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Acer.edmx</DependentUpon>
-      <LastGenOutput>Acer.cs</LastGenOutput>
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+      <LastGenOutput>StandartstyleModel.cs</LastGenOutput>
     </Content>
     <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput-rtl.css" />
@@ -353,13 +353,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="AppCode\DAL\Model\Acer.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Acer.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="AppCode\DAL\Model\Acer.edmx.diagram">
-      <DependentUpon>Acer.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\open-iconic\open-iconic-bootstrap.less" />
     <Content Include="Content\open-iconic\open-iconic-bootstrap.scss" />
     <Content Include="Content\open-iconic\open-iconic-bootstrap.styl" />
@@ -367,6 +360,13 @@
     <Content Include="fonts\oi\open-iconic.otf" />
     <Content Include="fonts\oi\open-iconic.ttf" />
     <Content Include="fonts\oi\open-iconic.woff" />
+    <EntityDeploy Include="AppCode\DAL\Model\StandartstyleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StandartstyleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="AppCode\DAL\Model\StandartstyleModel.edmx.diagram">
+      <DependentUpon>StandartstyleModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fileinput.js" />
     <Content Include="Scripts\fileinput.min.js" />

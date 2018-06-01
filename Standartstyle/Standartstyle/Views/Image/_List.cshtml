@@ -3,8 +3,8 @@
 @foreach (var item in Model)
 {
     <div class="col-md-4" id="image-@item.Name">
-        <div class="img-wrapper" id="@item.Name">
-            <div class="thumbnail @if (item.MainImageFlag) {<text> main</text>}">
+        <div class="img-wrapper @if (item.MainImageFlag) {<text>main</text>}" id="@item.Name" onclick="setUpMainImage(this);" image-collection="@if (item.IsNewImage) {<text>NewImages</text>} else {<text>Images</text>}">
+            <div class="thumbnail">
                 @if (item.IsNewImage)
                 {
                     <img src="@Url.Content(item.Path + item.GetFullFilenameForTemporaryFile())" name="@item.Name" alt="@item.Name" class="img-thumbnail vertical-middle rounded">
@@ -16,13 +16,13 @@
                 <span class="img-span"></span>
                 @if (item.IsNewImage)
                 {
-                    <a class="delete-img" onclick="deleteImage('@item.Name', true);">
+                    <a class="delete-img" data-itemname="@item.Name" data-isnew="true" data-itemcode="@item.ImageCode">
                         <span class="oi oi-circle-x"></span>
                     </a>
                 }
                 else
                 {
-                    <a class="delete-img" onclick="deleteImage('@item.Name', false);">
+                    <a class="delete-img" data-itemname="@item.Name" data-isnew="false" data-itemcode="@item.ImageCode">
                         <span class="oi oi-circle-x"></span>
                     </a>
                 }

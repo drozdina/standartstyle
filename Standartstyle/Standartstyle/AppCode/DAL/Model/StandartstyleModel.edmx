@@ -67,6 +67,7 @@
           <Property Name="WIDTH" Type="varchar" MaxLength="15" />
           <Property Name="HEIGHT" Type="varchar" MaxLength="15" />
           <Property Name="DEPTH" Type="varchar" MaxLength="15" />
+          <Property Name="IS_VISIBLE" Type="int" />
         </EntityType>
         <EntityType Name="GOODS_CATEGORY">
           <Key>
@@ -450,6 +451,7 @@
           <Property Name="WIDTH" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="HEIGHT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="DEPTH" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IS_VISIBLE" Type="Int32" />
           <NavigationProperty Name="GOOD_ATTRIBUTES" Relationship="Self.FK_GOOD_ATT_REFERENCE_GOODS" FromRole="GOODS" ToRole="GOOD_ATTRIBUTES" />
           <NavigationProperty Name="GOOD_COLOR" Relationship="Self.FK_GOOD_COL_REFERENCE_GOODS" FromRole="GOODS" ToRole="GOOD_COLOR" />
           <NavigationProperty Name="GOODS_CATEGORY" Relationship="Self.FK_GOODS_REFERENCE_GOODS_CA" FromRole="GOODS" ToRole="GOODS_CATEGORY" />
@@ -698,7 +700,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StandartstyleEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTRIBUTES" EntityType="Self.ATTRIBUTES" />
           <EntitySet Name="CBD_COLLECTION" EntityType="Self.CBD_COLLECTION" />
           <EntitySet Name="CBD_COLOR" EntityType="Self.CBD_COLOR" />
@@ -777,7 +779,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StandartstyleModelStoreContainer" CdmEntityContainer="StandartstyleEntities">
+        <EntityContainerMapping StorageEntityContainer="StandartstyleModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="ATTRIBUTES">
             <EntityTypeMapping TypeName="StandartstyleModel.ATTRIBUTES">
               <MappingFragment StoreEntitySet="ATTRIBUTES">
@@ -845,6 +847,7 @@
                 <ScalarProperty Name="WIDTH" ColumnName="WIDTH" />
                 <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
                 <ScalarProperty Name="DEPTH" ColumnName="DEPTH" />
+                <ScalarProperty Name="IS_VISIBLE" ColumnName="IS_VISIBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

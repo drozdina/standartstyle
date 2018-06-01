@@ -13,7 +13,7 @@ namespace Standartstyle.Models
         public string Path { get; set; }
         public string Name { get; set; }
         public string Extension { get; set; }
-        public bool MainImageFlag { get; set; }
+        public Boolean MainImageFlag { get; set; }
 
         public bool IsNewImage { get; set; }
 
