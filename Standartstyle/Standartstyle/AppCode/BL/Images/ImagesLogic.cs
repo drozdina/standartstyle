@@ -83,6 +83,22 @@ namespace Standartstyle.AppCode.BL.Images
             }
             return isMoved;
         }
+
+        private Boolean RemoveGoodImageFromImageLocation(ImageModel imageModel)
+        {
+            var isRemoved = false;
+            var absoluteSourceLocation = CreateLocationForGoodImages(imageModel.Path);
+            if (!absoluteSourceLocation.Equals(String.Empty))
+            {
+                var sourceLocation = Path.Combine(absoluteSourceLocation, imageModel.ImageCode.ToString() + ImageModel._DOT + imageModel.Extension);
+                if (File.Exists(sourceLocation))
+                {
+                    File.Delete(sourceLocation);
+                    isRemoved = true;
+                }
+            }
+            return isRemoved;
+        }
         #endregion
 
         #region CRUD logic
@@ -139,6 +155,36 @@ namespace Standartstyle.AppCode.BL.Images
                 ((List<ImageModel>)goodModel.Images).AddRange(images);
             }
             return goodModel;
+        }
+
+        public ImageModel RemoveImage(int imageCode)
+        {
+            ImageModel model = null;
+            using (GeneralRepository repo = new GeneralRepository())
+            {
+                try
+                {
+                    var imageFromDB = repo.ImageRepository.Get(image => image.IMAGECODE == imageCode).FirstOrDefault();
+                    if (imageFromDB != null)
+                    {
+                        model = new ImageModel
+                        {
+                            ImageCode = imageFromDB.IMAGECODE,
+                            Extension = imageFromDB.EXTENSION,
+                            Name = imageFromDB.NAME,
+                            Path = imageFromDB.LOCATION
+                        };
+
+                        repo.ImageRepository.Remove(imageFromDB);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model = null;
+                    Console.WriteLine("Something goes wrong. Removing image from DB. Stack trace: " + ex);
+                }
+            }
+            return model;
         }
         #endregion
 

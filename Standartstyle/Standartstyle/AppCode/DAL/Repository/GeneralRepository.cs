@@ -142,12 +142,7 @@ namespace Standartstyle.AppCode.DAL.Repository
                 return _RolesRepository;
             }
         }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
+        
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
