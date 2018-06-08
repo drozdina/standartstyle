@@ -157,8 +157,7 @@
     <script type="text/javascript">
         var fileFormFlag = true,
             fieldFormFlag = true,
-            fileNames = [],
-            deleteFiles = [];
+            fileNames = [];
 
         function checkMusthaveFields() {
             var result = true;
@@ -292,7 +291,7 @@
             return idx;
         }
 
-        function deleteImage(id, isNewImage) {
+        function deleteImage(code, id, isNewImage) {
             var dataBlock = $("div[elem-name='" + id + "']");
             var uiElementBlock = $("#image-" + id);
             $(uiElementBlock).remove();
@@ -302,6 +301,7 @@
                 recalculateNewImagesIndexes();
             }
             else {
+                $.post('@Url.Action("RemoveGoodImage", "Image")', { imageCode: imageFiles }, function (result) { });
                 recalculateExistingImagesIndexes();
             }
             checkMainImageValueAndSetItsValue();
@@ -344,11 +344,7 @@
             });
 
             $("a.delete-img").click(function (event) {
-                var deletedObj = {};
-                deletedObj.id = $(this).attr("data-itemcode");
-                deletedObj.name = $(this).attr("data-itemname");
-                deleteFiles.push(deletedObj);
-                deleteImage($(this).attr("data-itemname"), $(this).attr("data-isnew"));
+                deleteImage($(this).attr("data-itemcode"), $(this).attr("data-itemname"), $(this).attr("data-isnew"));
                 event.stopPropagation();
             });
 

@@ -99,6 +99,8 @@ namespace Standartstyle.AppCode.BL.Images
             }
             return isRemoved;
         }
+
+
         #endregion
 
         #region CRUD logic
@@ -157,7 +159,15 @@ namespace Standartstyle.AppCode.BL.Images
             return goodModel;
         }
 
-        public ImageModel RemoveImage(int imageCode)
+        public Boolean RemoveGoodImage(int imageCode)
+        {
+            var imageModel = RemoveGoodImageFromDB(imageCode);
+            var result = RemoveGoodImageFromImageLocation(imageModel);
+            return result;
+        }
+
+        #region CRUD private methods
+        private ImageModel RemoveGoodImageFromDB(int imageCode)
         {
             ImageModel model = null;
             using (GeneralRepository repo = new GeneralRepository())
@@ -186,6 +196,8 @@ namespace Standartstyle.AppCode.BL.Images
             }
             return model;
         }
+        #endregion
+
         #endregion
 
     }

@@ -13,6 +13,12 @@ namespace Standartstyle.Controllers
 {
     public class ImageController : Controller
     {
+
+        #region Variables
+        private ImagesLogic imagesLogic = new ImagesLogic();
+        #endregion
+
+        #region Variables
         public ActionResult UploadFiles()
         {
             if (Request.Files.Count > 0)
@@ -68,9 +74,28 @@ namespace Standartstyle.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult RemoveGoodImage(int imageCode)
+        {
+            var result = new List<object>();
+            var isDeleted = imagesLogic.RemoveGoodImage(imageCode);
+            if (isDeleted)
+            {
+                result.Add(new { status = true });
+                result.Add(new { message = "Изображение удалено!" });
+            }
+            else
+            {
+                result.Add(new { status = false });
+                result.Add(new { message = "Не удалось удалить изображение!" });
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult List(IEnumerable<ImageModel> images)
         {
             return PartialView("_List", images);
         }
+        #endregion
     }
 }

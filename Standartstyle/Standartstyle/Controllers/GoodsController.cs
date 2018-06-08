@@ -76,6 +76,7 @@ namespace Standartstyle.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult List()
         {
             return PartialView("_List");
