@@ -7,10 +7,14 @@ using System.Web;
 
 namespace Standartstyle.AppCode.DAL.Repository
 {
-    public class GeneralRepository : IDisposable
+    public class GeneralRepository
     {
-        private Entities context = new Entities();
+        private Entities context;
 
+        public GeneralRepository()
+        {
+            context = new Entities();
+        }
         private CBDCollectionRepository _CBDCollectionRepository;
         public CBDCollectionRepository CBDCollectionRepository
         {
@@ -141,26 +145,6 @@ namespace Standartstyle.AppCode.DAL.Repository
                     this._RolesRepository = new RolesRepository(context);
                 return _RolesRepository;
             }
-        }
-        
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

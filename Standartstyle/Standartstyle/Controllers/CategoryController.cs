@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
- 
+
 namespace Standartstyle.Controllers
 {
     public class CategoryController : Controller
     {
-        private GeneralRepository repo = new GeneralRepository();
+        private GeneralRepository repo;
+        public CategoryController()
+        {
+            repo = new GeneralRepository();
+        }
         // GET: Category
         public ActionResult Index()
         {
@@ -29,7 +33,7 @@ namespace Standartstyle.Controllers
                     Name = category.NAME
                 });
             }
-            return PartialView("_List" ,forView);
+            return PartialView("_List", forView);
         }
 
         public ActionResult Form(int? code)

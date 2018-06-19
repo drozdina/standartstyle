@@ -20,34 +20,25 @@ namespace Standartstyle.Controllers
         #endregion
 
         #region Actions
+
+        #region HTTP methods
+        [HttpGet]
         // GET: Goods
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
+        // GET: Good Form
         public ActionResult Form(int? id)
         {
-            //UserSession.Create("admin", "admin");
             GoodModel model = createNewGoodModel();
             if (id.HasValue)
             {
                 fillModelFromDB(id.Value, model);
             }
             return View(model);
-        }
-
-        private GoodModel createNewGoodModel()
-        {
-            GoodModel model = new GoodModel();
-            model.Categories = categoriesLogic.createExistingCategoriesDropdownList();
-            return model;
-        }
-
-        private void fillModelFromDB(int id, GoodModel model)
-        {
-            model = goodsLogic.SelectGoodData(id, model);
-            model = imagesLogic.SelectImagesForModel(model);
         }
 
         [HttpPost]
@@ -76,11 +67,28 @@ namespace Standartstyle.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpGet]
         public ActionResult List()
         {
             return PartialView("_List");
         }
+        #endregion
+
+        #region private logic
+        private GoodModel createNewGoodModel()
+        {
+            GoodModel model = new GoodModel();
+            model.Categories = categoriesLogic.createExistingCategoriesDropdownList();
+            return model;
+        }
+
+        private void fillModelFromDB(int id, GoodModel model)
+        {
+            model = goodsLogic.SelectGoodData(id, model);
+            model = imagesLogic.SelectImagesForModel(model);
+        }
+        #endregion
+
         #endregion
     }
 }

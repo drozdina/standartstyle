@@ -14,7 +14,12 @@ namespace Standartstyle.Controllers
 {
     public class AccountController : Controller
     {
-        GeneralRepository repo = new GeneralRepository();
+        private GeneralRepository repo;
+
+        public AccountController()
+        {
+            repo = new GeneralRepository();
+        }
         // GET: Account
         public ActionResult Login()
         {
@@ -38,7 +43,7 @@ namespace Standartstyle.Controllers
                 catch (Exception e)
                 {
 
-                }               
+                }
             }
             ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
             return View(model);

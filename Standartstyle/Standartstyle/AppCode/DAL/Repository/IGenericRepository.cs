@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Standartstyle.AppCode.DAL.Repository
 {
-    interface IGenericRepository<TEntity> where TEntity : class
+    interface IGenericRepository<TEntity> : IDisposable where TEntity : class
     {
         void Create(TEntity item);
         TEntity FindById(int id);

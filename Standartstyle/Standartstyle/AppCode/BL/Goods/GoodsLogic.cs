@@ -10,44 +10,42 @@ namespace Standartstyle.AppCode.BL.Goods
 {
     public class GoodsLogic
     {
-
+        private GeneralRepository repo;
+        public GoodsLogic()
+        {
+            repo = new GeneralRepository();
+        }
         public GoodModel SelectGoodData(int code, GoodModel model)
         {
-            using (GeneralRepository repo = new GeneralRepository())
+            var goodFromDB = repo.GoodsRepository.Get(good => good.GOODCODE == code).FirstOrDefault();
+            if (goodFromDB != null)
             {
-                var goodFromDB = repo.GoodsRepository.Get(good => good.GOODCODE == code).FirstOrDefault();
-                if (goodFromDB != null)
-                {
-                    model.GoodCode = goodFromDB.GOODCODE;
-                    model.Name = goodFromDB.NAME;
-                    model.SelectedCategoryCode = goodFromDB.CATEGORYCODE.Value;
-                    model.Width = goodFromDB.WIDTH;
-                    model.Height = goodFromDB.HEIGHT;
-                    model.Depth = goodFromDB.DEPTH;
-                    model.Description = goodFromDB.DESCRIPTION;
-                }
+                model.GoodCode = goodFromDB.GOODCODE;
+                model.Name = goodFromDB.NAME;
+                model.SelectedCategoryCode = goodFromDB.CATEGORYCODE.Value;
+                model.Width = goodFromDB.WIDTH;
+                model.Height = goodFromDB.HEIGHT;
+                model.Depth = goodFromDB.DEPTH;
+                model.Description = goodFromDB.DESCRIPTION;
             }
             return model;
         }
 
         public GoodModel CreateNewGood(GoodModel newGood)
         {
-            using (GeneralRepository repo = new GeneralRepository())
+            GOODS newElement = new GOODS
             {
-                GOODS newElement = new GOODS
-                {
-                    NAME = newGood.Name,
-                    CATEGORYCODE = newGood.SelectedCategoryCode,
-                    WIDTH = newGood.Width,
-                    HEIGHT = newGood.Height,
-                    DEPTH = newGood.Depth,
-                    DESCRIPTION = newGood.Description
-                };
-                repo.GoodsRepository.Create(newElement);
-                if (newElement.GOODCODE > 0)
-                {
-                    newGood.GoodCode = newElement.GOODCODE;
-                }
+                NAME = newGood.Name,
+                CATEGORYCODE = newGood.SelectedCategoryCode,
+                WIDTH = newGood.Width,
+                HEIGHT = newGood.Height,
+                DEPTH = newGood.Depth,
+                DESCRIPTION = newGood.Description
+            };
+            repo.GoodsRepository.Create(newElement);
+            if (newElement.GOODCODE > 0)
+            {
+                newGood.GoodCode = newElement.GOODCODE;
             }
             return newGood;
         }

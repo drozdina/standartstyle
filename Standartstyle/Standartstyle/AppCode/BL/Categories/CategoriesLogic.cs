@@ -10,6 +10,11 @@ namespace Standartstyle.AppCode.BL.Categories
 {
     public class CategoriesLogic
     {
+        private GeneralRepository repo;
+        public CategoriesLogic()
+        {
+            repo = new GeneralRepository();
+        }
         #region for WEB elements
         public IEnumerable<SelectListItem> createExistingCategoriesDropdownList()
         {
@@ -21,21 +26,19 @@ namespace Standartstyle.AppCode.BL.Categories
                 Disabled = true
             });
 
-            using (GeneralRepository repo = new GeneralRepository())
+            var categoriesFromDB = repo.GoodsCategoryRepository.Get().OrderBy(elem => elem.NAME);
+            if (categoriesFromDB != null && categoriesFromDB.Count() > 0)
             {
-                var categoriesFromDB = repo.GoodsCategoryRepository.Get().OrderBy(elem => elem.NAME);
-                if (categoriesFromDB != null && categoriesFromDB.Count() > 0)
+                foreach (var category in categoriesFromDB)
                 {
-                    foreach (var category in categoriesFromDB)
+                    categories.Add(new SelectListItem
                     {
-                        categories.Add(new SelectListItem
-                        {
-                            Value = category.CATEGORYCODE.ToString(),
-                            Text = category.NAME
-                        });
-                    }
+                        Value = category.CATEGORYCODE.ToString(),
+                        Text = category.NAME
+                    });
                 }
             }
+
             return categories;
         }
 

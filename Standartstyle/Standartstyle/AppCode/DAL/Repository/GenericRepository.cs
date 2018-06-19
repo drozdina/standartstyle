@@ -43,8 +43,15 @@ namespace Standartstyle.AppCode.DAL.Repository
         }
         public void Remove(TEntity item)
         {
-            _dbSet.Remove(item);
-            _context.SaveChanges();
+            if (item != null)
+            {
+                if (_context.Entry(item).State == EntityState.Detached)
+                {
+                    _dbSet.Attach(item);
+                }
+                _dbSet.Remove(item);
+                _context.SaveChanges();
+            }
         }
 
         public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
@@ -64,6 +71,26 @@ namespace Standartstyle.AppCode.DAL.Repository
             IQueryable<TEntity> query = _dbSet.AsNoTracking();
             return includeProperties
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

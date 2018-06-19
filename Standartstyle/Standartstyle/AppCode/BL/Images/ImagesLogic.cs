@@ -15,7 +15,15 @@ namespace Standartstyle.AppCode.BL.Images
         private static string _DASH = "-";
         private static string _UNDERSCORE = "_";
         private static string _SPACE = " ";
+
+        GeneralRepository repo;
         #endregion
+
+        public ImagesLogic()
+        {
+            repo = new GeneralRepository();
+        }
+
 
         #region Static methods
         public static ImageModel generateFileModel(string filename)
@@ -110,24 +118,21 @@ namespace Standartstyle.AppCode.BL.Images
             var relativeLocation = GenerateRelativePathForGoodImages(goodModel);
             foreach (var image in goodModel.NewImages)
             {
-                using (GeneralRepository repo = new GeneralRepository())
+                IMAGE newImageModel = new IMAGE
                 {
-                    IMAGE newImageModel = new IMAGE
-                    {
-                        GOODCODE = goodModel.GoodCode,
-                        NAME = image.Name,
-                        UPLOAD_DATE = DateTime.Now,
-                        LOCATION = relativeLocation,
-                        IS_MAIN = image.MainImageFlag,
-                        EXTENSION = image.Extension
-                    };
+                    GOODCODE = goodModel.GoodCode,
+                    NAME = image.Name,
+                    UPLOAD_DATE = DateTime.Now,
+                    LOCATION = relativeLocation,
+                    IS_MAIN = image.MainImageFlag,
+                    EXTENSION = image.Extension
+                };
 
-                    repo.ImageRepository.Create(newImageModel);
-                    var isCopied = MoveGoodImageToFileLocation(newImageModel, image);
-                    if (!isCopied)
-                    {
-                        uncopiedImages.Add(newImageModel.NAME);
-                    }
+                repo.ImageRepository.Create(newImageModel);
+                var isCopied = MoveGoodImageToFileLocation(newImageModel, image);
+                if (!isCopied)
+                {
+                    uncopiedImages.Add(newImageModel.NAME);
                 }
             }
             return uncopiedImages;
@@ -136,26 +141,23 @@ namespace Standartstyle.AppCode.BL.Images
         public GoodModel SelectImagesForModel(GoodModel goodModel)
         {
             List<ImageModel> images = new List<ImageModel>();
-            using (GeneralRepository repo = new GeneralRepository())
+            var imagesFromDB = repo.ImageRepository.Get(image => image.GOODCODE == goodModel.GoodCode).ToList();
+            foreach (var imageFromDB in imagesFromDB)
             {
-                var imagesFromDB = repo.ImageRepository.Get(image => image.GOODCODE == goodModel.GoodCode).ToList();
-                foreach (var imageFromDB in imagesFromDB)
+                var image = new ImageModel()
                 {
-                    var image = new ImageModel()
-                    {
-                        ImageCode = imageFromDB.IMAGECODE,
-                        MainImageFlag = imageFromDB.IS_MAIN.Value,
-                        Name = imageFromDB.NAME,
-                        Extension = imageFromDB.EXTENSION,
-                        Path = imageFromDB.LOCATION,
-                        IsNewImage = false
-                    };
+                    ImageCode = imageFromDB.IMAGECODE,
+                    MainImageFlag = imageFromDB.IS_MAIN.Value,
+                    Name = imageFromDB.NAME,
+                    Extension = imageFromDB.EXTENSION,
+                    Path = imageFromDB.LOCATION,
+                    IsNewImage = false
+                };
 
-                    images.Add(image);
-                }
-
-                ((List<ImageModel>)goodModel.Images).AddRange(images);
+                images.Add(image);
             }
+
+            ((List<ImageModel>)goodModel.Images).AddRange(images);
             return goodModel;
         }
 
@@ -170,29 +172,26 @@ namespace Standartstyle.AppCode.BL.Images
         private ImageModel RemoveGoodImageFromDB(int imageCode)
         {
             ImageModel model = null;
-            using (GeneralRepository repo = new GeneralRepository())
+            try
             {
-                try
+                var imageFromDB = repo.ImageRepository.Get(image => image.IMAGECODE == imageCode).FirstOrDefault();
+                if (imageFromDB != null)
                 {
-                    var imageFromDB = repo.ImageRepository.Get(image => image.IMAGECODE == imageCode).FirstOrDefault();
-                    if (imageFromDB != null)
+                    model = new ImageModel
                     {
-                        model = new ImageModel
-                        {
-                            ImageCode = imageFromDB.IMAGECODE,
-                            Extension = imageFromDB.EXTENSION,
-                            Name = imageFromDB.NAME,
-                            Path = imageFromDB.LOCATION
-                        };
+                        ImageCode = imageFromDB.IMAGECODE,
+                        Extension = imageFromDB.EXTENSION,
+                        Name = imageFromDB.NAME,
+                        Path = imageFromDB.LOCATION
+                    };
 
-                        repo.ImageRepository.Remove(imageFromDB);
-                    }
+                    repo.ImageRepository.Remove(imageFromDB);
                 }
-                catch (Exception ex)
-                {
-                    model = null;
-                    Console.WriteLine("Something goes wrong. Removing image from DB. Stack trace: " + ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                model = null;
+                Console.WriteLine("Something goes wrong. Removing image from DB. Stack trace: " + ex);
             }
             return model;
         }
