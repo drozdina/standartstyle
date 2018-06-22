@@ -50,6 +50,30 @@ namespace Standartstyle.AppCode.BL.Goods
             return newGood;
         }
 
+        public Boolean EditExistingGood(GoodModel good)
+        {
+            var result = false;
+            try
+            {
+                var goodFromDB = repo.GoodsRepository.FindById(good.GoodCode);
+
+                goodFromDB.NAME = good.Name;
+                goodFromDB.CATEGORYCODE = good.SelectedCategoryCode;
+                goodFromDB.WIDTH = good.Width;
+                goodFromDB.HEIGHT = good.Height;
+                goodFromDB.DEPTH = good.Depth;
+                goodFromDB.DESCRIPTION = good.Description;
+
+                repo.GoodsRepository.Update(goodFromDB);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при обновлении данных о товаре." + ex.StackTrace);
+            }
+            return result;
+        }
+
         public IEnumerable<GoodModel> SelectRangeOfGoods(GeneralRepository repo, int categoryCode, int page, int range)
         {
             var goods = new List<GoodModel>();

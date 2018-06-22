@@ -47,17 +47,17 @@ namespace Standartstyle.Controllers
             var result = new List<object>();
             if (ModelState.IsValid)
             {
-                model = goodsLogic.CreateNewGood(model);
+                var results = new List<object>();
                 if (model.GoodCode > 0)
                 {
-                    List<string> notCopied = imagesLogic.CreateNewImage(model);
-
+                    results = editExistingGood(model);
                 }
                 else
                 {
-                    result.Add(new { status = false });
-                    result.Add(new { message = "Не удалось сохранить новый товар!" });
+                    results = saveNewGood(model);
                 }
+                result.AddRange(results);
+
             }
             else
             {
@@ -86,6 +86,51 @@ namespace Standartstyle.Controllers
         {
             model = goodsLogic.SelectGoodData(id, model);
             model = imagesLogic.SelectImagesForModel(model);
+        }
+
+        private List<object> saveNewGood(GoodModel model)
+        {
+            var result = new List<object>();
+            model = goodsLogic.CreateNewGood(model);
+            if (model.GoodCode > 0)
+            {
+                List<string> notCopied = imagesLogic.CreateNewImage(model);
+                result.Add(new { status = true });
+                if (notCopied.Count > 0)
+                {
+                    result.Add(new { data = notCopied.ToString() });
+                }
+                result.Add(new { message = "Товар сохранен успешно!" });
+            }
+            else
+            {
+                result.Add(new { status = false });
+                result.Add(new { message = "Не удалось сохранить новый товар!" });
+            }
+            return result;
+        }
+
+        private List<object> editExistingGood(GoodModel model)
+        {
+            var result = new List<object>();
+            var isUpdated = goodsLogic.EditExistingGood(model);
+            if (isUpdated)
+            {
+                isUpdated = imagesLogic.UpdateImageDataForGoodModel(model);
+                List<string> notCopied = imagesLogic.CreateNewImage(model);
+                result.Add(new { status = true });
+                if (notCopied.Count > 0)
+                {
+                    result.Add(new { data = notCopied.ToString() });
+                }
+                result.Add(new { message = "Данные изменены успешно!" });
+            }
+            else
+            {
+                result.Add(new { status = false });
+                result.Add(new { message = "Не удалось обновить данные для товара!" });
+            }
+            return result;
         }
         #endregion
 

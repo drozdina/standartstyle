@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div id="wrapper">
-    @Html.Partial("Catalog/_CategoriesPartial", Model)
-</div>
-<div id="wrapper">
-    @Html.Partial("Catalog/_GoodsPartial", Model.GoodsForActiveCategory)
+<div class="container-fluid">
+    <div class="row">
+        @Html.Partial("Catalog/_CategoriesPartial", Model)
+        @Html.Partial("Catalog/_GoodsPartial", Model.GoodsForActiveCategory)
+    </div>
 </div>

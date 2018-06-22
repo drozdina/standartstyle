@@ -138,6 +138,26 @@ namespace Standartstyle.AppCode.BL.Images
             return uncopiedImages;
         }
 
+        public Boolean UpdateImageDataForGoodModel(GoodModel goodModel)
+        {
+            var result = false;
+            try
+            {
+                foreach (var image in goodModel.Images)
+                {
+                    var imageFromDB = repo.ImageRepository.FindById(image.ImageCode);
+                    imageFromDB.IS_MAIN = image.MainImageFlag;
+                    repo.ImageRepository.Update(imageFromDB);
+                }
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при обновлении изображений." + ex.StackTrace);
+            }
+            return result;
+        }
+
         public GoodModel SelectImagesForModel(GoodModel goodModel)
         {
             List<ImageModel> images = new List<ImageModel>();
