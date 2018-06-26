@@ -27,6 +27,8 @@ namespace Standartstyle.Models
         [Display(Name = "Глубина, мм")]
         public string Depth { get; set; }
 
+        public int ViewsCount { get; set; }
+
         public int MainImageIndex { get; set; }
         public IList<ImageModel> Images { get; set; }
 

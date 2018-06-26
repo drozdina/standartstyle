@@ -2,11 +2,16 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="album">
         <div class="container">
-            <div class="col-12">
-                <h1 class="page-header">Каталог товаров</h1>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-2 mb-2 border-bottom">
+                <h1 class="h2">Каталог товаров</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Form", "Goods")">Добавить новый</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="row">
+            <div class="row pt-3">
                 @foreach (var good in Model)
             {
                     <div class="col-md-4 col-sm-12 col-xs-12">
@@ -27,7 +32,7 @@
                                         <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-sun"></span></a>
                                         <a class="btn btn-sm btn-outline-secondary btn-danger" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
                                     </div>
-                                    <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;7</small>
+                                    <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
                                 </div>
                             </div>
                         </div>
