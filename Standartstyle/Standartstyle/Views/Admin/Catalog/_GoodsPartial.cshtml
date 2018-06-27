@@ -14,7 +14,7 @@
             <div class="row pt-3">
                 @foreach (var good in Model)
             {
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-4 col-sm-12">
                         <div class="card mb-4 box-shadow">
                             <div>
                                 <div class="thumbnail bg-light my-0 px-2 py-2">
@@ -33,6 +33,7 @@
                                         <a class="btn btn-sm btn-outline-secondary btn-danger" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
                                     </div>
                                     <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
+
                                 </div>
                             </div>
                         </div>

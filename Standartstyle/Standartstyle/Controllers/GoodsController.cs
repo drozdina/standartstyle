@@ -100,6 +100,8 @@ namespace Standartstyle.Controllers
                 {
                     result.Add(new { data = notCopied.ToString() });
                 }
+                result.Add(new { controller = "Admin" });
+                result.Add(new { action = "Catalog" });
                 result.Add(new { message = "Товар сохранен успешно!" });
             }
             else
@@ -123,6 +125,8 @@ namespace Standartstyle.Controllers
                 {
                     result.Add(new { data = notCopied.ToString() });
                 }
+                result.Add(new { controller = "Admin" });
+                result.Add(new { action = "Catalog" });
                 result.Add(new { message = "Данные изменены успешно!" });
             }
             else
