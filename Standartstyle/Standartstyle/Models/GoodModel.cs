@@ -28,6 +28,7 @@ namespace Standartstyle.Models
         public string Depth { get; set; }
 
         public int ViewsCount { get; set; }
+        public int IsVisible { get; set; }
 
         public int MainImageIndex { get; set; }
         public IList<ImageModel> Images { get; set; }

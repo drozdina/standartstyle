@@ -29,9 +29,9 @@ namespace Standartstyle.Controllers
             return View();
         }
 
-        public ActionResult Catalog(int? categoryCode, int? page, int? range)
+        public ActionResult Catalog(int? categoryCode, int page = 1, int range = 20)
         {
-            var catalog = adminUtils.prepareCatalogModelForView(repo, categoryCode, page, range);
+            var catalog = adminUtils.prepareCatalogModelForView(repo, categoryCode, page, range);            
             return View(catalog);
         }
 

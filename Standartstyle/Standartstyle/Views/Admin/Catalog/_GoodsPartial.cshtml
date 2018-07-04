@@ -1,46 +1,39 @@
 ﻿@model IEnumerable<Standartstyle.Models.GoodModel>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="album">
-        <div class="container">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-2 mb-2 border-bottom">
-                <h1 class="h2">Каталог товаров</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <a class="btn btn-sm btn-primary" href="@Url.Action("Form", "Goods")">Добавить новый</a>
+
+
+<div class="row pt-3">
+    @foreach (var good in Model)
+            {
+        <div class="col-md-4 col-sm-12">
+            <div class="card mb-4 box-shadow">
+                <div>
+                    <div class="thumbnail bg-light my-0 px-2 py-2">
+                        <img src="@Url.Content(good.Images[good.MainImageIndex].Path+good.Images[good.MainImageIndex].GetFullFilenameForStoredFile())"
+                             name="@good.Images[good.MainImageIndex].Name"
+                             alt="@good.Images[good.MainImageIndex].Name"
+                             class="rounded img-fluid vertical-middle">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Название: @good.Name<br>Категория: @good.SelectedCategory.Name</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-outline-info" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-pencil"></span></a>
+                            @if (good.IsVisible > 0)
+                            {
+                                <button class="btn btn-sm btn-outline-warning" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="0"><span class="oi oi-sun"></span></button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-outline-dark" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="1"><span class="oi oi-moon"></span></button>
+                            }
+                            <a class="btn btn-sm btn-outline-danger" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
+                        </div>
+                        <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
                     </div>
                 </div>
             </div>
-
-            <div class="row pt-3">
-                @foreach (var good in Model)
-            {
-                    <div class="col-md-4 col-sm-12">
-                        <div class="card mb-4 box-shadow">
-                            <div>
-                                <div class="thumbnail bg-light my-0 px-2 py-2">
-                                    <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilenameForStoredFile())"
-                                         name="@good.Images[0].Name"
-                                         alt="@good.Images[0].Name"
-                                         class="rounded img-fluid vertical-middle">
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Название: @good.Name<br>Категория: @good.SelectedCategory.Name</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-pencil"></span></a>
-                                        <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-sun"></span></a>
-                                        <a class="btn btn-sm btn-outline-secondary btn-danger" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
-                                    </div>
-                                    <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
         </div>
-    </div>
-</main>
+    }
+
+</div>
