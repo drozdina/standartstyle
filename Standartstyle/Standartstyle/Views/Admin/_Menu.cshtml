@@ -1,11 +1,20 @@
-﻿<nav class="navbar navbar-dark navbar-expand sticky-top flex-column flex-md-row bg-dark" role="navigation">
-    <div class="col-md-2 text-center text-md-center text-lg-center text-xl-center mw-100">
+﻿<nav class="navbar navbar-dark navbar-expand-md fixed-top bg-dark" role="navigation">
+    <div class="col-2 col-md-2 text-md-center text-lg-center text-xl-center mw-100">
         <a class="navbar-brand mr-0 mr-md-2" href="#">Стандарт Стиль</a>
     </div>
-    <ul class="navbar-nav text-light w-100">
-        <li class="nav-item">@Html.ActionLink("Каталог мебели", "Catalog", "Admin", new { @class = "nav-link" })</li>
-    </ul>
-    <ul class="navbar-nav">
-        <li class="nav-item">@Html.ActionLink("Выход", "Logoff", "Account", new { @class = "nav-link" })</li>
-    </ul>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse">
+        <ul class="navbar-nav text-light w-100">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Catalog", "Admin")">Каталог мебели</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Logoff", "Account")">Выход</a>
+            </li>
+        </ul>
+    </div>
 </nav>
