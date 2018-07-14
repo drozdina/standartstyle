@@ -108,6 +108,10 @@
       <HintPath>..\packages\NickBuhro.Translit.1.1.3\lib\net45\NickBuhro.Translit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -262,11 +266,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Models\AttributeModel.cs" />
     <Compile Include="Models\CatalogModel.cs" />
     <Compile Include="Models\CBDCollectionModel.cs" />
     <Compile Include="Models\CBDColorModel.cs" />
     <Compile Include="Models\CBDManufacturerModel.cs" />
+    <Compile Include="Models\FormCallbackModel.cs" />
     <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\GoodsCategoryModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
@@ -375,6 +381,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -483,6 +491,7 @@
     <Folder Include="Content\files\" />
     <Folder Include="Content\upload\" />
     <Folder Include="Files\" />
+    <Folder Include="Models\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

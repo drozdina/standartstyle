@@ -44,27 +44,25 @@ namespace Standartstyle.Controllers
         [HttpPost]
         public JsonResult SaveGood(GoodModel model)
         {
-            var result = new List<object>();
+            var callback = new FormCallbackModel();
             if (ModelState.IsValid)
             {
-                var results = new List<object>();
                 if (model.GoodCode > 0)
                 {
-                    results = editExistingGood(model);
+                    callback = editExistingGood(model);
                 }
                 else
                 {
-                    results = saveNewGood(model);
+                    callback = saveNewGood(model);
                 }
-                result.AddRange(results);
-
             }
             else
             {
-                result.Add(new { status = false });
-                result.Add(new { message = "Не заполнены все обязательные поля!" });
+                callback.Status = false;
+                callback.Message = "Не заполнены все обязательные поля!";
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+            return Json(callback, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -88,53 +86,58 @@ namespace Standartstyle.Controllers
             model = imagesLogic.SelectImagesForModel(model);
         }
 
-        private List<object> saveNewGood(GoodModel model)
+        private FormCallbackModel saveNewGood(GoodModel model)
         {
-            var result = new List<object>();
+            var callback = new FormCallbackModel();
             model = goodsLogic.CreateNewGood(model);
             if (model.GoodCode > 0)
             {
                 List<string> notCopied = imagesLogic.CreateNewImage(model);
-                result.Add(new { status = true });
+                callback.Status = true;
+                callback.Message = "Товар сохранен успешно!";
+                List<object> data = new List<object>();
                 if (notCopied.Count > 0)
                 {
-                    result.Add(new { data = notCopied.ToString() });
+                    data.Add(new { notCopied = notCopied.ToString() });
                 }
-                result.Add(new { controller = "Admin" });
-                result.Add(new { action = "Catalog" });
-                result.Add(new { message = "Товар сохранен успешно!" });
+                var url = new UrlHelper(this.ControllerContext.RequestContext).Action("Catalog", "Admin");
+                data.Add(new { url = url });
+
+                callback.Data = data;
             }
             else
             {
-                result.Add(new { status = false });
-                result.Add(new { message = "Не удалось сохранить новый товар!" });
+                callback.Status = false;
+                callback.Message = "Не удалось сохранить новый товар!";
             }
-            return result;
+            return callback;
         }
 
-        private List<object> editExistingGood(GoodModel model)
+        private FormCallbackModel editExistingGood(GoodModel model)
         {
-            var result = new List<object>();
+            var callback = new FormCallbackModel();
             var isUpdated = goodsLogic.EditExistingGood(model);
             if (isUpdated)
             {
                 isUpdated = imagesLogic.UpdateImageDataForGoodModel(model);
                 List<string> notCopied = imagesLogic.CreateNewImage(model);
-                result.Add(new { status = true });
+                callback.Status = true;
+                callback.Message = "Данные изменены успешно!";
+                List<object> data = new List<object>();
                 if (notCopied.Count > 0)
                 {
-                    result.Add(new { data = notCopied.ToString() });
+                    data.Add(new { notCopied = notCopied.ToString() });
                 }
-                result.Add(new { controller = "Admin" });
-                result.Add(new { action = "Catalog" });
-                result.Add(new { message = "Данные изменены успешно!" });
+                var url = new UrlHelper(this.ControllerContext.RequestContext).Action("Catalog", "Admin");
+                data.Add(new { url = url });
+                callback.Data = data;
             }
             else
             {
-                result.Add(new { status = false });
-                result.Add(new { message = "Не удалось обновить данные для товара!" });
+                callback.Status = false;
+                callback.Message = "Не удалось сохранить новый товар!";
             }
-            return result;
+            return callback;
         }
         #endregion
 

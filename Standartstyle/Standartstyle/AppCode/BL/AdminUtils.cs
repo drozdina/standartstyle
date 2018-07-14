@@ -20,7 +20,7 @@ namespace Standartstyle.AppCode.BL
             goodsLogic = new GoodsLogic();
         }
 
-        public CatalogModel prepareCatalogModelForView(GeneralRepository repo, int? categoryCode, int? page, int? range)
+        public CatalogModel prepareCatalogModelForView(GeneralRepository repo, int? categoryCode, int page, int range)
         {
             var catalog = new CatalogModel();
             catalog.Categories = categoriesLogic.createGoodsCategoryModel(repo);
@@ -33,17 +33,12 @@ namespace Standartstyle.AppCode.BL
                 catalog.ActiveCategory = catalog.Categories.Where(cat => cat.Code == categoryCode.Value).FirstOrDefault();
             }
 
-
-            if (!page.HasValue)
-            {
-                page = 1;
-            }
-            if (!range.HasValue)
-            {
-                range = 20;
-            }
-
-            catalog.GoodsForActiveCategory = goodsLogic.SelectRangeOfGoods(repo, catalog.ActiveCategory.Code, page.Value, range.Value);
+            catalog.GoodsForActiveCategory = goodsLogic.SelectRangeOfGoods(repo, catalog.ActiveCategory.Code, page, range);
+            catalog.PageInfo = new PageInfoModel {
+                PageNumber = page,
+                PageSize = range,
+                TotalItems = goodsLogic.GetActiveGoodsCount(repo, catalog.ActiveCategory.Code)
+            };
             return catalog;
         }
     }

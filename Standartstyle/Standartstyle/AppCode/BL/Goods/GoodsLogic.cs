@@ -27,6 +27,7 @@ namespace Standartstyle.AppCode.BL.Goods
                 model.Height = goodFromDB.HEIGHT;
                 model.Depth = goodFromDB.DEPTH;
                 model.Description = goodFromDB.DESCRIPTION;
+                model.IsVisible = goodFromDB.IS_VISIBLE ?? 0;
             }
             return model;
         }
@@ -40,7 +41,8 @@ namespace Standartstyle.AppCode.BL.Goods
                 WIDTH = newGood.Width,
                 HEIGHT = newGood.Height,
                 DEPTH = newGood.Depth,
-                DESCRIPTION = newGood.Description
+                DESCRIPTION = newGood.Description,
+                IS_VISIBLE = newGood.IsVisible
             };
             repo.GoodsRepository.Create(newElement);
             if (newElement.GOODCODE > 0)
@@ -63,6 +65,7 @@ namespace Standartstyle.AppCode.BL.Goods
                 goodFromDB.HEIGHT = good.Height;
                 goodFromDB.DEPTH = good.Depth;
                 goodFromDB.DESCRIPTION = good.Description;
+                goodFromDB.IS_VISIBLE = good.IsVisible;
 
                 repo.GoodsRepository.Update(goodFromDB);
                 result = true;
@@ -72,6 +75,20 @@ namespace Standartstyle.AppCode.BL.Goods
                 Console.WriteLine("Ошибка при обновлении данных о товаре." + ex.StackTrace);
             }
             return result;
+        }
+
+        public int GetActiveGoodsCount(GeneralRepository repo, int categoryCode)
+        {
+            var goodsFromDB = new List<GOODS>();
+            if (categoryCode == -1)
+            {
+                goodsFromDB = repo.GoodsRepository.Get(good => good.IS_VISIBLE > 0).ToList();
+            }
+            else
+            {
+                goodsFromDB = repo.GoodsRepository.Get(good => good.IS_VISIBLE > 0 && good.CATEGORYCODE == categoryCode).ToList();
+            }
+            return goodsFromDB.Count;
         }
 
         public IEnumerable<GoodModel> SelectRangeOfGoods(GeneralRepository repo, int categoryCode, int page, int range)

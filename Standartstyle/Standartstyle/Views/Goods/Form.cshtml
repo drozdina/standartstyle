@@ -6,7 +6,12 @@
 @Styles.Render("~/Content/fileuploader")
 <div class="container-fluid pt-3">
     <div class="row">
-        <div class="form-group col-md-12">
+        <div class="col-12" id="notification">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12">
             @using (Ajax.BeginForm("SaveGood", "Goods", new AjaxOptions
             {
                 UpdateTargetId = "steps",
@@ -155,6 +160,7 @@
     </div>
 </div>
 @section scripts{
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/fileupload")
     @Scripts.Render("~/Scripts/load-image.all.min.js")
     <script type="text/javascript">
@@ -311,7 +317,41 @@
         }
 
         function successCallback(data) {
+            if (data.Status) {
+                console.log(data);
+                addNotificationMessage(1, data.Message);
+            }
+            else {
+                addNotificationMessage(3, data.Message);
+            }
+        }
 
+        function addNotificationMessage(notificationType, message) {
+            var typeValue = "";
+            switch (notificationType) {
+                case 1:
+                    typeValue = "alert-success";
+                    break;
+                case 2:
+                    typeValue = "alert-warning";
+                    break;
+                case 3:
+                    typeValue = "alert-danger";
+                    break;
+                default:
+                    typeValue = "alert-warning";
+                    break;
+            }
+
+            var notification =
+                
+                "<div class='alert " + typeValue + " alert-dismissible fade show' role='alert'>" +
+                message +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Закрыть'>" +
+                "<span aria-hidden='true'>&times;</span>" +
+                "</button></div>";
+
+            $("#notification").append(notification);
         }
 
         $(document).ready(function () {
