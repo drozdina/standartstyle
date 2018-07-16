@@ -81,7 +81,7 @@ namespace Standartstyle.AppCode.BL.Images
             if (!absoluteDestinationLocation.Equals(String.Empty))
             {
                 var absoluteSourceLocation = CreateLocationForGoodImages(Configuration.UploadDirectory);
-                var sourceLocation = Path.Combine(absoluteSourceLocation, image.GetFullFilenameForTemporaryFile());
+                var sourceLocation = Path.Combine(absoluteSourceLocation, image.GetFullFilenameWithName());
                 var destinationLocation = Path.Combine(absoluteDestinationLocation, imageModel.IMAGECODE.ToString() + ImageModel._DOT + image.Extension);
                 if (File.Exists(sourceLocation))
                 {

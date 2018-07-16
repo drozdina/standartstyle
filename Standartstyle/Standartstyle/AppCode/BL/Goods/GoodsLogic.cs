@@ -136,22 +136,37 @@ namespace Standartstyle.AppCode.BL.Goods
             var images = new List<ImageModel>();
             var imagesFromDB = repo.ImageRepository.Get().Where(elem => elem.GOODCODE == good.GoodCode).ToList();
             var mainImageIndex = 0;
-            foreach (var imageFromDB in imagesFromDB)
+            if (imagesFromDB.Count > 0)
             {
-                var image = new ImageModel()
+                foreach (var imageFromDB in imagesFromDB)
                 {
-                    ImageCode = imageFromDB.IMAGECODE,
-                    Name = imageFromDB.NAME,
-                    Path = imageFromDB.LOCATION,
-                    Extension = imageFromDB.EXTENSION
+                    var image = new ImageModel()
+                    {
+                        ImageCode = imageFromDB.IMAGECODE,
+                        Name = imageFromDB.NAME,
+                        Path = imageFromDB.LOCATION,
+                        Extension = imageFromDB.EXTENSION
+                    };
+
+                    images.Add(image);
+
+                    if (imageFromDB.IS_MAIN.HasValue && imageFromDB.IS_MAIN.Value)
+                    {
+                        mainImageIndex = images.IndexOf(image);
+                    }
+                }
+            }
+            else
+            {
+                var noImage = new ImageModel()
+                {
+                    ImageCode = -1,
+                    Name = "no-image",
+                    Path = "~/Content/img/",
+                    Extension = "png"
                 };
 
-                images.Add(image);
-
-                if (imageFromDB.IS_MAIN.HasValue && imageFromDB.IS_MAIN.Value)
-                {
-                    mainImageIndex = images.IndexOf(image);
-                }
+                images.Add(noImage);
             }
 
             good.Images = images;

@@ -17,14 +17,14 @@ namespace Standartstyle.Models
 
         public bool IsNewImage { get; set; }
 
-        public string GetFullFilenameForTemporaryFile()
+        public string GetFullFilenameWithName()
         {
             return this.Name + _DOT + this.Extension;
         }
 
-        public string GetFullFilenameForStoredFile()
+        public string GetFullFilenameWithCode()
         {
             return this.ImageCode + _DOT + this.Extension;
-        }
+        }        
     }
 }

@@ -1,54 +1,70 @@
 ﻿@model IEnumerable<Standartstyle.Models.GoodModel>
 
-
 <div class="row pt-3">
     @foreach (var good in Model)
-            {
+    {
         <div class="col-md-4 col-sm-12">
             <div class="card mb-4 box-shadow">
-                <div>
-                    <div class="thumbnail bg-light my-0 px-2 py-2">
-                        <img src="@Url.Content(good.Images[good.MainImageIndex].Path+good.Images[good.MainImageIndex].GetFullFilenameForStoredFile())"
-                             name="@good.Images[good.MainImageIndex].Name"
-                             alt="@good.Images[good.MainImageIndex].Name"
-                             class="rounded img-fluid vertical-middle">
+
+                <div class="bg-light my-0 px-2 py-2">
+                    <div class="text-center" style="height: 200px; white-space: nowrap;">
+                        <span class="vertical-middle h-100" style="display:inline-block; margin-left: -5px;"></span>
+                        @if (good.Images.Count > 0)
+                        {
+                            if (good.Images[0].ImageCode < 0)
+                            {
+                                <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilenameWithName())"
+                                     title="@good.Images[0].Name"
+                                     alt="@good.Images[0].Name"
+                                     class="mw-100 mh-100 rounded" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilenameWithCode())"
+                                     title="@good.Images[0].Name"
+                                     alt="@good.Images[0].Name"
+                                     class="mw-100 mh-100 rounded" />
+                            }
+                        }
+                        else
+                        {
+                            <img src="~/Content/img/no-image.png" title="no-image" alt="no-image" class="mw-100 mh-100 rounded" />
+                        }
+
                     </div>
                 </div>
-            </div>
-
-            <div class="row pt-3">
-                @foreach (var good in Model)
-            {
-                    <div class="col-md-4 col-sm-12">
-                        <div class="card mb-4 box-shadow">
-
-                            <div class="bg-light my-0 px-2 py-2">
-                                <div class="text-center" style="height: 200px; white-space: nowrap;">
-                                    <span class="vertical-middle h-100" style="display:inline-block; margin-left: -5px;"></span>
-                                    <img src="@Url.Content(good.Images[0].Path+good.Images[0].GetFullFilenameForStoredFile())"
-                                         name="@good.Images[0].Name"
-                                         alt="@good.Images[0].Name"
-                                         class="mw-100 mh-100 rounded">
+                <div class="card-body">
+                    <p class="card-text">Название: @good.Name<br>Категория: @good.SelectedCategory.Name</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 p-0 mr-auto">
+                                <div class="btn-group w-100">
+                                    <a class="btn btn-outline-info col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-pencil"></span></a>
+                                    @if (good.IsVisible > 0)
+                                    {
+                                        <button class="btn btn-outline-warning col-4" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="0"><span class="oi oi-circle-check">Скрыть</span></button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-outline-dark col-4 align-middle" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="1">
+                                            <span class="oi oi-circle-x"></span>
+                                            <small>Скрыто</small>
+                                        </button>
+                                    }
+                                    <a class="btn btn-outline-danger col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">Название: @good.Name<br>Категория: @good.SelectedCategory.Name</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-pencil"></span></a>
-                                        <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-sun"></span></a>
-                                        <a class="btn btn-sm btn-outline-secondary btn-danger" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
-                                    </div>
-                                    <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
-
-                                </div>
+                            <div class="col-12 p-0 mt-3 text-center align-middle">
+                                <small class="text-muted float-left mr-auto">Просмотры</small>
+                                <small class="text-muted float-right"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
                             </div>
                         </div>
-                        <small class="text-muted"><span class="oi oi-eye"></span>&nbsp;@good.ViewsCount</small>
                     </div>
                 </div>
             </div>
         </div>
     }
-
 </div>
+<script type="text/javascript">
+    $("")
+</script>

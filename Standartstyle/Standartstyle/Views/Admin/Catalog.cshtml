@@ -23,8 +23,22 @@
 
                     @Html.Partial("Catalog/_GoodsPartial", Model.GoodsForActiveCategory)
                     
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-2 mb-2 border-top">
-                        <div class="btn-group">
+                    <nav aria-label="Page navigation example" class="pb-2 pt-2 border-top">
+                        <ul class="pagination justify-content-center mb-2 mt-2">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"><span class="oi oi-arrow-thick-left"></span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><span class="oi oi-arrow-thick-right"></span></a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-2  border-top">
+                        <div class="btn-group mb-2 mt-2">
                             @if (Model.ActiveCategory.Code > 0)
                             {
                                 @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", new { categoryCode = Model.ActiveCategory.Code, page = x }))
