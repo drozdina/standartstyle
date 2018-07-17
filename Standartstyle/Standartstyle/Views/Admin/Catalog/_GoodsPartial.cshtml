@@ -5,7 +5,6 @@
     {
         <div class="col-md-4 col-sm-12">
             <div class="card mb-4 box-shadow">
-
                 <div class="bg-light my-0 px-2 py-2">
                     <div class="text-center" style="height: 200px; white-space: nowrap;">
                         <span class="vertical-middle h-100" style="display:inline-block; margin-left: -5px;"></span>
@@ -39,19 +38,26 @@
                         <div class="row">
                             <div class="col-12 p-0 mr-auto">
                                 <div class="btn-group w-100">
-                                    <a class="btn btn-outline-info col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-pencil"></span></a>
+                                    <a class="btn btn-outline-info btn-sm col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })">
+                                        <span class="oi oi-pencil"></span>
+                                    </a>
                                     @if (good.IsVisible > 0)
                                     {
-                                        <button class="btn btn-outline-warning col-4" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="0"><span class="oi oi-circle-check">Скрыть</span></button>
+                                        <button class="btn btn-outline-warning btn-sm col-4 d-inline" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="0">
+                                            <span class="oi oi-circle-check h-100"></span>
+                                            <small>Показано</small>
+                                        </button>
                                     }
                                     else
                                     {
-                                        <button class="btn btn-outline-dark col-4 align-middle" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="1">
-                                            <span class="oi oi-circle-x"></span>
-                                            <small>Скрыто</small>
+                                        <button class="btn btn-outline-dark btn-sm col-4" onclick="setVisibilityForProduct(this)" good-code="@good.GoodCode" new-visibility="1">
+                                            <span class="oi oi-circle-x d-inline align-baseline"></span>
+                                            <span class="d-inline">Скрыто</span>
                                         </button>
                                     }
-                                    <a class="btn btn-outline-danger col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })"><span class="oi oi-trash"></span></a>
+                                    <a class="btn btn-outline-danger btn-sm col-4" href="@Url.Action("Form", "Goods", new { id = good.GoodCode })">
+                                        <span class="oi oi-trash"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-12 p-0 mt-3 text-center align-middle">
@@ -66,5 +72,5 @@
     }
 </div>
 <script type="text/javascript">
-    $("")
+
 </script>
