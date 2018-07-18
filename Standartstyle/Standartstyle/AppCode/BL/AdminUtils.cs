@@ -35,7 +35,7 @@ namespace Standartstyle.AppCode.BL
 
             catalog.GoodsForActiveCategory = goodsLogic.SelectRangeOfGoods(repo, catalog.ActiveCategory.Code, page, range);
             catalog.PageInfo = new PageInfoModel {
-                PageNumber = page,
+                CurrentPageNumber = page,
                 PageSize = range,
                 TotalItems = goodsLogic.GetActiveGoodsCount(repo, catalog.ActiveCategory.Code)
             };
