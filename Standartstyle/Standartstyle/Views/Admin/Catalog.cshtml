@@ -7,46 +7,25 @@
 
 <div class="container-fluid">
     <div class="row">
-        @Html.Partial("Catalog/_CategoriesPartial", Model)
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-12">
             <div class="album">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-2 mb-2 border-bottom">
                         <h1 class="h2">Каталог товаров</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <div class="btn-group mr-2">
-                                <a class="btn btn-sm btn-primary" href="@Url.Action("Form", "Goods")">Добавить новый</a>
+                                <a class="btn btn-sm btn-primary" href="@Url.Action(" Form", "Goods" )">Добавить новый</a>
                             </div>
                         </div>
                     </div>
-
+                    @Html.Partial("Catalog/_CategoriesPartial", Model)
                     @Html.Partial("Catalog/_GoodsPartial", Model.GoodsForActiveCategory)
 
                     <nav aria-label="Page navigation example" class="pb-2 pt-2 border-top">
                         <ul class="pagination justify-content-center mb-2 mt-2">
-                            @*<li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1"><span class="oi oi-arrow-thick-left"></span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><span class="oi oi-arrow-thick-right"></span></a>
-                            </li>*@
-                            @if (Model.ActiveCategory.Code > 0)
-                            {
-                                @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", new { categoryCode = Model.ActiveCategory.Code, page = x }))
-                            }
-                            else
-                            {
-
-                                @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", new { page = x }))
-                            }
+                            @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", new { categoryCode = Model.ActiveCategory.Code, page = x }))
                         </ul>
-                    </nav>                   
+                    </nav>
                 </div>
             </div>
         </main>

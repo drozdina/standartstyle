@@ -1,26 +1,14 @@
 ﻿@model  Standartstyle.Models.CatalogModel
-<nav class="col-md-2 d-none d-md-block bg-light sidebar position-fixed h-100 border-right" style="min-width:195px;">
-    <div id="categories">
-        <div class="sidebar-sticky" style="min-width:165px;">
-            <div class="w-100 h-100 border-bottom pb-2">
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                    <span>Категории</span>
-                    <a class="d-flex align-items-center text-muted" href="#">
-                        <span class="oi oi-plus"></span>
-                    </a>
-                </h6>
-            </div>            
-            <ul class="nav flex-column mb-2">
-                @foreach (var category in Model.Categories)
-                {
-                    <li class="nav-item @if (Model.ActiveCategory.Code == @category.Code)
-                    {<text>active</text>} ">
-                    <a class="nav-link" href="#">
+
+<div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pb-2 pt-2 bg-light">
+    <ul class="nav nav-pills nav-fill">
+        @foreach (var category in Model.Categories)
+        {
+            <li class="nav-item">
+                <a class="nav-link @if(Model.ActiveCategory.Code == @category.Code){<text> active</text>}" href="#">
                     @category.Name
-                    </a>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
-</nav>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -9,6 +9,13 @@ namespace Standartstyle.Models
 {
     public class GoodModel
     {
+        enum GoodState
+        {
+            Visible = 1,
+            Hidden = 2,
+            Deleted = 3
+        }
+
         public int GoodCode { get; set; }
 
         [Required(ErrorMessage = "Обязательно к заполнению")]

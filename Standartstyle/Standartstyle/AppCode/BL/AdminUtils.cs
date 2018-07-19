@@ -20,21 +20,14 @@ namespace Standartstyle.AppCode.BL
             goodsLogic = new GoodsLogic();
         }
 
-        public CatalogModel prepareCatalogModelForView(GeneralRepository repo, int? categoryCode, int page, int range)
+        public CatalogModel prepareCatalogModelForView(GeneralRepository repo, int categoryCode, int page, int range)
         {
             var catalog = new CatalogModel();
             catalog.Categories = categoriesLogic.createGoodsCategoryModel(repo);
-            if (!categoryCode.HasValue)
-            {
-                catalog.ActiveCategory = catalog.Categories.Where(cat => cat.Code == -1).FirstOrDefault();
-            }
-            else
-            {
-                catalog.ActiveCategory = catalog.Categories.Where(cat => cat.Code == categoryCode.Value).FirstOrDefault();
-            }
-
+            catalog.ActiveCategory = catalog.Categories.Where(cat => cat.Code == categoryCode).FirstOrDefault();
             catalog.GoodsForActiveCategory = goodsLogic.SelectRangeOfGoods(repo, catalog.ActiveCategory.Code, page, range);
-            catalog.PageInfo = new PageInfoModel {
+            catalog.PageInfo = new PageInfoModel
+            {
                 CurrentPageNumber = page,
                 PageSize = range,
                 TotalItems = goodsLogic.GetActiveGoodsCount(repo, catalog.ActiveCategory.Code)

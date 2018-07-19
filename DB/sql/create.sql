@@ -245,6 +245,7 @@ create table GOODS (
    WIDTH                varchar(15)          null,
    HEIGHT               varchar(15)          null,
    DEPTH                varchar(15)          null,
+   VIEWSCOUNT           integer              null,
    constraint PK_GOODS primary key (GOODCODE)
 )
 go
